@@ -16,8 +16,8 @@ namespace DynamicTable
 {
     public partial class Form1 : Form
     {
-        //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
-        static string path = "Z:\\Downloads\\";
+        static string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        //static string path = "Z:\\Downloads\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
         List<RepairData> repairDataList = new List<RepairData>();
@@ -200,18 +200,29 @@ namespace DynamicTable
 
         private void CreateGraphicsColumn()
         {
-            //string imagePath = "Z:\\Downloads\\hi.png";
-            string imagePath = $"{path}hi.png";
+            
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
-            Image image = Image.FromFile(imagePath);
-            //hello mikey
-            Size newsize = new Size(Convert.ToInt32(image.Width*1), Convert.ToInt32(image.Height * 1));
-            image = new Bitmap(image, newsize);
-
-            newDataGridViewImageColumn.Image = image;
+            newDataGridViewImageColumn.Width = 120;
             newDataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            dataGridView1.Columns.Add(newDataGridViewImageColumn);
             newDataGridViewImageColumn.HeaderText = "Image";
+            dataGridView1.Columns.Add(newDataGridViewImageColumn);
+
+            for (int i = 0; i < repairDataList.Count; i++)
+            {
+                if(repairDataList[i].relatedFigures != null)
+                {
+                    //Console.WriteLine(Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]"));
+                    string imagePath = $"{path}\\figfolder\\temp\\{Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]")}.png";
+                    Image image = Image.FromFile(imagePath);
+                    Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
+                    //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
+                    Bitmap resizedimage = new Bitmap(image, newsize);
+
+                    dataGridView1.Rows[i].Cells[6].Value = resizedimage;
+                }
+            }
+            //dataGridView1.Rows[0].Cells[6].Value = resizedimage;
+
             //dataGridView1.AutoResizeRows();
         }
 
@@ -235,6 +246,7 @@ namespace DynamicTable
                 newDataRow[3] = repairDataList[i].repairableLimits;
                 newDataRow[4] = repairDataList[i].correctiveAction;
                 newDataRow[5] = repairDataList[i].relatedFigures;
+                //repairDataList[i].relatedFigures
                 //newDataRow[6] = list[i].checkComplete;
                 dataTable.Rows.Add(newDataRow);
 
@@ -258,6 +270,7 @@ namespace DynamicTable
             
             //dataGridView1.Columns.Add(new DataGridViewImageColumn());
             CreateGraphicsColumn();
+
             CreateButtonsColumn();
         }
 
@@ -331,13 +344,17 @@ namespace DynamicTable
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
                 {
-                    Console.WriteLine("Image clicked");
-                    // Cast to image
-                    Bitmap img = (Bitmap)dataGridView1.CurrentCell.Value;
-                    // Load image data in memory stream
-                    MemoryStream ms = new MemoryStream();
-                    img.Save(ms, ImageFormat.Png);
-                    pictureBox1.Image = Image.FromStream(ms);
+                    if (repairDataList[e.RowIndex].relatedFigures != null)
+                    {
+                        Console.WriteLine("Image clicked");
+                        // Cast to image
+                        string imagePath = $"{path}\\figfolder\\temp\\{Regex.Match(repairDataList[e.RowIndex].relatedFigures, @"[0-9A-Z]")}.png";
+                        Image img = Image.FromFile(imagePath);
+                        // Load image data in memory stream
+                        MemoryStream ms = new MemoryStream();
+                        img.Save(ms, ImageFormat.Png);
+                        pictureBox1.Image = Image.FromStream(ms);
+                    }
                     
                 }
             }
