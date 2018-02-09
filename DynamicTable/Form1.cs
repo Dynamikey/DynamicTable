@@ -203,15 +203,18 @@ namespace DynamicTable
             //string imagePath = "Z:\\Downloads\\hi.png";
             string imagePath = $"{path}hi.png";
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
+            //newDataGridViewImageColumn
             Image image = Image.FromFile(imagePath);
             //hello mikey
             Size newsize = new Size(Convert.ToInt32(image.Width*1), Convert.ToInt32(image.Height * 1));
             image = new Bitmap(image, newsize);
 
-            newDataGridViewImageColumn.Image = image;
+            //newDataGridViewImageColumn.Image = image;
             newDataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridView1.Columns.Add(newDataGridViewImageColumn);
+
             newDataGridViewImageColumn.HeaderText = "Image";
+            newDataGridViewImageColumn.DefaultCellStyle.NullValue = null;
             //dataGridView1.AutoResizeRows();
         }
 
@@ -238,14 +241,6 @@ namespace DynamicTable
                 //newDataRow[6] = list[i].checkComplete;
                 dataTable.Rows.Add(newDataRow);
 
-                /*dataTable.Rows[i].SetField(0, list[i].headingNumber);
-                dataTable.Rows[i].SetField(1, list[i].headingName);
-                dataTable.Rows[i].SetField(2, list[i].useableLimits);
-                dataTable.Rows[i].SetField(3, list[i].repairableLimits);
-                dataTable.Rows[i].SetField(4, list[i].correctiveAction);
-                dataTable.Rows[i].SetField(5, list[i].relatedFigures);
-                dataTable.Rows[i].SetField(6, list[i].checkComplete);*/
-
             }
             dataGridView1.DataSource = dataTable;
             //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
@@ -256,9 +251,11 @@ namespace DynamicTable
             // Resize "Completed" column
             dataGridView1.AutoResizeColumn(5);
             
-            //dataGridView1.Columns.Add(new DataGridViewImageColumn());
             CreateGraphicsColumn();
             CreateButtonsColumn();
+
+            vScrollBar1.Visible = true;
+            vScrollBar1.Maximum = repairDataList.Count()*4+2;
         }
 
         private void GenerateExampleRepairData()
@@ -331,13 +328,17 @@ namespace DynamicTable
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
                 {
-                    Console.WriteLine("Image clicked");
-                    // Cast to image
-                    Bitmap img = (Bitmap)dataGridView1.CurrentCell.Value;
-                    // Load image data in memory stream
-                    MemoryStream ms = new MemoryStream();
-                    img.Save(ms, ImageFormat.Png);
-                    pictureBox1.Image = Image.FromStream(ms);
+
+                    if (dataGridView1.CurrentCell.Value != null)
+                    {
+                        Console.WriteLine("Image clicked");
+                        // Cast to image
+                        Bitmap img = (Bitmap)dataGridView1.CurrentCell.Value;
+                        // Load image data in memory stream
+                        MemoryStream ms = new MemoryStream();
+                        img.Save(ms, ImageFormat.Png);
+                        pictureBox1.Image = Image.FromStream(ms);
+                    }
                     
                 }
             }
@@ -350,6 +351,13 @@ namespace DynamicTable
             dataGridView1.ClearSelection();
         }
 
-        
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+            VScrollBar vScrollBar = (VScrollBar)sender;
+            int val = dataGridView1.DisplayedRowCount(false);
+            Console.WriteLine(val);
+            dataGridView1.FirstDisplayedScrollingRowIndex = (int)((float)e.NewValue / (float)vScrollBar.Maximum * (repairDataList.Count()-1));
+            
+        }
     }
 }
