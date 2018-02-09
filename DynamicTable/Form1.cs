@@ -15,9 +15,9 @@ namespace DynamicTable
     public partial class Form1 : Form
     {
 
-        XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
+        //XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader("Z:\Downloads\\RR\\RN-EJ-412-1008-04.xml");
-        //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1009-03.xml");
+        XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1008-04.xml");
         private void WriteValues()
         {
@@ -203,7 +203,7 @@ namespace DynamicTable
             string imagePath = "C:\\Users\\Fin\\Documents\\RR\\hi.jpg";
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
             Image image = Image.FromFile(imagePath);
-            //hello spikey mikey
+            //hello mikey
             Size newsize = new Size(Convert.ToInt32(image.Width*0.1), Convert.ToInt32(image.Height * 0.1));
             image = new Bitmap(image, newsize);
 
