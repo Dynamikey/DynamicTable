@@ -16,17 +16,17 @@ namespace DynamicTable
 {
     public partial class Form1 : Form
     {
-        //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1009-03.xml");
-        //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1008-04.xml");
-        XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
-        //XmlTextReader reader = new XmlTextReader("Z:\Downloads\\RR\\RN-EJ-412-1008-04.xml");
+        //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        static string path = "Z:\\Downloads\\";
+        XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
+        //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
         List<RepairData> repairDataList = new List<RepairData>();
         RepairData repairData = new RepairData();
         DataTable dataTable;
 
         private void WriteValues()
         {
-            using (var writer = new CsvFileWriter("Z:\\Downloads\\RN-EJ-412-1009-03.xml"))
+            using (var writer = new CsvFileWriter($"{path}test.csv"))
             {
                 List<string> columns = new List<string>();
 
@@ -201,11 +201,11 @@ namespace DynamicTable
         private void CreateGraphicsColumn()
         {
             //string imagePath = "Z:\\Downloads\\hi.png";
-            string imagePath = "C:\\Users\\Fin\\Documents\\RR\\hi.jpg";
+            string imagePath = $"{path}hi.png";
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
             Image image = Image.FromFile(imagePath);
             //hello mikey
-            Size newsize = new Size(Convert.ToInt32(image.Width*0.1), Convert.ToInt32(image.Height * 0.1));
+            Size newsize = new Size(Convert.ToInt32(image.Width*1), Convert.ToInt32(image.Height * 1));
             image = new Bitmap(image, newsize);
 
             newDataGridViewImageColumn.Image = image;
