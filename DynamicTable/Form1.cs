@@ -330,18 +330,20 @@ namespace DynamicTable
             Console.WriteLine("Cell clicked");
             var senderGrid = (DataGridView)sender;
             senderGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            if (e.RowIndex >= 0 && !(senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn) && !(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
+            if (e.RowIndex >= 0)
             {
                 var row = senderGrid.Rows[e.RowIndex];
-                if (row.DefaultCellStyle.BackColor == Color.White)
+                if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn) && !(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
                 {
-                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    if (row.DefaultCellStyle.BackColor == Color.White)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White;
+                    }
                 }
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Color.White;
-                }
-
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
                 {
                     if (repairDataList[e.RowIndex].relatedFigures != null)
