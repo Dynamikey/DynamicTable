@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace DynamicTable
 {
@@ -16,6 +18,11 @@ namespace DynamicTable
     {
         XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader("Z:\Downloads\\RR\\RN-EJ-412-1008-04.xml");
+        List<RepairData> repairDataList = new List<RepairData>();
+        RepairData repairData = new RepairData();
+        DataTable dataTable;
+
+
         private void WriteValues()
         {
             using (var writer = new CsvFileWriter("Z:\\Documents\\WriteTest.csv"))
@@ -170,10 +177,6 @@ namespace DynamicTable
             d = default(RepairData);
         }
 
-        List<RepairData> repairDataList = new List<RepairData>();
-        RepairData repairData = new RepairData();
-        DataTable dataTable;
-       
         public Form1()
         {
             InitializeDataTable();
@@ -212,7 +215,6 @@ namespace DynamicTable
             dataGridViewButtonColumn.FlatStyle = FlatStyle.Flat;
             dataGridView1.Columns.Add(dataGridViewButtonColumn);
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -317,6 +319,18 @@ namespace DynamicTable
                 else
                 {
                     row.DefaultCellStyle.BackColor = Color.White;
+                }
+
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+                {
+                    Console.WriteLine("Image clicked");
+                    // Cast to image
+                    Bitmap img = (Bitmap)dataGridView1.CurrentCell.Value;
+                    // Load image data in memory stream
+                    MemoryStream ms = new MemoryStream();
+                    img.Save(ms, ImageFormat.Png);
+                    pictureBox1.Image = Image.FromStream(ms);
+                    
                 }
             }
             senderGrid.EndEdit();
