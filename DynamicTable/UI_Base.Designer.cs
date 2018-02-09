@@ -69,6 +69,8 @@
             this.Main_Picture_Box = new System.Windows.Forms.PictureBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.Slide_Panel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -80,6 +82,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.Main_Picture_Box)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+
+
+
             this.SuspendLayout();
             // 
             // ExitBtn
@@ -240,10 +250,10 @@
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.textBox2);
             this.tabPage2.Controls.Add(this.shapeContainer2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(912, 539);
+            this.tabPage2.Size = new System.Drawing.Size(912, 520);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
@@ -290,7 +300,7 @@
             this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape4,
             this.rectangleShape3});
-            this.shapeContainer2.Size = new System.Drawing.Size(906, 533);
+            this.shapeContainer2.Size = new System.Drawing.Size(906, 514);
             this.shapeContainer2.TabIndex = 0;
             this.shapeContainer2.TabStop = false;
             // 
@@ -321,10 +331,10 @@
             this.tabPage3.Controls.Add(this.button3);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.shapeContainer3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 5);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(912, 539);
+            this.tabPage3.Size = new System.Drawing.Size(912, 520);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             // 
@@ -371,7 +381,7 @@
             this.shapeContainer3.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape6,
             this.rectangleShape5});
-            this.shapeContainer3.Size = new System.Drawing.Size(906, 533);
+            this.shapeContainer3.Size = new System.Drawing.Size(906, 514);
             this.shapeContainer3.TabIndex = 8;
             this.shapeContainer3.TabStop = false;
             // 
@@ -477,6 +487,8 @@
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.White;
+            this.tabPage5.Controls.Add(this.vScrollBar1);
+            this.tabPage5.Controls.Add(this.dataGridView1);
             this.tabPage5.Controls.Add(this.Main_Picture_Box);
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
@@ -497,10 +509,10 @@
             // 
             this.tabPage6.BackColor = System.Drawing.Color.White;
             this.tabPage6.Controls.Add(this.pictureBox2);
-            this.tabPage6.Location = new System.Drawing.Point(4, 5);
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(912, 539);
+            this.tabPage6.Size = new System.Drawing.Size(912, 520);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "tabPage6";
             // 
@@ -511,6 +523,60 @@
             this.pictureBox2.Size = new System.Drawing.Size(399, 516);
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView1.GridColor = System.Drawing.Color.LightGray;
+            this.dataGridView1.Location = new System.Drawing.Point(499, 0);
+            this.dataGridView1.MaximumSize = new System.Drawing.Size(900, 0);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(900, 673);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(1342, 39);
+            this.vScrollBar1.Maximum = 50;
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(57, 541);
+            this.vScrollBar1.SmallChange = 4;
+            this.vScrollBar1.TabIndex = 3;
+            this.vScrollBar1.Visible = false;
+            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // UI_Base
             // 
@@ -541,6 +607,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Main_Picture_Box)).EndInit();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -584,6 +651,8 @@
         private System.Windows.Forms.PictureBox Main_Picture_Box;
         private System.Windows.Forms.Label Part_Name;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.VScrollBar vScrollBar1;
     }
 }
 
