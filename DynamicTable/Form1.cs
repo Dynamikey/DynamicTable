@@ -15,11 +15,11 @@ namespace DynamicTable
     public partial class Form1 : Form
     {
 
-        XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
+        XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader("Z:\Downloads\\RR\\RN-EJ-412-1008-04.xml");
         private void WriteValues()
         {
-            using (var writer = new CsvFileWriter("Z:\\Documents\\WriteTest.csv"))
+            using (var writer = new CsvFileWriter("C:\\Users\\Fin\\Documents\\RR\\WriteTest.csv"))
             {
                 List<string> columns = new List<string>();
 
@@ -209,12 +209,19 @@ namespace DynamicTable
 
         private void CreateGraphicsColumn()
         {
-            string imagePath = "Z:\\Downloads\\hi.png";
+            //string imagePath = "Z:\\Downloads\\hi.png";
+            string imagePath = "C:\\Users\\Fin\\Documents\\RR\\hi.jpg";
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
             Image image = Image.FromFile(imagePath);
+
+            Size newsize = new Size(Convert.ToInt32(image.Width*0.1), Convert.ToInt32(image.Height * 0.1));
+            image = new Bitmap(image, newsize);
+
             newDataGridViewImageColumn.Image = image;
+            newDataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridView1.Columns.Add(newDataGridViewImageColumn);
             newDataGridViewImageColumn.HeaderText = "Image";
+            
             //dataGridView1.AutoResizeRows();
         }
 
