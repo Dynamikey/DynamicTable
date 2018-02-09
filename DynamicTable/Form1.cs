@@ -15,25 +15,27 @@ namespace DynamicTable
     public partial class Form1 : Form
     {
 
-        XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1009-03.xml");
+        XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader("Z:\Downloads\\RR\\RN-EJ-412-1008-04.xml");
+        //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1009-03.xml");
+        //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1008-04.xml");
         private void WriteValues()
         {
             using (var writer = new CsvFileWriter("C:\\Users\\Fin\\Documents\\RR\\WriteTest.csv"))
             {
                 List<string> columns = new List<string>();
 
-                for (int i = 0; i < list.Count; i++)
+                for (int i = 0; i < repairDataList.Count; i++)
                 {
-                    columns.Add(list[i].headingNumber);
-                    columns.Add(list[i].headingName);
-                    if (list[i].useableLimits != null) columns.Add(list[i].useableLimits);
+                    columns.Add(repairDataList[i].headingNumber);
+                    columns.Add(repairDataList[i].headingName);
+                    if (repairDataList[i].useableLimits != null) columns.Add(repairDataList[i].useableLimits);
                     else columns.Add(" ");
-                    if (list[i].repairableLimits != null) columns.Add(list[i].repairableLimits);
+                    if (repairDataList[i].repairableLimits != null) columns.Add(repairDataList[i].repairableLimits);
                     else columns.Add(" ");
-                    if (list[i].correctiveAction != null) columns.Add(list[i].correctiveAction);
+                    if (repairDataList[i].correctiveAction != null) columns.Add(repairDataList[i].correctiveAction);
                     else columns.Add(" ");
-                    if (list[i].relatedFigures != null) columns.Add(list[i].relatedFigures);
+                    if (repairDataList[i].relatedFigures != null) columns.Add(repairDataList[i].relatedFigures);
                     else columns.Add(" ");
                     writer.WriteRow(columns);
                     columns.Clear();
@@ -44,10 +46,10 @@ namespace DynamicTable
 
         private void FigFinder()
         {
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < repairDataList.Count; i++)
             {
                 RepairData temp = new RepairData();
-                temp = list[i]; //Copy list data into temporary repairData struct
+                temp = repairDataList[i]; //Copy list data into temporary repairData struct
 
                 foreach (Match match in Regex.Matches(temp.headingName, @"\d+[^,.]")) //@"\d+[a-zA-Z0-9]"
                 {
@@ -70,7 +72,7 @@ namespace DynamicTable
                     NullReferenceException e;
                 }
 
-                list[i] = temp;
+                repairDataList[i] = temp;
             }
         }
 
@@ -82,7 +84,7 @@ namespace DynamicTable
                 {
                     if (reader.Name == "featureDamage") //If XML line is a feature damage heading (e.g. "4.4 Heatshield")
                     {
-                        data.headingNumber = reader.GetAttribute("id").Substring(1); //Extract heading number "4.4" (minus the first character which is a F)
+                        repairData.headingNumber = reader.GetAttribute("id").Substring(1); //Extract heading number "4.4" (minus the first character which is a F)
                                                                                      //Console.WriteLine($"Found a heading number: {data.headingNumber}");
                     }
 
@@ -103,16 +105,16 @@ namespace DynamicTable
                         {
                             featureText = featureText.Remove(0, 1);
                         }
-                        data.headingName = featureText;
+                        repairData.headingName = featureText;
 
-                        AddToList(list, ref data);
+                        AddToList(repairDataList, ref repairData);
                     }
 
                     if (reader.Name == "damageAndActions")
                     {
                         do
                         {
-                            data.headingNumber = reader.GetAttribute("id").Substring(1); //Extract sub-heading number "4.4.1" (minus the first character which is a D)
+                            repairData.headingNumber = reader.GetAttribute("id").Substring(1); //Extract sub-heading number "4.4.1" (minus the first character which is a D)
 
                             XmlReader fdsub = reader.ReadSubtree();
 
@@ -124,11 +126,11 @@ namespace DynamicTable
                                     string damageHeading = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
                                     if (damageHeading.StartsWith(".")) //Bit of clean up code to move sub-sub-heading number (e.g. "4.2.3.1") from headingName to headingNumber
                                     {
-                                        data.headingNumber += damageHeading.Substring(0, damageHeading.IndexOf(" "));
+                                        repairData.headingNumber += damageHeading.Substring(0, damageHeading.IndexOf(" "));
                                         damageHeading = damageHeading.Remove(0, damageHeading.IndexOf(" ") + 1);
                                     }
 
-                                    data.headingName = damageHeading;
+                                    repairData.headingName = damageHeading;
                                 }
 
                                 if (fdsub.Name == "useableLimits")
@@ -136,22 +138,22 @@ namespace DynamicTable
                                     string useableLimitsText = Regex.Replace(fdsub.ReadInnerXml(), "\"([A-Z0-9a-z]+)\"", ">$1 <"); // Extracts figure attributes from useable limits
                                     useableLimitsText = Regex.Replace(useableLimitsText, "figure", "Fig.");
                                     useableLimitsText = Regex.Replace(useableLimitsText, "F0+[^1-9]", string.Empty);
-                                    data.useableLimits = Regex.Replace(useableLimitsText, "<[^>]+>", string.Empty);
+                                    repairData.useableLimits = Regex.Replace(useableLimitsText, "<[^>]+>", string.Empty);
                                 }
 
                                 if (fdsub.Name == "repairableLimits")
                                 {
-                                    data.repairableLimits = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
+                                    repairData.repairableLimits = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
                                 }
 
                                 if (fdsub.Name == "correctiveAction")
                                 {
-                                    data.correctiveAction = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
+                                    repairData.correctiveAction = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
                                 }
 
                             }
 
-                            AddToList(list, ref data);
+                            AddToList(repairDataList, ref repairData);
 
                         } while (reader.ReadToNextSibling("damageAndActions")); //Multiple sub-headings
                     }
@@ -165,26 +167,14 @@ namespace DynamicTable
                 Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures}");
         }
 
-
-
-        
-
-        List<RepairData> list = new List<RepairData>();
-        RepairData data = new RepairData();
-
-        /*public void AddToList()
-        {
-            list.Add(data);
-            data = default(RepairData);
-        }*/
-
         public void AddToList(List<RepairData> l, ref RepairData d)
         {
             l.Add(d);
             d = default(RepairData);
         }
 
-
+        List<RepairData> repairDataList = new List<RepairData>();
+        RepairData repairData = new RepairData();
         DataTable dataTable;
        
         public Form1()
@@ -221,7 +211,6 @@ namespace DynamicTable
             newDataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             dataGridView1.Columns.Add(newDataGridViewImageColumn);
             newDataGridViewImageColumn.HeaderText = "Image";
-            
             //dataGridView1.AutoResizeRows();
         }
 
@@ -229,8 +218,7 @@ namespace DynamicTable
         {
 
             DataGridViewButtonColumn dataGridViewButtonColumn = new DataGridViewButtonColumn();
-            dataGridViewButtonColumn.HeaderText = "Done?";
-            //dataGridViewButtonColumn.Text = "Done?";
+            dataGridViewButtonColumn.HeaderText = "Comments";
             dataGridViewButtonColumn.FlatStyle = FlatStyle.Flat;
             dataGridView1.Columns.Add(dataGridViewButtonColumn);
         }
@@ -238,15 +226,15 @@ namespace DynamicTable
 
         private void button1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < repairDataList.Count; i++)
             {
                 DataRow newDataRow = dataTable.NewRow();
-                newDataRow[0] = list[i].headingNumber;
-                newDataRow[1] = list[i].headingName;
-                newDataRow[2] = list[i].useableLimits;
-                newDataRow[3] = list[i].repairableLimits;
-                newDataRow[4] = list[i].correctiveAction;
-                newDataRow[5] = list[i].relatedFigures;
+                newDataRow[0] = repairDataList[i].headingNumber;
+                newDataRow[1] = repairDataList[i].headingName;
+                newDataRow[2] = repairDataList[i].useableLimits;
+                newDataRow[3] = repairDataList[i].repairableLimits;
+                newDataRow[4] = repairDataList[i].correctiveAction;
+                newDataRow[5] = repairDataList[i].relatedFigures;
                 //newDataRow[6] = list[i].checkComplete;
                 dataTable.Rows.Add(newDataRow);
 
@@ -271,27 +259,23 @@ namespace DynamicTable
             //dataGridView1.Columns.Add(new DataGridViewImageColumn());
             CreateGraphicsColumn();
             CreateButtonsColumn();
-
-
-
-            
         }
 
         private void GenerateExampleRepairData()
         {
             for (int i = 0; i < 10; i++)
             {
-                data.headingNumber = (i+1).ToString();
-                data.headingName = "blah";
-                data.useableLimits = "blah";
-                data.repairableLimits = "blah";
-                data.correctiveAction = "blah blah blah blah blah blah blah blah blah blah blah";
-                data.relatedFigures = "blah";
-                data.checkComplete = false;
-                AddToList(list, ref data);
+                repairData.headingNumber = (i+1).ToString();
+                repairData.headingName = "blah";
+                repairData.useableLimits = "blah";
+                repairData.repairableLimits = "blah";
+                repairData.correctiveAction = "blah blah blah blah blah blah blah blah blah blah blah";
+                repairData.relatedFigures = "blah";
+                repairData.checkComplete = false;
+                AddToList(repairDataList, ref repairData);
 
             }
-            PrintList(list);
+            PrintList(repairDataList);
         }
         /*
         void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -324,7 +308,7 @@ namespace DynamicTable
         {
             ParseXML();
             FigFinder();
-            PrintList(list);
+            PrintList(repairDataList);
             WriteValues();
         }
 
@@ -354,52 +338,6 @@ namespace DynamicTable
             dataGridView1.ClearSelection();
         }
 
-        /*
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-            senderGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn && e.RowIndex >= 0)
-            {
-                bool isSelect = senderGrid["Completed", e.RowIndex].Value as bool? ?? false;
-                //Console.WriteLine(dataGridView1["Completed", e.RowIndex].Value);
-                //bool completed = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-                var row = senderGrid.Rows[e.RowIndex];
-                if (isSelect)
-                {
-                    row.DefaultCellStyle.BackColor = Color.Red;
-                }
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Color.White;
-                }
-            }
-
-            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-            {
-                Console.WriteLine("Button clicked");
-                // Do something
-
-                var row = senderGrid.Rows[e.RowIndex];
-                if (row.DefaultCellStyle.BackColor == Color.White)
-                {
-                    row.DefaultCellStyle.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Color.White;
-                }
-            }
-
-            if (e.RowIndex >= 0)
-            {
-                var row = senderGrid.Rows[e.RowIndex];
-                row.DefaultCellStyle.BackColor = Color.Red;
-            }
-
-            senderGrid.EndEdit();
-        }
-        */
+        
     }
 }
