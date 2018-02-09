@@ -16,12 +16,17 @@ namespace DynamicTable
 {
     public partial class Form1 : Form
     {
-
-        //XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
+        //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1009-03.xml");
+        //XmlTextReader reader = new XmlTextReader("C:\\Users\\Fin\\Documents\\RR\\RN-EJ-412-1008-04.xml");
+        XmlTextReader reader = new XmlTextReader("Z:\\Downloads\\RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader("Z:\Downloads\\RR\\RN-EJ-412-1008-04.xml");
+        List<RepairData> repairDataList = new List<RepairData>();
+        RepairData repairData = new RepairData();
+        DataTable dataTable;
+
         private void WriteValues()
         {
-            using (var writer = new CsvFileWriter("C:\\Users\\Fin\\Documents\\RR\\WriteTest.csv"))
+            using (var writer = new CsvFileWriter("Z:\\Downloads\\RN-EJ-412-1009-03.xml"))
             {
                 List<string> columns = new List<string>();
 
