@@ -96,6 +96,7 @@ namespace DynamicTable
                 //newDataRow[6] = list[i].checkComplete;
                 dataTable.Rows.Add(newDataRow);
 
+
             }
             dataGridView1.DataSource = dataTable;
             //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
