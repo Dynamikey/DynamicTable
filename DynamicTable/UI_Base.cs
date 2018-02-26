@@ -20,6 +20,7 @@ namespace DynamicTable
 
         int PW;
         bool Hiden;
+        String InspectorID;
         public UI_Base()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace DynamicTable
             Hiden = true;
             Slide_Panel.Width = 0;
             InitializeDataTable();
-            GenerateRepairData();
+            //GenerateRepairData(); Moved to later when switching to table tab
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -66,6 +67,7 @@ namespace DynamicTable
 
         private void Inspector_ID_Nxt_btn_Click(object sender, EventArgs e)
         {
+            InspectorID = textBox1.Text;
             tabControl1.SelectedTab = tabPage2;
         }
 
@@ -81,6 +83,7 @@ namespace DynamicTable
 
         private void button4_Click(object sender, EventArgs e)
         {
+            GenerateRepairData();
             tabControl1.SelectedTab = tabPage5;
 
             for (int i = 0; i < repairDataList.Count; i++)
@@ -118,6 +121,7 @@ namespace DynamicTable
         static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
         //static string path = "Z:\\Downloads\\";
+        //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
         List<RepairData> repairDataList = new List<RepairData>();
@@ -128,7 +132,14 @@ namespace DynamicTable
         {
             using (var writer = new CsvFileWriter($"{path}test.csv"))
             {
+               
+
                 List<string> columns = new List<string>();
+
+                columns.Add(Inspector_ID_Label.Text);
+                columns.Add(InspectorID);
+                writer.WriteRow(columns);
+                columns.Clear();
 
                 for (int i = 0; i < repairDataList.Count; i++)
                 {
