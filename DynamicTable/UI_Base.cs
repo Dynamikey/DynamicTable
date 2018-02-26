@@ -97,6 +97,7 @@ namespace DynamicTable
                 dataTable.Rows.Add(newDataRow);
 
 
+
             }
             dataGridView1.DataSource = dataTable;
             //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
