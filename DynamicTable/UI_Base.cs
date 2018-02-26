@@ -110,8 +110,6 @@ namespace DynamicTable
 
             CreateButtonsColumn();
 
-            vScrollBar1.Visible = true;
-            vScrollBar1.Maximum = repairDataList.Count() * 4 + 2;
 
         }
 
