@@ -11,6 +11,8 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.IO;
 using System.Drawing.Imaging;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 
 namespace DynamicTable
@@ -21,6 +23,9 @@ namespace DynamicTable
         int PW;
         bool Hiden;
         String InspectorID;
+        String EngineID;
+        String PartNumber;
+        String RepairNoteNumber;
         public UI_Base()
         {
             InitializeComponent();
@@ -73,14 +78,18 @@ namespace DynamicTable
 
         private void button2_Click(object sender, EventArgs e)
         {
+            EngineID = textBox2.Text;
             tabControl1.SelectedTab = tabPage3;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            PartNumber = textBox3.Text;
+            repairNoteSearch();
+
             tabControl1.SelectedTab = tabPage4;
         }
-
+        
         private void button4_Click(object sender, EventArgs e)
         {
             GenerateRepairData();
@@ -136,6 +145,8 @@ namespace DynamicTable
 
                 List<string> columns = new List<string>();
 
+                columns.Add(Engine_nb_lbl.Text);
+                columns.Add(EngineID);
                 columns.Add(Inspector_ID_Label.Text);
                 columns.Add(InspectorID);
                 writer.WriteRow(columns);
@@ -435,13 +446,43 @@ namespace DynamicTable
             dataGridView1.ClearSelection();
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void repairNoteSearch()
         {
-            VScrollBar vScrollBar = (VScrollBar)sender;
-            int val = dataGridView1.DisplayedRowCount(false);
-            Console.WriteLine(val);
-            dataGridView1.FirstDisplayedScrollingRowIndex = (int)((float)e.NewValue / (float)vScrollBar.Maximum * (repairDataList.Count() - 1));
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(@"C:\Users\Fin\Documents\RR\\EJ200 Repair Note Finder.xlsx");
+            //Excel.Workbook wb = app.Workbooks.Open($"C:\\Users\\Fin\\Documents\\RR\\{EngineID} Repair Note Finder.xlsx");
+            Excel.Worksheet xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
 
+            Excel.Range currentFind = null;
+            Excel.Range firstFind = null;
+
+            Excel.Range PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
+
+            currentFind = PartNameRange.Find(PartNumber, Type.Missing, Excel.XlFindLookIn.xlValues, Excel.XlLookAt.xlPart, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlNext, false, Type.Missing, Type.Missing);
+
+            while (currentFind != null)
+            {
+                // Keep track of the first range you find. 
+                if (firstFind == null)
+                {
+                    firstFind = currentFind;
+                }
+
+                // If you didn't move to a new range, you are done.
+                else if (currentFind.get_Address(Excel.XlReferenceStyle.xlA1)
+                      == firstFind.get_Address(Excel.XlReferenceStyle.xlA1))
+                {
+                    break;
+                }
+
+                Console.WriteLine("Found Part Number on Row No.: " + currentFind.Row);
+                RepairNoteNumber = xlWorkSheet.Cells[currentFind.Row, 5].Value.ToString();
+                Console.WriteLine(RepairNoteNumber);
+
+                currentFind = PartNameRange.FindNext(currentFind);
+            }
+
+            wb.Close(false);
         }
 
 
