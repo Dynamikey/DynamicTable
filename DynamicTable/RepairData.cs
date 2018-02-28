@@ -15,5 +15,6 @@ namespace DynamicTable
         public string correctiveAction { get; set; }
         public string relatedFigures { get; set; }
         public bool checkComplete { get; set; }
+        public string condition { get; set; }
     }
 }

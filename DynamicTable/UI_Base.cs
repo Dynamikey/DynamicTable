@@ -460,7 +460,7 @@ namespace DynamicTable
             if (e.RowIndex >= 0)
             {
                 var row = senderGrid.Rows[e.RowIndex];
-                if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn) && !(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
+                if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)) // && !(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
                 {
                     if (row.DefaultCellStyle.BackColor == Color.White)
                     {
@@ -485,6 +485,12 @@ namespace DynamicTable
                         pictureBox1.Image = Image.FromStream(ms);
                     }
 
+                }
+
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                {
+                    SAP_popup sapopup = new SAP_popup();
+                    sapopup.Show();
                 }
             }
             senderGrid.EndEdit();
@@ -517,6 +523,7 @@ namespace DynamicTable
             //dataGridView1.AutoResizeColumn(5);
             CreateButtonsColumn(ref dataGridView1);
         }
+
 
         private void generalDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -576,7 +583,7 @@ namespace DynamicTable
             dataGridView1.ClearSelection();
         }
 
-        private void generalDataGridView_SelectionChanged(object sender, EventArgs e)
+        private void generalDataGridView_SelectionChanged(object sender, EventArgs e)                                                            
         {
             Console.WriteLine("Selection changed");
             generalDataGridView.ClearSelection();
@@ -649,5 +656,13 @@ namespace DynamicTable
 
             wb.Close(false);
         }
+
+        private void launchSAPcomment()
+        {
+            SAP_popup sapopup = new SAP_popup();
+            sapopup.Show();
+        }
+
+
     }
 }
