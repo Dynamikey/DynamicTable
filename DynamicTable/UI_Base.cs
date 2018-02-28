@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.IO;
 using System.Drawing.Imaging;
-
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace DynamicTable
 {
@@ -21,13 +21,20 @@ namespace DynamicTable
         int PW;
         bool Hiden;
         String InspectorID;
+        String EngineID;
+        String PartNumber;
+        String RepairNoteNumber;
+        List<RepairNoteInformation> repairNoteList = new List<RepairNoteInformation>();
+        RepairNoteInformation repairNoteInformation = new RepairNoteInformation();
+
         public UI_Base()
         {
             InitializeComponent();
             PW = Slide_Panel.Width;
             Hiden = true;
             Slide_Panel.Width = 0;
-            InitializeDataTable();
+            InitializeSubrowDataTable();
+            InitializeGeneralDataTable();
             //GenerateRepairData(); Moved to later when switching to table tab
         }
         private void button1_Click_1(object sender, EventArgs e)
@@ -73,12 +80,80 @@ namespace DynamicTable
 
         private void button2_Click(object sender, EventArgs e)
         {
+            EngineID = textBox2.Text;
             tabControl1.SelectedTab = tabPage3;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            PartNumber = textBox3.Text;
+            
+            repairNoteSearch();
+
             tabControl1.SelectedTab = tabPage4;
+            int top = 80;
+            int left = 19;
+
+            for (int i = 0; i < repairNoteList.Count; i++)
+            {
+                RowStyle temp = tableLayoutPanel1.RowStyles[0];
+                tableLayoutPanel1.RowCount++;
+                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+                Button button = new Button();
+                button.Left = left;
+                button.Top = top;
+                button.Height = 40;
+                button.Width = 200;
+                button.Name = "Option" + i;
+                button.Text = repairNoteList[i].rn;
+                button.Click += button4_Click;//function
+                tableLayoutPanel1.Controls.Add(button,3, i+1);
+
+                Label label = new Label();
+                label.Left = 300;
+                label.Height = 40;
+                label.Top = top + label.Height/4;
+                label.Width = 700; 
+                label.Font = new Font("Segoe UI", 12);
+                label.Text = repairNoteList[i].description;
+                tableLayoutPanel1.Controls.Add(label, 0, i + 1);
+
+                Label label2 = new Label();
+                label2.Left = 300;
+                label2.Height = 40;
+                label2.Top = top + label.Height / 4;
+                label2.Width = 700;
+                label2.Font = new Font("Segoe UI", 12);
+                label2.Text = repairNoteList[i].ml;
+                tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
+
+                Label label3 = new Label();
+                label3.Left = 300;
+                label3.Height = 40;
+                label3.Top = top + label.Height / 4;
+                label3.Width = 700;
+                label3.Font = new Font("Segoe UI", 12);
+                label3.Text = repairNoteList[i].pc;
+                tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
+
+
+
+                top += button.Height + 5;
+            }
+        }
+
+        private void optionbutton_Click(object sender, EventArgs e)
+        {
+            RepairNoteNumber = sender.ToString();
+            Console.WriteLine("testing  " + RepairNoteNumber);
+            //tabControl1.SelectedTab = tabPage3;
+        }
+
+        bool isSubRow(string str)
+        {
+            string[] numbers = str.Split('.');
+            return (numbers.Length > 2) ? true : false;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -86,37 +161,26 @@ namespace DynamicTable
             GenerateRepairData();
             tabControl1.SelectedTab = tabPage5;
 
+            // *******
+
             for (int i = 0; i < repairDataList.Count; i++)
             {
-                DataRow newDataRow = dataTable.NewRow();
-                newDataRow[0] = repairDataList[i].headingNumber;
-                newDataRow[1] = repairDataList[i].headingName;
-                newDataRow[2] = repairDataList[i].useableLimits;
-                newDataRow[3] = repairDataList[i].repairableLimits;
-                newDataRow[4] = repairDataList[i].correctiveAction;
-                newDataRow[5] = repairDataList[i].relatedFigures;
-                //repairDataList[i].relatedFigures
-                //newDataRow[6] = list[i].checkComplete;
-                dataTable.Rows.Add(newDataRow);
-
-
+                if (isSubRow(repairDataList[i].headingNumber) == false)
+                { 
+                    DataRow newDataRow = generalDataTable.NewRow();
+                    newDataRow[0] = repairDataList[i].headingNumber;
+                    newDataRow[1] = repairDataList[i].headingName;
+                    newDataRow[2] = repairDataList[i].relatedFigures;
+                    generalDataTable.Rows.Add(newDataRow);
+                }
 
             }
-            dataGridView1.DataSource = dataTable;
-            //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
+            generalDataGridView.DataSource = generalDataTable;
 
-
-            // Resize "Number" column
-            dataGridView1.AutoResizeColumn(0);
-            // Resize "Completed" column
-            dataGridView1.AutoResizeColumn(5);
-
-            CreateGraphicsColumn();
-
-            CreateButtonsColumn();
-
+            CreateGraphicsColumn(ref generalDataGridView);
 
         }
+
 
         static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
@@ -126,7 +190,9 @@ namespace DynamicTable
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
         List<RepairData> repairDataList = new List<RepairData>();
         RepairData repairData = new RepairData();
-        DataTable dataTable;
+        DataTable subrowDataTable;
+        DataTable generalDataTable;
+        
 
         private void WriteValues()
         {
@@ -289,55 +355,76 @@ namespace DynamicTable
             d = default(RepairData);
         }
 
-        private void InitializeDataTable()
+        private void InitializeSubrowDataTable()
         {
-            dataTable = new DataTable();
-            dataTable.Columns.Add("Number", typeof(string));
-            dataTable.Columns.Add("Name", typeof(string));
-            dataTable.Columns.Add("Useable Limits", typeof(string));
-            dataTable.Columns.Add("Repairable Limits", typeof(string));
-            dataTable.Columns.Add("Corrective Action", typeof(string));
-            dataTable.Columns.Add("Related Figures", typeof(string));
+            subrowDataTable = new DataTable();
+            subrowDataTable.Columns.Add("Number", typeof(string));
+            subrowDataTable.Columns.Add("Name", typeof(string));
+            subrowDataTable.Columns.Add("Useable Limits", typeof(string));
+            subrowDataTable.Columns.Add("Repairable Limits", typeof(string));
+            subrowDataTable.Columns.Add("Corrective Action", typeof(string));
+            //subrowDataTable.Columns.Add("Related Figures", typeof(string));
             //dataTable.Columns.Add("Completed", typeof(bool));
         }
 
-        private void CreateGraphicsColumn()
+        private void InitializeGeneralDataTable()
         {
+            generalDataTable = new DataTable();
+            generalDataTable.Columns.Add("Number", typeof(string));
+            generalDataTable.Columns.Add("Name", typeof(string));
+            generalDataTable.Columns.Add("Related Figures", typeof(string));
+        }
 
+        private void CreateGraphicsColumn(ref DataGridView dataGridView)
+        {
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
             newDataGridViewImageColumn.Width = 120;
             newDataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            newDataGridViewImageColumn.HeaderText = "Image";
-            dataGridView1.Columns.Add(newDataGridViewImageColumn);
+            newDataGridViewImageColumn.HeaderText = "Images";
+            dataGridView.Columns.Add(newDataGridViewImageColumn);
+
+            int col = dataGridView.ColumnCount - 1;
+            int row = 0;
 
             for (int i = 0; i < repairDataList.Count; i++)
             {
-                if (repairDataList[i].relatedFigures != null)
+                if (!isSubRow(repairDataList[i].headingNumber))
                 {
-                    //Console.WriteLine(Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]"));
-                    string imagePath = $"{path}\\figfolder\\temp\\{Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]")}.png";
-                    Image image = Image.FromFile(imagePath);
-                    Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
-                    //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
-                    Bitmap resizedimage = new Bitmap(image, newsize);
-
-                    dataGridView1.Rows[i].Cells[6].Value = resizedimage;
+                    if (repairDataList[i].relatedFigures != null)
+                    {
+                        //Console.WriteLine(Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]"));
+                        string imagePath = $"{path}figfolder\\temp\\{Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]")}.png";
+                        Image image = Image.FromFile(imagePath);
+                        Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
+                        //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
+                        Bitmap resizedimage = new Bitmap(image, newsize);
+                        dataGridView.Rows[row].Cells[col].Value = resizedimage;
+                    }
+                    row++;
+                    
                 }
             }
             newDataGridViewImageColumn.DefaultCellStyle.NullValue = null;
-            //dataGridView1.Rows[0].Cells[6].Value = resizedimage;
+            //dataGridView.Rows[0].Cells[6].Value = resizedimage;
 
-            //dataGridView1.AutoResizeRows();
+            //dataGridView.AutoResizeRows();
         }
 
-
-        private void CreateButtonsColumn()
+        int count = 0;
+        private void CreateButtonsColumn(ref DataGridView dataGridView)
         {
 
-            DataGridViewButtonColumn dataGridViewButtonColumn = new DataGridViewButtonColumn();
-            dataGridViewButtonColumn.HeaderText = "Comments";
-            dataGridViewButtonColumn.FlatStyle = FlatStyle.Flat;
-            dataGridView1.Columns.Add(dataGridViewButtonColumn);
+            //if (!dataGridView.Columns.Contains("Comments"))
+            //{
+            if (count == 0)
+            {
+                DataGridViewButtonColumn dataGridViewButtonColumn = new DataGridViewButtonColumn();
+                dataGridViewButtonColumn.HeaderText = "Comments";
+                dataGridViewButtonColumn.FlatStyle = FlatStyle.Flat;
+                dataGridView.Columns.Add(dataGridViewButtonColumn);
+            }
+            count = 1;
+            //}
         }
 
         private void GenerateExampleRepairData()
@@ -356,32 +443,6 @@ namespace DynamicTable
             }
             PrintList(repairDataList);
         }
-        /*
-        void dataGridView1_CurrentCellDirtyStateChanged(object sender, EventArgs e)
-        {
-            //DataGridView dataGridView1 = (DataGridView)sender;
-            //DataGridViewCell dataGridViewCell = dataGridView1.CurrentCell;
-            //bool isSelected = dataGridViewCell.EditedFormattedValue.Equals(true);
-            //Console.Write(isSelected);
-            Console.WriteLine("Dirty State Changed");
-        }
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            Console.WriteLine("Cell Value Changed");
-            bool isSelect = dataGridView1["Completed", e.RowIndex].Value as bool? ?? false;
-            Console.WriteLine(dataGridView1["Completed", e.RowIndex].Value);
-            //bool completed = Convert.ToBoolean(dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString());
-            var row = dataGridView1.Rows[e.RowIndex];
-            if (isSelect)
-            {
-                row.DefaultCellStyle.BackColor = Color.Red;
-            } else
-            {
-                row.DefaultCellStyle.BackColor = Color.White;
-            }
-            dataGridView1.EndEdit();
-        }
-        */
 
         private void GenerateRepairData()
         {
@@ -429,10 +490,96 @@ namespace DynamicTable
             senderGrid.EndEdit();
         }
 
+        private void GenerateSubrowDataGridView(int row)
+        {
+            subrowDataTable.Clear();
+            for (int i = row + 1; i < repairDataList.Count; i++)
+            {
+                if (isSubRow(repairDataList[i].headingNumber))
+                {
+                    DataRow newDataRow = subrowDataTable.NewRow();
+                    newDataRow[0] = repairDataList[i].headingNumber;
+                    newDataRow[1] = repairDataList[i].headingName;
+                    newDataRow[2] = repairDataList[i].useableLimits;
+                    newDataRow[3] = repairDataList[i].repairableLimits;
+                    newDataRow[4] = repairDataList[i].correctiveAction;
+                    subrowDataTable.Rows.Add(newDataRow);
+                }
+                else break;
+
+            }
+            dataGridView1.DataSource = subrowDataTable;
+            //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
+
+            // Resize "Number" column
+            dataGridView1.AutoResizeColumn(0);
+            // Resize "Completed" column
+            //dataGridView1.AutoResizeColumn(5);
+            CreateButtonsColumn(ref dataGridView1);
+        }
+
+        private void generalDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Console.WriteLine("Cell clicked");
+            var senderGrid = (DataGridView)sender;
+            senderGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            if (e.RowIndex >= 0)
+            {
+                var row = senderGrid.Rows[e.RowIndex];
+                if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn) && !(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
+                {
+                    int rowIndex;
+                    int i = 0;
+                    for (rowIndex = 0; i <= e.RowIndex; rowIndex++)
+                    {
+                        if (!isSubRow(repairDataList[rowIndex].headingNumber)) i++;
+                    }
+                    if (rowIndex != 0) rowIndex--;
+
+                    GenerateSubrowDataGridView(rowIndex);
+
+                    dataGridView1.Visible = true;
+                    generalDataGridView.Visible = false;
+                }
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+                {
+                    int rowIndex;
+                    int i = 0;
+                    
+                    for (rowIndex = 0; i <= e.RowIndex; rowIndex++)
+                    {
+                        if (!isSubRow(repairDataList[rowIndex].headingNumber)) i++;
+                    }
+                    if (rowIndex != 0) rowIndex--; 
+
+                    if (repairDataList[rowIndex].relatedFigures != null)
+                    {
+
+                        Console.WriteLine("Image clicked");
+
+                        // Cast to image
+                        string imagePath = $"{path}\\figfolder\\temp\\{Regex.Match(repairDataList[rowIndex].relatedFigures, @"[0-9A-Z]")}.png";
+                        Image img = Image.FromFile(imagePath);
+                        // Load image data in memory stream
+                        MemoryStream ms = new MemoryStream();
+                        img.Save(ms, ImageFormat.Png);
+                        pictureBox1.Image = Image.FromStream(ms);
+                    }
+
+                }
+            }
+            senderGrid.EndEdit();
+        }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Selection changed");
             dataGridView1.ClearSelection();
+        }
+
+        private void generalDataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Selection changed");
+            generalDataGridView.ClearSelection();
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -444,6 +591,63 @@ namespace DynamicTable
 
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Visible == true)
+            {
+                dataGridView1.Visible = false;
+                generalDataGridView.Visible = true;
+            }
+            else
+            {
+                dataGridView1.Visible = true;
+                generalDataGridView.Visible = false;
+            }
+        }
 
+        private void repairNoteSearch()
+        {
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(@"C:\Users\Fin\Documents\RR\\EJ200 Repair Note Finder.xlsx");
+            //Excel.Workbook wb = app.Workbooks.Open($"C:\\Users\\Fin\\Documents\\RR\\{EngineID} Repair Note Finder.xlsx");
+            Excel.Worksheet xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
+
+            Excel.Range currentFind = null;
+            Excel.Range firstFind = null;
+
+            Excel.Range PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
+
+            currentFind = PartNameRange.Find(PartNumber, Type.Missing, Excel.XlFindLookIn.xlValues, Excel.XlLookAt.xlPart, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlNext, false, Type.Missing, Type.Missing);
+
+            while (currentFind != null)
+            {
+                // Keep track of the first range you find. 
+                if (firstFind == null)
+                {
+                    firstFind = currentFind;
+                }
+
+                // If you didn't move to a new range, you are done.
+                else if (currentFind.get_Address(Excel.XlReferenceStyle.xlA1)
+                      == firstFind.get_Address(Excel.XlReferenceStyle.xlA1))
+                {
+                    break;
+                }
+
+                Console.WriteLine("Found Part Number on Row No.: " + currentFind.Row);
+                repairNoteInformation.description = xlWorkSheet.Cells[currentFind.Row, 2].Value.ToString();
+                repairNoteInformation.ml = xlWorkSheet.Cells[currentFind.Row, 3].Value.ToString();
+                repairNoteInformation.pc = xlWorkSheet.Cells[currentFind.Row, 4].Value.ToString();
+                repairNoteInformation.rn = xlWorkSheet.Cells[currentFind.Row, 5].Value.ToString();
+                repairNoteList.Add(repairNoteInformation);
+                repairNoteInformation = default(RepairNoteInformation);
+                
+                //Console.WriteLine(RepairNoteNumber);
+
+                currentFind = PartNameRange.FindNext(currentFind);
+            }
+
+            wb.Close(false);
+        }
     }
 }
