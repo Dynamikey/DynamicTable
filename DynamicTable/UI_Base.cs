@@ -351,7 +351,7 @@ namespace DynamicTable
         private void PrintList(List<RepairData> l)
         {
             for (int i = 0; i < l.Count; i++)
-                Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures}");
+                Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures} {l[i].condition}");
         }
 
         public void AddToList(List<RepairData> l, ref RepairData d)
@@ -478,13 +478,13 @@ namespace DynamicTable
                 }
                 else if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
-                    launchSAPcomment();
+                    launchSAPcomment(e.RowIndex + globalSubRowNumber);
                 }
             }
             senderGrid.EndEdit();
         }
 
-        int globalSubRowNumber = -1;
+        public int globalSubRowNumber = -1;
         private void GenerateSubrowDataGridView(int row)
         {
             subrowDataTable.Clear();
@@ -752,16 +752,17 @@ namespace DynamicTable
             wb.Close(false);
         }
 
-        private void launchSAPcomment()
+        private void launchSAPcomment(int rowIndex)
         {
-            using (SAP_popup sapopup = new SAP_popup(repairDataList))
+            using (SAP_popup sapopup = new SAP_popup(rowIndex, repairDataList))
             {
                 var result = sapopup.ShowDialog();
                 if (result == DialogResult.OK)
                 {
                     repairDataList = sapopup.repairDataList2;
                     Console.WriteLine("HI");
-                    Console.WriteLine(repairDataList[0].condition);
+
+                    PrintList(repairDataList);
                 }
             }
                 
