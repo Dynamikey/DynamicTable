@@ -14,11 +14,12 @@ namespace DynamicTable
     {
         UI_Base ui = new UI_Base();
         public List<RepairData> repairDataList2 { get; set; }
-        public SAP_popup(List<RepairData> list)
+        int rowIndex;
+        public SAP_popup(int rowIndexTemp, List<RepairData> list)
         {
             InitializeComponent();
             repairDataList2 = list;
-
+            rowIndex = rowIndexTemp;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -27,9 +28,7 @@ namespace DynamicTable
             button2.Font = new Font(button2.Font, FontStyle.Regular);
             button3.Font = new Font(button3.Font, FontStyle.Regular);
 
-            //ui.repairDataList[0].condition = "Servicable";
-            //repairDataList[0].condition = "Serviceable";
-            repairDataList2[0] = new RepairData(repairDataList2[0], "Serviceable");
+            repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], "Serviceable");
             
         }
 
