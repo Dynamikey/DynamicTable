@@ -28,6 +28,17 @@ namespace DynamicTable
             this.checkComplete = b;
             this.condition = rd.condition;
         }
+        public RepairData(RepairData rd, string str)
+        {
+            this.headingNumber = rd.headingNumber;
+            this.headingName = rd.headingName;
+            this.useableLimits = rd.useableLimits;
+            this.repairableLimits = rd.repairableLimits;
+            this.correctiveAction = rd.correctiveAction;
+            this.relatedFigures = rd.relatedFigures;
+            this.checkComplete = rd.checkComplete;
+            this.condition = str;
+        }
     }
 
 
