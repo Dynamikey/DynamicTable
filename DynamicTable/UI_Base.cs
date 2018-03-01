@@ -188,11 +188,10 @@ namespace DynamicTable
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
-        List<RepairData> repairDataList = new List<RepairData>();
+        List <RepairData> repairDataList = new List<RepairData>();
         RepairData repairData = new RepairData();
         DataTable subrowDataTable;
         DataTable generalDataTable;
-        
 
         private void WriteValues()
         {
@@ -489,8 +488,7 @@ namespace DynamicTable
 
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
-                    SAP_popup sapopup = new SAP_popup();
-                    sapopup.Show();
+                    launchSAPcomment();
                 }
             }
             senderGrid.EndEdit();
@@ -510,6 +508,7 @@ namespace DynamicTable
                     newDataRow[3] = repairDataList[i].repairableLimits;
                     newDataRow[4] = repairDataList[i].correctiveAction;
                     subrowDataTable.Rows.Add(newDataRow);
+                   
                 }
                 else break;
 
