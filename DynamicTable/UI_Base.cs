@@ -195,7 +195,7 @@ namespace DynamicTable
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
-        List <RepairData> repairDataList = new List<RepairData>();
+        public List<RepairData> repairDataList = new List<RepairData>();
         RepairData repairData = new RepairData();
         DataTable subrowDataTable;
         DataTable generalDataTable;
@@ -755,8 +755,17 @@ namespace DynamicTable
 
         private void launchSAPcomment()
         {
-            SAP_popup sapopup = new SAP_popup();
-            sapopup.Show();
+            using (SAP_popup sapopup = new SAP_popup(repairDataList))
+            {
+                var result = sapopup.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    repairDataList = sapopup.repairDataList2;
+                    Console.WriteLine("HI");
+                    Console.WriteLine(repairDataList[0].condition);
+                }
+            }
+                
         }
 
     }
