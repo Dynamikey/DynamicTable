@@ -37,6 +37,7 @@ namespace DynamicTable
             InitializeGeneralDataTable();
             //GenerateRepairData(); Moved to later when switching to table tab
         }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             timer1.Start();
@@ -154,6 +155,11 @@ namespace DynamicTable
         {
             string[] numbers = str.Split('.');
             return (numbers.Length > 2) ? true : false;
+        }
+
+        string[] convertToRelatedFiguresArr(string str)
+        {
+            return str.Split(' ');
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -391,8 +397,8 @@ namespace DynamicTable
                 {
                     if (repairDataList[i].relatedFigures != null)
                     {
-                        //Console.WriteLine(Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]"));
-                        string imagePath = $"{path}figfolder\\temp\\{Regex.Match(repairDataList[i].relatedFigures, @"[0-9A-Z]")}.png";
+                        string[] relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
+                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
                         Image image = Image.FromFile(imagePath);
                         Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
                         //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
@@ -459,7 +465,7 @@ namespace DynamicTable
             if (e.RowIndex >= 0)
             {
                 var row = senderGrid.Rows[e.RowIndex];
-                if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)) // && !(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
+                if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
                 {
                     if (row.DefaultCellStyle.BackColor == Color.White)
                     {
@@ -470,23 +476,7 @@ namespace DynamicTable
                         row.DefaultCellStyle.BackColor = Color.White;
                     }
                 }
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
-                {
-                    if (repairDataList[e.RowIndex].relatedFigures != null)
-                    {
-                        Console.WriteLine("Image clicked");
-                        // Cast to image
-                        string imagePath = $"{path}\\figfolder\\temp\\{Regex.Match(repairDataList[e.RowIndex].relatedFigures, @"[0-9A-Z]")}.png";
-                        Image img = Image.FromFile(imagePath);
-                        // Load image data in memory stream
-                        MemoryStream ms = new MemoryStream();
-                        img.Save(ms, ImageFormat.Png);
-                        pictureBox1.Image = Image.FromStream(ms);
-                    }
-
-                }
-
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                else if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
                     launchSAPcomment();
                 }
@@ -494,9 +484,11 @@ namespace DynamicTable
             senderGrid.EndEdit();
         }
 
+        int globalSubRowNumber = -1;
         private void GenerateSubrowDataGridView(int row)
         {
             subrowDataTable.Clear();
+            globalSubRowNumber = row + 1;
             for (int i = row + 1; i < repairDataList.Count; i++)
             {
                 if (isSubRow(repairDataList[i].headingNumber))
@@ -508,7 +500,6 @@ namespace DynamicTable
                     newDataRow[3] = repairDataList[i].repairableLimits;
                     newDataRow[4] = repairDataList[i].correctiveAction;
                     subrowDataTable.Rows.Add(newDataRow);
-                   
                 }
                 else break;
 
@@ -521,8 +512,55 @@ namespace DynamicTable
             // Resize "Completed" column
             //dataGridView1.AutoResizeColumn(5);
             CreateButtonsColumn(ref dataGridView1);
+
+            for (int i = globalSubRowNumber; i < repairDataList.Count; i++)
+            {
+                if (isSubRow(repairDataList[i].headingNumber))
+                {
+                    if (repairDataList[i].checkComplete)
+                    {
+                        dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.White;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
+        private void GenerateImageListView(string[] arr)
+        {
+            ImageList imageList = new ImageList();
+            imageList.ImageSize = new Size(140, 140);
+            imageList.ColorDepth = ColorDepth.Depth32Bit;
+            listView1.Clear();
+            for (int j = 0; j < arr.Length; j++)
+            {
+                if (arr[j] != "")
+                {
+                    string tempImagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{arr[j]}.png";
+                    Image tempImage = Image.FromFile(tempImagePath);
+
+                    Console.WriteLine(tempImagePath);
+                    imageList.Images.Add(tempImage);
+                }
+            }
+
+            listView1.View = View.LargeIcon;
+            listView1.LargeImageList = imageList;
+            for (int j = 0; j < imageList.Images.Count; j++)
+            {
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = j;
+                listView1.Items.Add(item);
+            }
+            Console.WriteLine(listView1.Items.Count);
+        }
 
         private void generalDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -544,6 +582,8 @@ namespace DynamicTable
 
                     GenerateSubrowDataGridView(rowIndex);
 
+                    string[] relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
+                    GenerateImageListView(relatedFiguresArr);
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
                 }
@@ -551,31 +591,38 @@ namespace DynamicTable
                 {
                     int rowIndex;
                     int i = 0;
-                    
+
                     for (rowIndex = 0; i <= e.RowIndex; rowIndex++)
                     {
                         if (!isSubRow(repairDataList[rowIndex].headingNumber)) i++;
                     }
-                    if (rowIndex != 0) rowIndex--; 
+                    if (rowIndex != 0) rowIndex--;
 
                     if (repairDataList[rowIndex].relatedFigures != null)
                     {
 
                         Console.WriteLine("Image clicked");
 
+
                         // Cast to image
-                        string imagePath = $"{path}\\figfolder\\temp\\{Regex.Match(repairDataList[rowIndex].relatedFigures, @"[0-9A-Z]")}.png";
+                        string[] relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
+                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
                         Image img = Image.FromFile(imagePath);
                         // Load image data in memory stream
                         MemoryStream ms = new MemoryStream();
                         img.Save(ms, ImageFormat.Png);
                         pictureBox1.Image = Image.FromStream(ms);
+                        //originalPictureBoxSize = pictureBox1.Size;
+
+
+                        GenerateImageListView(relatedFiguresArr);
                     }
 
                 }
             }
             senderGrid.EndEdit();
         }
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Selection changed");
@@ -588,19 +635,68 @@ namespace DynamicTable
             generalDataGridView.ClearSelection();
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        {
-            VScrollBar vScrollBar = (VScrollBar)sender;
-            int val = dataGridView1.DisplayedRowCount(false);
-            Console.WriteLine(val);
-            dataGridView1.FirstDisplayedScrollingRowIndex = (int)((float)e.NewValue / (float)vScrollBar.Maximum * (repairDataList.Count() - 1));
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Visible == true)
             {
+                if (globalSubRowNumber != -1)
+                {
+                    bool isFullyComplete = true;
+                    for (int i = globalSubRowNumber; i < repairDataList.Count; i++)
+                    {
+                        if (isSubRow(repairDataList[i].headingNumber))
+                        {
+                            Console.WriteLine(i);
+                            //Console.WriteLine(globalSubRowNumber);
+                            //repairDataList[i].checkComplete = true
+                            if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.LightGreen)
+                            {
+                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
+                                        repairDataList[i].headingName,
+                                        repairDataList[i].useableLimits,
+                                        repairDataList[i].repairableLimits,
+                                        repairDataList[i].correctiveAction,
+                                        repairDataList[i].relatedFigures,
+                                        true);*/
+                                repairDataList[i] = new RepairData(repairDataList[i], true);
+                            }
+                            else
+                            {
+                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
+                                        repairDataList[i].headingName,
+                                        repairDataList[i].useableLimits,
+                                        repairDataList[i].repairableLimits,
+                                        repairDataList[i].correctiveAction,
+                                        repairDataList[i].relatedFigures,
+                                        false);*/
+                                repairDataList[i] = new RepairData(repairDataList[i], false);
+                                isFullyComplete = false;
+                            }
+                            // = (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.White) ? false : true;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    repairDataList[globalSubRowNumber - 1] = (isFullyComplete) ? new RepairData(repairDataList[globalSubRowNumber - 1], true) : new RepairData(repairDataList[globalSubRowNumber - 1], false);
+                    int rowCount = -1;
+                    for (int i = 0; i <= globalSubRowNumber; i++)
+                    {
+                        if (!isSubRow(repairDataList[i].headingNumber))
+                        {
+                            rowCount++;
+                        }
+                    }
+                    if (isFullyComplete)
+                    {
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
+                    }
+                }
                 dataGridView1.Visible = false;
                 generalDataGridView.Visible = true;
             }
@@ -661,7 +757,6 @@ namespace DynamicTable
             SAP_popup sapopup = new SAP_popup();
             sapopup.Show();
         }
-
 
     }
 }
