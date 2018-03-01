@@ -18,6 +18,7 @@ namespace DynamicTable
     public partial class UI_Base : Form
     {
         //hello
+        //hello
         int PW;
         bool Hiden;
         String InspectorID;
