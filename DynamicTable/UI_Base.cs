@@ -189,9 +189,9 @@ namespace DynamicTable
         }
 
 
-        //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
-        static string path = "Z:\\Downloads\\RR\\";
+        //static string path = "Z:\\Downloads\\RR\\";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
@@ -471,15 +471,43 @@ namespace DynamicTable
                     if (row.DefaultCellStyle.BackColor == Color.White)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable");
+                        PrintList(repairDataList);
                     }
                     else
                     {
                         row.DefaultCellStyle.BackColor = Color.White;
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "");
+                        PrintList(repairDataList);
+                        // TODO: Add some sort of confirmation to deselect
                     }
                 }
                 else if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
                     launchSAPcomment(e.RowIndex + globalSubRowNumber);
+                    Console.WriteLine("About to start switch case");
+                    switch (repairDataList[e.RowIndex + globalSubRowNumber].condition)
+                    {
+                        case "Serviceable":
+                            row.DefaultCellStyle.BackColor = Color.LightGreen;
+                            Console.WriteLine("Colour should change to green");
+                            break;
+
+                        case "Salvageable":
+                            row.DefaultCellStyle.BackColor = Color.Orange;
+                            Console.WriteLine("Colour should change to orange");
+                            break;
+
+                        case "Unsalvageable":
+                            row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                            Console.WriteLine("Colour should change to red");
+                            break;
+
+                        case "":
+                            Console.WriteLine("Colour should stay white");
+                            break;
+                    }
+
                 }
             }
             senderGrid.EndEdit();
@@ -520,7 +548,29 @@ namespace DynamicTable
                 {
                     if (repairDataList[i].checkComplete)
                     {
-                        dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
+                        //dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
+
+                        switch (repairDataList[i].condition)
+                        {
+                            case "Serviceable":
+                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
+                                Console.WriteLine("Colour should change to green");
+                                break;
+
+                            case "Salvageable":
+                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Orange;
+                                Console.WriteLine("Colour should change to orange");
+                                break;
+
+                            case "Unsalvageable":
+                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                                Console.WriteLine("Colour should change to red");
+                                break;
+
+                            case "":
+                                Console.WriteLine("Colour should stay white");
+                                break;
+                        }
                     }
                     else
                     {
@@ -653,6 +703,8 @@ namespace DynamicTable
                 if (globalSubRowNumber != -1)
                 {
                     bool isFullyComplete = true;
+                    bool containsSalvageable = false;
+                    bool containsUnsalvageable = false;
                     for (int i = globalSubRowNumber; i < repairDataList.Count; i++)
                     {
                         if (isSubRow(repairDataList[i].headingNumber))
@@ -671,6 +723,30 @@ namespace DynamicTable
                                         true);*/
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                             }
+                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Orange)
+                            {
+                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
+                                        repairDataList[i].headingName,
+                                        repairDataList[i].useableLimits,
+                                        repairDataList[i].repairableLimits,
+                                        repairDataList[i].correctiveAction,
+                                        repairDataList[i].relatedFigures,
+                                        true);*/
+                                repairDataList[i] = new RepairData(repairDataList[i], true);
+                                containsSalvageable = true;
+                            }
+                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.PaleVioletRed)
+                            {
+                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
+                                        repairDataList[i].headingName,
+                                        repairDataList[i].useableLimits,
+                                        repairDataList[i].repairableLimits,
+                                        repairDataList[i].correctiveAction,
+                                        repairDataList[i].relatedFigures,
+                                        true);*/
+                                repairDataList[i] = new RepairData(repairDataList[i], true);
+                                containsUnsalvageable = true;
+                            }
                             else
                             {
                                 /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
@@ -682,6 +758,8 @@ namespace DynamicTable
                                         false);*/
                                 repairDataList[i] = new RepairData(repairDataList[i], false);
                                 isFullyComplete = false;
+                                containsSalvageable = false;
+                                containsUnsalvageable = false;
                             }
                             // = (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.White) ? false : true;
                         }
@@ -699,7 +777,25 @@ namespace DynamicTable
                             rowCount++;
                         }
                     }
+                    /*
                     if (isFullyComplete)
+                    {
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
+                    }*/
+                    
+                    if (containsUnsalvageable)
+                    {
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                    }
+                    else if (containsSalvageable)
+                    {
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.Orange;
+                    }
+                    else if (isFullyComplete)
                     {
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.LightGreen;
                     }

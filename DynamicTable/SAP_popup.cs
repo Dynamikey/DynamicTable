@@ -48,6 +48,7 @@ namespace DynamicTable
             button3.Font = new Font(button3.Font, FontStyle.Regular);
 
             repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], "Unsalvageable");
+ 
         }
 
         private void button5_Click(object sender, EventArgs e)
