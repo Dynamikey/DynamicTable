@@ -47,7 +47,7 @@ namespace DynamicTable
         {
             if (Hiden)
             {
-                Slide_Panel.Width = Slide_Panel.Width + 20;
+                Slide_Panel.Width = Slide_Panel.Width + 40;
                 if (Slide_Panel.Width >= PW)
                 {
                     timer1.Stop();
@@ -58,7 +58,7 @@ namespace DynamicTable
             }
             else
             {
-                Slide_Panel.Width = Slide_Panel.Width - 20;
+                Slide_Panel.Width = Slide_Panel.Width - 40;
                 if (Slide_Panel.Width <= 0)
                 {
                     timer1.Stop();
