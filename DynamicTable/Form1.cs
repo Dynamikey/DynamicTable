@@ -16,9 +16,9 @@ namespace DynamicTable
 {
     public partial class Form1 : Form
     {
-        static string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
-        //static string path = "Z:\\Downloads\\";
+        static string path = "Z:\\Downloads\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
         List<RepairData> repairDataList = new List<RepairData>();

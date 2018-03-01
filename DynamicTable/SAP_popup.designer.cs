@@ -55,19 +55,20 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(18, 28);
+            this.comboBox1.Location = new System.Drawing.Point(18, 57);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(183, 21);
+            this.comboBox1.Size = new System.Drawing.Size(346, 38);
             this.comboBox1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.label1.Location = new System.Drawing.Point(14, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 20);
+            this.label1.Size = new System.Drawing.Size(215, 45);
             this.label1.TabIndex = 1;
             this.label1.Text = "Damage Type";
             // 
@@ -76,10 +77,10 @@
             this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(222, 10);
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.button1.Location = new System.Drawing.Point(394, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(204, 50);
+            this.button1.Size = new System.Drawing.Size(376, 108);
             this.button1.TabIndex = 2;
             this.button1.Text = "Serviceable";
             this.button1.UseVisualStyleBackColor = false;
@@ -90,10 +91,10 @@
             this.button2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(221, 139);
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.button2.Location = new System.Drawing.Point(394, 273);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(204, 50);
+            this.button2.Size = new System.Drawing.Size(376, 108);
             this.button2.TabIndex = 3;
             this.button2.Text = "Unsalvageable";
             this.button2.UseVisualStyleBackColor = false;
@@ -104,10 +105,10 @@
             this.button3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(220, 76);
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.button3.Location = new System.Drawing.Point(394, 143);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(204, 50);
+            this.button3.Size = new System.Drawing.Size(376, 108);
             this.button3.TabIndex = 4;
             this.button3.Text = "Salvageable";
             this.button3.UseVisualStyleBackColor = false;
@@ -125,7 +126,7 @@
             this.rectangleShape3,
             this.rectangleShape2,
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(960, 200);
+            this.shapeContainer1.Size = new System.Drawing.Size(1824, 400);
             this.shapeContainer1.TabIndex = 5;
             this.shapeContainer1.TabStop = false;
             // 
@@ -135,9 +136,9 @@
             this.rectangleShape6.CornerRadius = 5;
             this.rectangleShape6.FillColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape6.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape6.Location = new System.Drawing.Point(727, 8);
+            this.rectangleShape6.Location = new System.Drawing.Point(1360, 12);
             this.rectangleShape6.Name = "rectangleShape6";
-            this.rectangleShape6.Size = new System.Drawing.Size(103, 77);
+            this.rectangleShape6.Size = new System.Drawing.Size(217, 166);
             // 
             // rectangleShape5
             // 
@@ -145,9 +146,9 @@
             this.rectangleShape5.CornerRadius = 5;
             this.rectangleShape5.FillColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape5.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape5.Location = new System.Drawing.Point(728, 101);
+            this.rectangleShape5.Location = new System.Drawing.Point(1360, 202);
             this.rectangleShape5.Name = "rectangleShape5";
-            this.rectangleShape5.Size = new System.Drawing.Size(103, 91);
+            this.rectangleShape5.Size = new System.Drawing.Size(216, 179);
             // 
             // rectangleShape4
             // 
@@ -155,9 +156,9 @@
             this.rectangleShape4.CornerRadius = 5;
             this.rectangleShape4.FillColor = System.Drawing.Color.MidnightBlue;
             this.rectangleShape4.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape4.Location = new System.Drawing.Point(841, 7);
+            this.rectangleShape4.Location = new System.Drawing.Point(1606, 12);
             this.rectangleShape4.Name = "rectangleShape4";
-            this.rectangleShape4.Size = new System.Drawing.Size(103, 185);
+            this.rectangleShape4.Size = new System.Drawing.Size(204, 370);
             // 
             // rectangleShape3
             // 
@@ -165,9 +166,9 @@
             this.rectangleShape3.CornerRadius = 5;
             this.rectangleShape3.FillColor = System.Drawing.SystemColors.ControlDark;
             this.rectangleShape3.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape3.Location = new System.Drawing.Point(218, 136);
+            this.rectangleShape3.Location = new System.Drawing.Point(390, 267);
             this.rectangleShape3.Name = "rectangleShape3";
-            this.rectangleShape3.Size = new System.Drawing.Size(214, 59);
+            this.rectangleShape3.Size = new System.Drawing.Size(383, 114);
             // 
             // rectangleShape2
             // 
@@ -175,9 +176,9 @@
             this.rectangleShape2.CornerRadius = 5;
             this.rectangleShape2.FillColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape2.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape2.Location = new System.Drawing.Point(217, 71);
+            this.rectangleShape2.Location = new System.Drawing.Point(394, 137);
             this.rectangleShape2.Name = "rectangleShape2";
-            this.rectangleShape2.Size = new System.Drawing.Size(214, 59);
+            this.rectangleShape2.Size = new System.Drawing.Size(378, 117);
             // 
             // rectangleShape1
             // 
@@ -185,19 +186,19 @@
             this.rectangleShape1.CornerRadius = 5;
             this.rectangleShape1.FillColor = System.Drawing.SystemColors.ControlLightLight;
             this.rectangleShape1.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape1.Location = new System.Drawing.Point(217, 5);
+            this.rectangleShape1.Location = new System.Drawing.Point(391, 8);
             this.rectangleShape1.Name = "rectangleShape1";
-            this.rectangleShape1.Size = new System.Drawing.Size(214, 59);
+            this.rectangleShape1.Size = new System.Drawing.Size(382, 115);
             // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(728, 107);
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(1367, 207);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(104, 78);
+            this.button4.Size = new System.Drawing.Size(206, 170);
             this.button4.TabIndex = 6;
             this.button4.Text = "Raise RDR";
             this.button4.UseVisualStyleBackColor = false;
@@ -207,11 +208,11 @@
             this.button5.BackColor = System.Drawing.Color.MidnightBlue;
             this.button5.FlatAppearance.BorderColor = System.Drawing.Color.MidnightBlue;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(848, 10);
+            this.button5.Location = new System.Drawing.Point(1610, 19);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(89, 178);
+            this.button5.Size = new System.Drawing.Size(192, 358);
             this.button5.TabIndex = 7;
             this.button5.Text = "Generate SAP Note";
             this.button5.UseVisualStyleBackColor = false;
@@ -219,45 +220,47 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(17, 75);
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(22, 153);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(181, 20);
+            this.textBox1.Size = new System.Drawing.Size(342, 35);
             this.textBox1.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 52);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.label2.Location = new System.Drawing.Point(14, 105);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 20);
+            this.label2.Size = new System.Drawing.Size(216, 45);
             this.label2.TabIndex = 9;
             this.label2.Text = "Measurement";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(15, 98);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.label3.Location = new System.Drawing.Point(14, 191);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 20);
+            this.label3.Size = new System.Drawing.Size(286, 45);
             this.label3.TabIndex = 11;
             this.label3.Text = "Further Comments";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(18, 121);
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(19, 238);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(181, 75);
+            this.textBox2.Size = new System.Drawing.Size(345, 144);
             this.textBox2.TabIndex = 10;
             // 
             // SAP_Preview
             // 
-            this.SAP_Preview.Location = new System.Drawing.Point(447, 9);
+            this.SAP_Preview.Location = new System.Drawing.Point(801, 13);
             this.SAP_Preview.Multiline = true;
             this.SAP_Preview.Name = "SAP_Preview";
-            this.SAP_Preview.Size = new System.Drawing.Size(267, 183);
+            this.SAP_Preview.Size = new System.Drawing.Size(532, 369);
             this.SAP_Preview.TabIndex = 12;
             // 
             // button6
@@ -265,10 +268,10 @@
             this.button6.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button6.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(728, 12);
+            this.button6.Font = new System.Drawing.Font("Segoe UI Symbol", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(1367, 19);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(104, 68);
+            this.button6.Size = new System.Drawing.Size(206, 157);
             this.button6.TabIndex = 13;
             this.button6.Text = "Take photo";
             this.button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -278,9 +281,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(756, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(1418, 28);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(47, 38);
+            this.pictureBox1.Size = new System.Drawing.Size(104, 103);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
@@ -289,7 +292,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 200);
+            this.ClientSize = new System.Drawing.Size(1824, 400);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.SAP_Preview);
