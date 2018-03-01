@@ -18,6 +18,7 @@ namespace DynamicTable
     public partial class UI_Base : Form
     {
         //hello
+        //hello
         int PW;
         bool Hiden;
         String InspectorID;
@@ -26,7 +27,7 @@ namespace DynamicTable
         String RepairNoteNumber;
         List<RepairNoteInformation> repairNoteList = new List<RepairNoteInformation>();
         RepairNoteInformation repairNoteInformation = new RepairNoteInformation();
-
+        string[] relatedFiguresArr;
         public UI_Base()
         {
             InitializeComponent();
@@ -190,7 +191,7 @@ namespace DynamicTable
 
         //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
-        static string path = "Z:\\Downloads\\RR\\";
+        static string path = "Z:\\Documents\\RR\\";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
@@ -582,8 +583,18 @@ namespace DynamicTable
 
                     GenerateSubrowDataGridView(rowIndex);
 
-                    string[] relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
+                    relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
                     GenerateImageListView(relatedFiguresArr);
+
+                    // Cast to image
+                    string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
+                    Image img = Image.FromFile(imagePath);
+                    // Load image data in memory stream
+                    MemoryStream ms = new MemoryStream();
+                    img.Save(ms, ImageFormat.Png);
+                    pictureBox1.Image = Image.FromStream(ms);
+                    //originalPictureBoxSize = pictureBox1.Size;
+
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
                 }
@@ -605,7 +616,7 @@ namespace DynamicTable
 
 
                         // Cast to image
-                        string[] relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
+                        relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
                         string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
                         Image img = Image.FromFile(imagePath);
                         // Load image data in memory stream
@@ -760,13 +771,27 @@ namespace DynamicTable
                 if (result == DialogResult.OK)
                 {
                     repairDataList = sapopup.repairDataList2;
-                    Console.WriteLine("HI");
-
                     PrintList(repairDataList);
                 }
             }
                 
         }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count <= 0)
+                return;
+            int selectedIndex = listView1.SelectedIndices[0];
+            if (selectedIndex >= 0)
+            {
+                string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
+                Image img = Image.FromFile(imagePath);
+                // Load image data in memory stream
+                MemoryStream ms = new MemoryStream();
+                img.Save(ms, ImageFormat.Png);
+                pictureBox1.Image = Image.FromStream(ms);
+            }
+
+        }
     }
 }
