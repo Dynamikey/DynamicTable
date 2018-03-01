@@ -188,9 +188,9 @@ namespace DynamicTable
         }
 
 
-        static string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
-        //static string path = "Z:\\Downloads\\";
+        static string path = "Z:\\Downloads\\RR\\";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
@@ -710,7 +710,7 @@ namespace DynamicTable
         private void repairNoteSearch()
         {
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open(@"C:\Users\Fin\Documents\RR\\EJ200 Repair Note Finder.xlsx");
+            Excel.Workbook wb = app.Workbooks.Open($"{path}EJ200 Repair Note Finder.xlsx");
             //Excel.Workbook wb = app.Workbooks.Open($"C:\\Users\\Fin\\Documents\\RR\\{EngineID} Repair Note Finder.xlsx");
             Excel.Worksheet xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
 
