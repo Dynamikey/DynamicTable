@@ -190,7 +190,7 @@ namespace DynamicTable
 
         static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
-        //static string path = "Z:\\Downloads\\";
+        //static string path = "Z:\\Documents\\RR";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
