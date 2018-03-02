@@ -106,11 +106,6 @@
     <EmbeddedResource Include="UI_Base.resx">
       <DependentUpon>UI_Base.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DynamicTable_1_TemporaryKey.pfx" />
-    <None Include="DynamicTable_2_TemporaryKey.pfx" />
-    <None Include="DynamicTable_3_TemporaryKey.pfx" />
-    <None Include="DynamicTable_4_TemporaryKey.pfx" />
-    <None Include="DynamicTable_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
