@@ -204,8 +204,8 @@ namespace DynamicTable
 
         //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
-        //static string path = "Z:\\Downloads\\RR\\";
-        static string path = "Z:\\Documents\\RR\\";
+        static string path = "Z:\\Downloads\\RR\\";
+        //static string path = "Z:\\Documents\\RR\\";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
@@ -378,7 +378,7 @@ namespace DynamicTable
         private void InitializeSubrowDataTable()
         {
             subrowDataTable = new DataTable();
-            subrowDataTable.Columns.Add("Number", typeof(string));
+            subrowDataTable.Columns.Add("No.", typeof(string));
             subrowDataTable.Columns.Add("Name", typeof(string));
             subrowDataTable.Columns.Add("Useable Limits", typeof(string));
             subrowDataTable.Columns.Add("Repairable Limits", typeof(string));
@@ -392,7 +392,7 @@ namespace DynamicTable
         private void InitializeGeneralDataTable()
         {
             generalDataTable = new DataTable();
-            generalDataTable.Columns.Add("Number", typeof(string));
+            generalDataTable.Columns.Add("No.", typeof(string));
             generalDataTable.Columns.Add("Name", typeof(string));
             generalDataTable.Columns.Add("Related Figures", typeof(string));
 
@@ -917,11 +917,13 @@ namespace DynamicTable
         private void dataGridView1_ColumnAdded_1(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void generalDataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
     }
 }
