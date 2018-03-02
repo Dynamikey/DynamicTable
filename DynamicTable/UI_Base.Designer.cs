@@ -426,18 +426,19 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 668F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 339F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 530F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 644F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 825F));
             this.tableLayoutPanel1.Controls.Add(this.label6, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 1, 0);
-            this.tableLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.tableLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 20F);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(76, 45);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1743, 982);
@@ -448,11 +449,11 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.label6.Location = new System.Drawing.Point(1010, 0);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 35F);
+            this.label6.Location = new System.Drawing.Point(789, 0);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
-            this.label6.Size = new System.Drawing.Size(200, 95);
+            this.label6.Size = new System.Drawing.Size(126, 112);
             this.label6.TabIndex = 6;
             this.label6.Text = "P.C.";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -462,11 +463,11 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 35F);
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
-            this.label4.Size = new System.Drawing.Size(662, 95);
+            this.label4.Size = new System.Drawing.Size(638, 112);
             this.label4.TabIndex = 4;
             this.label4.Text = "Description";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -476,11 +477,11 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.label7.Location = new System.Drawing.Point(1216, 0);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 35F);
+            this.label7.Location = new System.Drawing.Point(921, 0);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
-            this.label7.Size = new System.Drawing.Size(524, 95);
+            this.label7.Size = new System.Drawing.Size(819, 112);
             this.label7.TabIndex = 7;
             this.label7.Text = "Repair Note";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -490,13 +491,13 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.label5.Location = new System.Drawing.Point(671, 0);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 35F);
+            this.label5.Location = new System.Drawing.Point(647, 0);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
-            this.label5.Size = new System.Drawing.Size(333, 95);
+            this.label5.Size = new System.Drawing.Size(136, 112);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Maintenance Level";
+            this.label5.Text = "ML";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabPage5
