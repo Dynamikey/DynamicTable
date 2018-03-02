@@ -86,60 +86,68 @@ namespace DynamicTable
             tabControl1.SelectedTab = tabPage3;
         }
 
+
+
         private void button3_Click(object sender, EventArgs e)
         {
+
+
             PartNumber = textBox3.Text;
-            
-            repairNoteSearch();
 
-            tabControl1.SelectedTab = tabPage4;
-            //int top = 80;
-            //int left = 19;
 
-            for (int i = 0; i < repairNoteList.Count; i++)
+            if (PartNumber != "")
             {
-                RowStyle temp = tableLayoutPanel1.RowStyles[0];
-                tableLayoutPanel1.RowCount++;
-                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                repairNoteSearch();
 
-                Button button = new Button();
-                //button.Left = left;
-                //button.Top = top;
-                button.Height = 60;
-                button.Width = 800;
-                button.Name = "Option" + i;
-                button.Text = repairNoteList[i].rn;
-                button.Click += button4_Click;//function
-                tableLayoutPanel1.Controls.Add(button,3, i+1);
+                tabControl1.SelectedTab = tabPage4;
+                //int top = 80;
+                //int left = 19;
 
-                Label label = new Label();
-                //label.Left = 300;
-                label.Height = 60;
-                //label.Top = top + label.Height/4;
-                label.Width = 700; 
-                label.Font = new Font("Segoe UI", 20);
-                label.Text = repairNoteList[i].description;
-                tableLayoutPanel1.Controls.Add(label, 0, i + 1);
+                for (int i = 0; i < repairNoteList.Count; i++)
+                {
+                    RowStyle temp = tableLayoutPanel1.RowStyles[0];
+                    tableLayoutPanel1.RowCount++;
+                    tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
-                Label label2 = new Label();
-                //label2.Left = 300;
-                label2.Height = 60;
-                //label2.Top = top + label.Height / 4;
-                label2.Width = 700;
-                label2.Font = new Font("Segoe UI", 20);
-                label2.Text = repairNoteList[i].ml;
-                tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
+                    Button button = new Button();
+                    //button.Left = left;
+                    //button.Top = top;
+                    button.Height = 60;
+                    button.Width = 800;
+                    button.Name = "Option" + i;
+                    button.Text = repairNoteList[i].rn;
+                    button.Click += button4_Click;//function
+                    tableLayoutPanel1.Controls.Add(button, 3, i + 1);
 
-                Label label3 = new Label();
-                //label3.Left = 300;
-                label3.Height = 60;
-                //label3.Top = top + label.Height / 4;
-                label3.Width = 700;
-                label3.Font = new Font("Segoe UI", 20);
-                label3.Text = repairNoteList[i].pc;
-                tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
+                    Label label = new Label();
+                    //label.Left = 300;
+                    label.Height = 60;
+                    //label.Top = top + label.Height/4;
+                    label.Width = 700;
+                    label.Font = new Font("Segoe UI", 20);
+                    label.Text = repairNoteList[i].description;
+                    tableLayoutPanel1.Controls.Add(label, 0, i + 1);
 
-                //top += button.Height;
+                    Label label2 = new Label();
+                    //label2.Left = 300;
+                    label2.Height = 60;
+                    //label2.Top = top + label.Height / 4;
+                    label2.Width = 700;
+                    label2.Font = new Font("Segoe UI", 20);
+                    label2.Text = repairNoteList[i].ml;
+                    tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
+
+                    Label label3 = new Label();
+                    //label3.Left = 300;
+                    label3.Height = 60;
+                    //label3.Top = top + label.Height / 4;
+                    label3.Width = 700;
+                    label3.Font = new Font("Segoe UI", 20);
+                    label3.Text = repairNoteList[i].pc;
+                    tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
+
+                    //top += button.Height;
+                }
             }
         }
 
