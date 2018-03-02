@@ -189,9 +189,10 @@ namespace DynamicTable
         }
 
 
-        static string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
         //static string path = "Z:\\Downloads\\RR\\";
+        static string path = "Z:\\Documents\\RR\\";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
@@ -401,19 +402,23 @@ namespace DynamicTable
                 {
                     if (repairDataList[i].relatedFigures != null)
                     {
-                        string[] relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
-                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                        Image image = Image.FromFile(imagePath);
-                        Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
+                        string[] relatedFiguresArrTemp = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
+                        string imagePathTemp = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArrTemp[0]}.png";
+                        Image imageTemp = Image.FromFile(imagePathTemp);
+                        Size newsizeTemp = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * imageTemp.Height / imageTemp.Width));
                         //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
-                        Bitmap resizedimage = new Bitmap(image, newsize);
-                        dataGridView.Rows[row].Cells[col].Value = resizedimage;
-                    }
+                        Bitmap resizedImageTemp = new Bitmap(imageTemp, newsizeTemp);
+                        dataGridView.Rows[row].Cells[col].Value = resizedImageTemp;
+                    } 
                     row++;
                     
                 }
             }
-            newDataGridViewImageColumn.DefaultCellStyle.NullValue = null;
+            string imagePath = $"{path}figfolder\\default.png";
+            Image image = Image.FromFile(imagePath);
+            Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
+            Bitmap resizedImage = new Bitmap(image, newsize);
+            newDataGridViewImageColumn.DefaultCellStyle.NullValue = resizedImage;
             //dataGridView.Rows[0].Cells[6].Value = resizedimage;
 
             //dataGridView.AutoResizeRows();
