@@ -89,19 +89,21 @@ namespace DynamicTable
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             PartNumber = textBox3.Text;
 
-            repairNoteSearch();
-
-            tabControl1.SelectedTab = tabPage4;
-            int top = 80;
-            int left = 19;
-
-            for (int i = 0; i < repairNoteList.Count; i++)
+            if (PartNumber != "")
             {
-                RowStyle temp = tableLayoutPanel1.RowStyles[0];
-                tableLayoutPanel1.RowCount++;
-                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                repairNoteSearch();
+                tabControl1.SelectedTab = tabPage4;
+                int top = 80;
+                int left = 19;
+
+                for (int i = 0; i < repairNoteList.Count; i++)
+                {
+                    RowStyle temp = tableLayoutPanel1.RowStyles[0];
+                    tableLayoutPanel1.RowCount++;
+                    tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
                 Button button = new Button();
                 button.Left = left;
@@ -113,37 +115,40 @@ namespace DynamicTable
                 button.Click += button4_Click;//function
                 tableLayoutPanel1.Controls.Add(button, 3, i + 1);
 
-                Label label = new Label();
-                label.Left = 300;
-                label.Height = 40;
-                label.Top = top + label.Height / 4;
-                label.Width = 700;
-                label.Font = new Font("Segoe UI", 12);
-                label.Text = repairNoteList[i].description;
-                tableLayoutPanel1.Controls.Add(label, 0, i + 1);
+                    Label label = new Label();
+                    label.Left = 300;
+                    label.Height = 40;
+                    label.Top = top + label.Height / 4;
+                    label.Width = 700;
+                    label.Font = new Font("Segoe UI", 12);
+                    label.Text = repairNoteList[i].description;
+                    tableLayoutPanel1.Controls.Add(label, 0, i + 1);
 
-                Label label2 = new Label();
-                label2.Left = 300;
-                label2.Height = 40;
-                label2.Top = top + label.Height / 4;
-                label2.Width = 700;
-                label2.Font = new Font("Segoe UI", 12);
-                label2.Text = repairNoteList[i].ml;
-                tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
+                    Label label2 = new Label();
+                    label2.Left = 300;
+                    label2.Height = 40;
+                    label2.Top = top + label.Height / 4;
+                    label2.Width = 700;
+                    label2.Font = new Font("Segoe UI", 12);
+                    label2.Text = repairNoteList[i].ml;
+                    tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
 
-                Label label3 = new Label();
-                label3.Left = 300;
-                label3.Height = 40;
-                label3.Top = top + label.Height / 4;
-                label3.Width = 700;
-                label3.Font = new Font("Segoe UI", 12);
-                label3.Text = repairNoteList[i].pc;
-                tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
+                    Label label3 = new Label();
+                    label3.Left = 300;
+                    label3.Height = 40;
+                    label3.Top = top + label.Height / 4;
+                    label3.Width = 700;
+                    label3.Font = new Font("Segoe UI", 12);
+                    label3.Text = repairNoteList[i].pc;
+                    tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
 
 
 
-                top += button.Height + 5;
+                    top += button.Height + 5;
+                }
+
             }
+            
         }
 
         private void optionbutton_Click(object sender, EventArgs e)
@@ -190,9 +195,10 @@ namespace DynamicTable
         }
 
 
-        static string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
         //static string path = "Z:\\Downloads\\RR\\";
+        static string path = "Z:\\Documents\\RR\\";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
@@ -402,19 +408,23 @@ namespace DynamicTable
                 {
                     if (repairDataList[i].relatedFigures != null)
                     {
-                        string[] relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
-                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                        Image image = Image.FromFile(imagePath);
-                        Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
+                        string[] relatedFiguresArrTemp = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
+                        string imagePathTemp = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArrTemp[0]}.png";
+                        Image imageTemp = Image.FromFile(imagePathTemp);
+                        Size newsizeTemp = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * imageTemp.Height / imageTemp.Width));
                         //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
-                        Bitmap resizedimage = new Bitmap(image, newsize);
-                        dataGridView.Rows[row].Cells[col].Value = resizedimage;
-                    }
+                        Bitmap resizedImageTemp = new Bitmap(imageTemp, newsizeTemp);
+                        dataGridView.Rows[row].Cells[col].Value = resizedImageTemp;
+                    } 
                     row++;
 
                 }
             }
-            newDataGridViewImageColumn.DefaultCellStyle.NullValue = null;
+            string imagePath = $"{path}figfolder\\default.png";
+            Image image = Image.FromFile(imagePath);
+            Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
+            Bitmap resizedImage = new Bitmap(image, newsize);
+            newDataGridViewImageColumn.DefaultCellStyle.NullValue = resizedImage;
             //dataGridView.Rows[0].Cells[6].Value = resizedimage;
 
             //dataGridView.AutoResizeRows();
@@ -637,10 +647,10 @@ namespace DynamicTable
                     if (rowIndex != 0) rowIndex--;
 
                     GenerateSubrowDataGridView(rowIndex);
-
-                    if (repairDataList[rowIndex].relatedFigures != null)
-                    {
+                    if (repairDataList[rowIndex].relatedFigures != null) { 
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
+
+
                         GenerateImageListView(relatedFiguresArr);
 
                         // Cast to image
@@ -652,7 +662,6 @@ namespace DynamicTable
                         pictureBox1.Image = Image.FromStream(ms);
                         //originalPictureBoxSize = pictureBox1.Size;
                     }
-
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
                 }
