@@ -371,6 +371,8 @@ namespace DynamicTable
             subrowDataTable.Columns.Add("Corrective Action", typeof(string));
             //subrowDataTable.Columns.Add("Related Figures", typeof(string));
             //dataTable.Columns.Add("Completed", typeof(bool));
+
+
         }
 
         private void InitializeGeneralDataTable()
@@ -379,6 +381,7 @@ namespace DynamicTable
             generalDataTable.Columns.Add("Number", typeof(string));
             generalDataTable.Columns.Add("Name", typeof(string));
             generalDataTable.Columns.Add("Related Figures", typeof(string));
+
         }
 
         private void CreateGraphicsColumn(ref DataGridView dataGridView)
@@ -582,6 +585,7 @@ namespace DynamicTable
                     break;
                 }
             }
+
         }
 
         private void GenerateImageListView(string[] arr)
@@ -890,5 +894,14 @@ namespace DynamicTable
 
         }
 
+        private void dataGridView1_ColumnAdded_1(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void generalDataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
     }
 }
