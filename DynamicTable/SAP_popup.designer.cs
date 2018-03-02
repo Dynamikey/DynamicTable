@@ -50,13 +50,21 @@
             this.SAP_Preview = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.CameraPreview = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Dent",
+            "Wear",
+            "Blockage",
+            "Crack",
+            "Corrosion"});
             this.comboBox1.Location = new System.Drawing.Point(18, 57);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(346, 38);
@@ -276,6 +284,7 @@
             this.button6.Text = "Take photo";
             this.button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // pictureBox1
             // 
@@ -288,11 +297,21 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
+            // CameraPreview
+            // 
+            this.CameraPreview.Location = new System.Drawing.Point(801, 13);
+            this.CameraPreview.Name = "CameraPreview";
+            this.CameraPreview.Size = new System.Drawing.Size(532, 368);
+            this.CameraPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CameraPreview.TabIndex = 15;
+            this.CameraPreview.TabStop = false;
+            // 
             // SAP_popup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1824, 400);
+            this.Controls.Add(this.CameraPreview);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.SAP_Preview);
@@ -309,9 +328,12 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Location = new System.Drawing.Point(96, 680);
             this.Name = "SAP_popup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SAP_Comment_pop";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,5 +362,8 @@
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape6;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox CameraPreview;
+
+
     }
 }

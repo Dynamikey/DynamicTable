@@ -13,6 +13,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using Excel = Microsoft.Office.Interop.Excel;
 
+
 namespace DynamicTable
 {
     public partial class UI_Base : Form
@@ -89,7 +90,7 @@ namespace DynamicTable
         private void button3_Click(object sender, EventArgs e)
         {
             PartNumber = textBox3.Text;
-            
+
             repairNoteSearch();
 
             tabControl1.SelectedTab = tabPage4;
@@ -110,13 +111,13 @@ namespace DynamicTable
                 button.Name = "Option" + i;
                 button.Text = repairNoteList[i].rn;
                 button.Click += button4_Click;//function
-                tableLayoutPanel1.Controls.Add(button,3, i+1);
+                tableLayoutPanel1.Controls.Add(button, 3, i + 1);
 
                 Label label = new Label();
                 label.Left = 300;
                 label.Height = 40;
-                label.Top = top + label.Height/4;
-                label.Width = 700; 
+                label.Top = top + label.Height / 4;
+                label.Width = 700;
                 label.Font = new Font("Segoe UI", 12);
                 label.Text = repairNoteList[i].description;
                 tableLayoutPanel1.Controls.Add(label, 0, i + 1);
@@ -173,7 +174,7 @@ namespace DynamicTable
             for (int i = 0; i < repairDataList.Count; i++)
             {
                 if (isSubRow(repairDataList[i].headingNumber) == false)
-                { 
+                {
                     DataRow newDataRow = generalDataTable.NewRow();
                     newDataRow[0] = repairDataList[i].headingNumber;
                     newDataRow[1] = repairDataList[i].headingName;
@@ -204,7 +205,7 @@ namespace DynamicTable
         {
             using (var writer = new CsvFileWriter($"{path}test.csv"))
             {
-               
+
 
                 List<string> columns = new List<string>();
 
@@ -410,7 +411,7 @@ namespace DynamicTable
                         dataGridView.Rows[row].Cells[col].Value = resizedimage;
                     }
                     row++;
-                    
+
                 }
             }
             newDataGridViewImageColumn.DefaultCellStyle.NullValue = null;
@@ -637,17 +638,20 @@ namespace DynamicTable
 
                     GenerateSubrowDataGridView(rowIndex);
 
-                    relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
-                    GenerateImageListView(relatedFiguresArr);
+                    if (repairDataList[rowIndex].relatedFigures != null)
+                    {
+                        relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
+                        GenerateImageListView(relatedFiguresArr);
 
-                    // Cast to image
-                    string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                    Image img = Image.FromFile(imagePath);
-                    // Load image data in memory stream
-                    MemoryStream ms = new MemoryStream();
-                    img.Save(ms, ImageFormat.Png);
-                    pictureBox1.Image = Image.FromStream(ms);
-                    //originalPictureBoxSize = pictureBox1.Size;
+                        // Cast to image
+                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
+                        Image img = Image.FromFile(imagePath);
+                        // Load image data in memory stream
+                        MemoryStream ms = new MemoryStream();
+                        img.Save(ms, ImageFormat.Png);
+                        pictureBox1.Image = Image.FromStream(ms);
+                        //originalPictureBoxSize = pictureBox1.Size;
+                    }
 
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
@@ -694,7 +698,7 @@ namespace DynamicTable
             dataGridView1.ClearSelection();
         }
 
-        private void generalDataGridView_SelectionChanged(object sender, EventArgs e)                                                            
+        private void generalDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Selection changed");
             generalDataGridView.ClearSelection();
@@ -790,7 +794,7 @@ namespace DynamicTable
                     {
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
                     }*/
-                    
+
                     if (containsUnsalvageable)
                     {
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.PaleVioletRed;
@@ -854,7 +858,7 @@ namespace DynamicTable
                 repairNoteInformation.rn = xlWorkSheet.Cells[currentFind.Row, 5].Value.ToString();
                 repairNoteList.Add(repairNoteInformation);
                 repairNoteInformation = default(RepairNoteInformation);
-                
+
                 //Console.WriteLine(RepairNoteNumber);
 
                 currentFind = PartNameRange.FindNext(currentFind);
@@ -874,7 +878,7 @@ namespace DynamicTable
                     PrintList(repairDataList);
                 }
             }
-                
+
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
