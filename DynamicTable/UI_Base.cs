@@ -13,6 +13,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using Excel = Microsoft.Office.Interop.Excel;
 
+
 namespace DynamicTable
 {
     public partial class UI_Base : Form
@@ -176,7 +177,7 @@ namespace DynamicTable
             for (int i = 0; i < repairDataList.Count; i++)
             {
                 if (isSubRow(repairDataList[i].headingNumber) == false)
-                { 
+                {
                     DataRow newDataRow = generalDataTable.NewRow();
                     newDataRow[0] = repairDataList[i].headingNumber;
                     newDataRow[1] = repairDataList[i].headingName;
@@ -208,7 +209,7 @@ namespace DynamicTable
         {
             using (var writer = new CsvFileWriter($"{path}test.csv"))
             {
-               
+
 
                 List<string> columns = new List<string>();
 
@@ -414,7 +415,7 @@ namespace DynamicTable
                         dataGridView.Rows[row].Cells[col].Value = resizedImageTemp;
                     } 
                     row++;
-                    
+
                 }
             }
             string imagePath = $"{path}figfolder\\default.png";
@@ -704,7 +705,7 @@ namespace DynamicTable
             dataGridView1.ClearSelection();
         }
 
-        private void generalDataGridView_SelectionChanged(object sender, EventArgs e)                                                            
+        private void generalDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Selection changed");
             generalDataGridView.ClearSelection();
@@ -800,7 +801,7 @@ namespace DynamicTable
                     {
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
                     }*/
-                    
+
                     if (containsUnsalvageable)
                     {
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.PaleVioletRed;
@@ -864,7 +865,7 @@ namespace DynamicTable
                 repairNoteInformation.rn = xlWorkSheet.Cells[currentFind.Row, 5].Value.ToString();
                 repairNoteList.Add(repairNoteInformation);
                 repairNoteInformation = default(RepairNoteInformation);
-                
+
                 //Console.WriteLine(RepairNoteNumber);
 
                 currentFind = PartNameRange.FindNext(currentFind);
@@ -884,7 +885,7 @@ namespace DynamicTable
                     PrintList(repairDataList);
                 }
             }
-                
+
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
