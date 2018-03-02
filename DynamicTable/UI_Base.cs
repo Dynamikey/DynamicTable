@@ -88,61 +88,66 @@ namespace DynamicTable
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             PartNumber = textBox3.Text;
-            
-            repairNoteSearch();
 
-            tabControl1.SelectedTab = tabPage4;
-            int top = 80;
-            int left = 19;
-
-            for (int i = 0; i < repairNoteList.Count; i++)
+            if (PartNumber != "")
             {
-                RowStyle temp = tableLayoutPanel1.RowStyles[0];
-                tableLayoutPanel1.RowCount++;
-                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                repairNoteSearch();
+                tabControl1.SelectedTab = tabPage4;
+                int top = 80;
+                int left = 19;
 
-                Button button = new Button();
-                button.Left = left;
-                button.Top = top;
-                button.Height = 40;
-                button.Width = 200;
-                button.Name = "Option" + i;
-                button.Text = repairNoteList[i].rn;
-                button.Click += button4_Click;//function
-                tableLayoutPanel1.Controls.Add(button,3, i+1);
+                for (int i = 0; i < repairNoteList.Count; i++)
+                {
+                    RowStyle temp = tableLayoutPanel1.RowStyles[0];
+                    tableLayoutPanel1.RowCount++;
+                    tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
-                Label label = new Label();
-                label.Left = 300;
-                label.Height = 40;
-                label.Top = top + label.Height/4;
-                label.Width = 700; 
-                label.Font = new Font("Segoe UI", 12);
-                label.Text = repairNoteList[i].description;
-                tableLayoutPanel1.Controls.Add(label, 0, i + 1);
+                    Button button = new Button();
+                    button.Left = left;
+                    button.Top = top;
+                    button.Height = 40;
+                    button.Width = 200;
+                    button.Name = "Option" + i;
+                    button.Text = repairNoteList[i].rn;
+                    button.Click += button4_Click;//function
+                    tableLayoutPanel1.Controls.Add(button, 3, i + 1);
 
-                Label label2 = new Label();
-                label2.Left = 300;
-                label2.Height = 40;
-                label2.Top = top + label.Height / 4;
-                label2.Width = 700;
-                label2.Font = new Font("Segoe UI", 12);
-                label2.Text = repairNoteList[i].ml;
-                tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
+                    Label label = new Label();
+                    label.Left = 300;
+                    label.Height = 40;
+                    label.Top = top + label.Height / 4;
+                    label.Width = 700;
+                    label.Font = new Font("Segoe UI", 12);
+                    label.Text = repairNoteList[i].description;
+                    tableLayoutPanel1.Controls.Add(label, 0, i + 1);
 
-                Label label3 = new Label();
-                label3.Left = 300;
-                label3.Height = 40;
-                label3.Top = top + label.Height / 4;
-                label3.Width = 700;
-                label3.Font = new Font("Segoe UI", 12);
-                label3.Text = repairNoteList[i].pc;
-                tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
+                    Label label2 = new Label();
+                    label2.Left = 300;
+                    label2.Height = 40;
+                    label2.Top = top + label.Height / 4;
+                    label2.Width = 700;
+                    label2.Font = new Font("Segoe UI", 12);
+                    label2.Text = repairNoteList[i].ml;
+                    tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
+
+                    Label label3 = new Label();
+                    label3.Left = 300;
+                    label3.Height = 40;
+                    label3.Top = top + label.Height / 4;
+                    label3.Width = 700;
+                    label3.Font = new Font("Segoe UI", 12);
+                    label3.Text = repairNoteList[i].pc;
+                    tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
 
 
 
-                top += button.Height + 5;
+                    top += button.Height + 5;
+                }
+
             }
+            
         }
 
         private void optionbutton_Click(object sender, EventArgs e)
@@ -641,19 +646,21 @@ namespace DynamicTable
                     if (rowIndex != 0) rowIndex--;
 
                     GenerateSubrowDataGridView(rowIndex);
+                    if (repairDataList[rowIndex].relatedFigures != null) { 
+                        relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
 
-                    relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
-                    GenerateImageListView(relatedFiguresArr);
 
-                    // Cast to image
-                    string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                    Image img = Image.FromFile(imagePath);
-                    // Load image data in memory stream
-                    MemoryStream ms = new MemoryStream();
-                    img.Save(ms, ImageFormat.Png);
-                    pictureBox1.Image = Image.FromStream(ms);
-                    //originalPictureBoxSize = pictureBox1.Size;
+                        GenerateImageListView(relatedFiguresArr);
 
+                        // Cast to image
+                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
+                        Image img = Image.FromFile(imagePath);
+                        // Load image data in memory stream
+                        MemoryStream ms = new MemoryStream();
+                        img.Save(ms, ImageFormat.Png);
+                        pictureBox1.Image = Image.FromStream(ms);
+                        //originalPictureBoxSize = pictureBox1.Size;
+                    }
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
                 }
