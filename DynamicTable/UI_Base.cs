@@ -103,7 +103,13 @@ namespace DynamicTable
                 {
                     RowStyle temp = tableLayoutPanel1.RowStyles[0];
                     tableLayoutPanel1.RowCount++;
-                    tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                   
+
+                    RowStyle style = new RowStyle();
+                    style.SizeType = SizeType.Absolute;
+                    style.Height = 60;
+
+                    tableLayoutPanel1.RowStyles.Add(style);
 
                     Button button = new Button();
                     //button.Left = left;
@@ -117,7 +123,8 @@ namespace DynamicTable
 
                     Label label = new Label();
                     //label.Left = 300;
-                    //label.Height = 40;
+                    label.Height = 60;
+                    label.Margin = new Padding(0, 10, 0, 0);
                     //label.Top = top + label.Height / 4;
                     label.Width = 700;
                     label.Font = new Font("Segoe UI", 20);
@@ -126,7 +133,8 @@ namespace DynamicTable
 
                     Label label2 = new Label();
                     //label2.Left = 300;
-                    //label2.Height = 40;
+                    label2.Height = 60;
+                    label2.Margin = new Padding(0, 10, 0, 0);
                     //label2.Top = top + label.Height / 4;
                     label2.Width = 700;
                     label2.Font = new Font("Segoe UI", 20);
@@ -135,7 +143,8 @@ namespace DynamicTable
 
                     Label label3 = new Label();
                     //label3.Left = 300;
-                    //label3.Height = 40;
+                    label3.Height = 60;
+                    label3.Margin = new Padding(0, 10, 0, 0);
                     //label3.Top = top + label.Height / 4;
                     label3.Width = 700;
                     label3.Font = new Font("Segoe UI", 20);
