@@ -85,6 +85,8 @@ namespace DynamicTable
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.finishbutton = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.Slide_Panel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -101,6 +103,7 @@ namespace DynamicTable
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // ExitBtn
@@ -194,7 +197,7 @@ namespace DynamicTable
             // 
             this.Inspector_ID_Label.AutoSize = true;
             this.Inspector_ID_Label.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.Inspector_ID_Label.Location = new System.Drawing.Point(462, 444);
+            this.Inspector_ID_Label.Location = new System.Drawing.Point(462, 194);
             this.Inspector_ID_Label.Name = "Inspector_ID_Label";
             this.Inspector_ID_Label.Size = new System.Drawing.Size(200, 45);
             this.Inspector_ID_Label.TabIndex = 3;
@@ -205,7 +208,7 @@ namespace DynamicTable
             this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox1.Location = new System.Drawing.Point(470, 500);
+            this.textBox1.Location = new System.Drawing.Point(470, 250);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(386, 43);
             this.textBox1.TabIndex = 1;
@@ -217,7 +220,7 @@ namespace DynamicTable
             this.Inspector_ID_Nxt_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Inspector_ID_Nxt_btn.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.Inspector_ID_Nxt_btn.ForeColor = System.Drawing.Color.White;
-            this.Inspector_ID_Nxt_btn.Location = new System.Drawing.Point(1028, 477);
+            this.Inspector_ID_Nxt_btn.Location = new System.Drawing.Point(1028, 227);
             this.Inspector_ID_Nxt_btn.Name = "Inspector_ID_Nxt_btn";
             this.Inspector_ID_Nxt_btn.Size = new System.Drawing.Size(358, 92);
             this.Inspector_ID_Nxt_btn.TabIndex = 0;
@@ -243,7 +246,7 @@ namespace DynamicTable
             this.rectangleShape2.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape2.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.rectangleShape2.CornerRadius = 5;
-            this.rectangleShape2.Location = new System.Drawing.Point(1020, 470);
+            this.rectangleShape2.Location = new System.Drawing.Point(1020, 220);
             this.rectangleShape2.Name = "rectangleShape2";
             this.rectangleShape2.Size = new System.Drawing.Size(368, 100);
             // 
@@ -253,7 +256,7 @@ namespace DynamicTable
             this.rectangleShape1.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape1.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape1.CornerRadius = 5;
-            this.rectangleShape1.Location = new System.Drawing.Point(460, 490);
+            this.rectangleShape1.Location = new System.Drawing.Point(460, 240);
             this.rectangleShape1.Name = "rectangleShape1";
             this.rectangleShape1.Size = new System.Drawing.Size(410, 56);
             // 
@@ -275,7 +278,7 @@ namespace DynamicTable
             // 
             this.Engine_nb_lbl.AutoSize = true;
             this.Engine_nb_lbl.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.Engine_nb_lbl.Location = new System.Drawing.Point(462, 444);
+            this.Engine_nb_lbl.Location = new System.Drawing.Point(462, 194);
             this.Engine_nb_lbl.Name = "Engine_nb_lbl";
             this.Engine_nb_lbl.Size = new System.Drawing.Size(249, 45);
             this.Engine_nb_lbl.TabIndex = 4;
@@ -288,7 +291,7 @@ namespace DynamicTable
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(1028, 477);
+            this.button2.Location = new System.Drawing.Point(1028, 227);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(358, 92);
             this.button2.TabIndex = 3;
@@ -301,7 +304,7 @@ namespace DynamicTable
             this.textBox2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox2.Location = new System.Drawing.Point(470, 500);
+            this.textBox2.Location = new System.Drawing.Point(470, 250);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(386, 43);
             this.textBox2.TabIndex = 2;
@@ -324,7 +327,7 @@ namespace DynamicTable
             this.rectangleShape4.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape4.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape4.CornerRadius = 5;
-            this.rectangleShape4.Location = new System.Drawing.Point(460, 490);
+            this.rectangleShape4.Location = new System.Drawing.Point(460, 240);
             this.rectangleShape4.Name = "rectangleShape4";
             this.rectangleShape4.Size = new System.Drawing.Size(410, 56);
             // 
@@ -334,7 +337,7 @@ namespace DynamicTable
             this.rectangleShape3.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape3.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.rectangleShape3.CornerRadius = 5;
-            this.rectangleShape3.Location = new System.Drawing.Point(1020, 470);
+            this.rectangleShape3.Location = new System.Drawing.Point(1020, 220);
             this.rectangleShape3.Name = "rectangleShape3";
             this.rectangleShape3.Size = new System.Drawing.Size(368, 100);
             // 
@@ -3021,7 +3024,7 @@ namespace DynamicTable
             this.textBox3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox3.Location = new System.Drawing.Point(470, 500);
+            this.textBox3.Location = new System.Drawing.Point(470, 250);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(386, 43);
             this.textBox3.TabIndex = 7;
@@ -3033,7 +3036,7 @@ namespace DynamicTable
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(1028, 477);
+            this.button3.Location = new System.Drawing.Point(1028, 227);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(358, 92);
             this.button3.TabIndex = 6;
@@ -3045,7 +3048,7 @@ namespace DynamicTable
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.label1.Location = new System.Drawing.Point(462, 444);
+            this.label1.Location = new System.Drawing.Point(462, 194);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(209, 45);
             this.label1.TabIndex = 5;
@@ -3069,7 +3072,7 @@ namespace DynamicTable
             this.rectangleShape6.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape6.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.rectangleShape6.CornerRadius = 5;
-            this.rectangleShape6.Location = new System.Drawing.Point(1020, 470);
+            this.rectangleShape6.Location = new System.Drawing.Point(1020, 220);
             this.rectangleShape6.Name = "rectangleShape6";
             this.rectangleShape6.Size = new System.Drawing.Size(368, 100);
             // 
@@ -3079,7 +3082,7 @@ namespace DynamicTable
             this.rectangleShape5.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape5.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape5.CornerRadius = 5;
-            this.rectangleShape5.Location = new System.Drawing.Point(460, 490);
+            this.rectangleShape5.Location = new System.Drawing.Point(460, 240);
             this.rectangleShape5.Name = "rectangleShape5";
             this.rectangleShape5.Size = new System.Drawing.Size(410, 56);
             // 
@@ -3354,6 +3357,32 @@ namespace DynamicTable
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.MidnightBlue;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(0, -1);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(95, 113);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 11;
+            this.pictureBox3.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(52, 540);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 40);
+            this.label2.TabIndex = 12;
+            this.label2.Text = ">";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // finishbutton
             // 
             this.finishbutton.Location = new System.Drawing.Point(1723, 1031);
@@ -3369,6 +3398,8 @@ namespace DynamicTable
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.Slide_Panel);
             this.Controls.Add(this.button1);
@@ -3401,6 +3432,7 @@ namespace DynamicTable
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3452,6 +3484,8 @@ namespace DynamicTable
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Panel panel1;
+        private PictureBox pictureBox3;
+        private Label label2;
     }
 }
 
