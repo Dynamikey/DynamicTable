@@ -15,7 +15,7 @@ namespace DynamicTable
         public OpeningScreen()
         {
             InitializeComponent();
-
         }
+
     }
 }
