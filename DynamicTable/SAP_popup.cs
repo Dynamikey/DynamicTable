@@ -33,7 +33,8 @@ namespace DynamicTable
 
             cameras = new List<WebCameraId>(webCameraControl1.GetVideoCaptureDevices());
             webCameraControl1.Visible = false;
-            webCameraControl1.StartCapture(cameras[0]);
+            if (cameras.Count > 0)
+                webCameraControl1.StartCapture(cameras[0]);
 
         }
 
