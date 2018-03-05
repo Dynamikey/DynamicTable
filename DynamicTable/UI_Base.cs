@@ -12,14 +12,13 @@ using System.Xml;
 using System.IO;
 using System.Drawing.Imaging;
 using Excel = Microsoft.Office.Interop.Excel;
-
+//using MySql.Data.MySqlClient;
 
 namespace DynamicTable
 {
     public partial class UI_Base : Form
     {
-        //hello
-        //hello
+
         int PW;
         bool Hiden;
         String InspectorID;
@@ -29,6 +28,8 @@ namespace DynamicTable
         List<RepairNoteInformation> repairNoteList = new List<RepairNoteInformation>();
         RepairNoteInformation repairNoteInformation = new RepairNoteInformation();
         string[] relatedFiguresArr;
+        Size originalPictureBoxSize;
+        Image img;
         public UI_Base()
         {
             InitializeComponent();
@@ -79,14 +80,25 @@ namespace DynamicTable
         private void Inspector_ID_Nxt_btn_Click(object sender, EventArgs e)
         {
             InspectorID = textBox1.Text;
-            tabControl1.SelectedTab = tabPage2;
+
+            if(InspectorID != "")
+            {
+                tabControl1.SelectedTab = tabPage2;
+            }
+
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             EngineID = textBox2.Text;
-            tabControl1.SelectedTab = tabPage3;
-            this.ActiveControl = textBox3;
+
+            if(EngineID != "")
+            {
+                tabControl1.SelectedTab = tabPage3;
+                this.ActiveControl = textBox3;
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -160,12 +172,6 @@ namespace DynamicTable
             
         }
 
-        private void optionbutton_Click(object sender, EventArgs e)
-        {
-            RepairNoteNumber = sender.ToString();
-            Console.WriteLine("testing  " + RepairNoteNumber);
-            //tabControl1.SelectedTab = tabPage3;
-        }
 
         bool isSubRow(string str)
         {
@@ -180,6 +186,8 @@ namespace DynamicTable
 
         private void button4_Click(object sender, EventArgs e)
         {
+            RepairNoteNumber =  sender.ToString();
+            RepairNoteNumber = RepairNoteNumber.Substring(RepairNoteNumber.IndexOf(":") + 2);
             GenerateRepairData();
             tabControl1.SelectedTab = tabPage5;
 
@@ -207,7 +215,6 @@ namespace DynamicTable
         //static string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
         static string path = "Z:\\Downloads\\RR\\";
-        //static string path = "Z:\\Documents\\RR\\";
         //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
         XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
@@ -218,16 +225,31 @@ namespace DynamicTable
 
         private void WriteValues()
         {
-            using (var writer = new CsvFileWriter($"{path}test.csv"))
+            using (var writer = new CsvFileWriter($"{path}CSVoutput.csv"))
             {
 
 
                 List<string> columns = new List<string>();
 
+
+                Console.WriteLine(RepairNoteNumber);
+                Console.WriteLine(Inspector_ID_Label.Text);
+                Console.WriteLine(InspectorID);
+                Console.WriteLine(Engine_nb_lbl.Text);
+                Console.WriteLine(EngineID);
+                Console.WriteLine(label1.Text);
+                Console.WriteLine(PartNumber);
+
+                columns.Add(RepairNoteNumber);
                 columns.Add(Inspector_ID_Label.Text);
                 columns.Add(InspectorID);
+                columns.Add(Engine_nb_lbl.Text);
+                columns.Add(EngineID);
+                columns.Add(label1.Text);
+                columns.Add(PartNumber);
                 writer.WriteRow(columns);
                 columns.Clear();
+
 
                 for (int i = 0; i < repairDataList.Count; i++)
                 {
@@ -268,7 +290,6 @@ namespace DynamicTable
                 foreach (Match match in Regex.Matches(temp.headingName, @"\d+[^,.]")) //@"\d+[a-zA-Z0-9]"
                 {
                     temp.relatedFigures += match.Value + " ";
-                    //Console.WriteLine("Found '{0}' at position {1} in {2}", match.Value, match.Index, temp.headingName);
                 }
 
                 try
@@ -378,7 +399,7 @@ namespace DynamicTable
         private void PrintList(List<RepairData> l)
         {
             for (int i = 0; i < l.Count; i++)
-                Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures} {l[i].conditionInput}");
+                Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures} {l[i].conditionInput} {l[i].damageTypeInput} {l[i].damageMeasurementInput} {l[i].damageFurtherCommentsInput}");
         }
 
         public void AddToList(List<RepairData> l, ref RepairData d)
@@ -429,6 +450,8 @@ namespace DynamicTable
                     {
                         string[] relatedFiguresArrTemp = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
                         string imagePathTemp = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArrTemp[0]}.png";
+
+
                         Image imageTemp = Image.FromFile(imagePathTemp);
                         Size newsizeTemp = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * imageTemp.Height / imageTemp.Width));
                         //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
@@ -488,12 +511,12 @@ namespace DynamicTable
             ParseXML();
             FigFinder();
             PrintList(repairDataList);
-            WriteValues();
+            
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine("Cell clicked");
+            //Console.WriteLine("Cell clicked");
             var senderGrid = (DataGridView)sender;
             senderGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
             if (e.RowIndex >= 0)
@@ -518,26 +541,21 @@ namespace DynamicTable
                 else if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
                     launchSAPcomment(e.RowIndex + globalSubRowNumber);
-                    Console.WriteLine("About to start switch case");
                     switch (repairDataList[e.RowIndex + globalSubRowNumber].conditionInput)
                     {
                         case "Serviceable":
                             row.DefaultCellStyle.BackColor = Color.LightGreen;
-                            Console.WriteLine("Colour should change to green");
                             break;
 
                         case "Salvageable":
                             row.DefaultCellStyle.BackColor = Color.Orange;
-                            Console.WriteLine("Colour should change to orange");
                             break;
 
                         case "Unsalvageable":
                             row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                            Console.WriteLine("Colour should change to red");
                             break;
 
                         case "":
-                            Console.WriteLine("Colour should stay white");
                             break;
                     }
 
@@ -587,21 +605,17 @@ namespace DynamicTable
                         {
                             case "Serviceable":
                                 dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
-                                Console.WriteLine("Colour should change to green");
                                 break;
 
                             case "Salvageable":
                                 dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Orange;
-                                Console.WriteLine("Colour should change to orange");
                                 break;
 
                             case "Unsalvageable":
                                 dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                                Console.WriteLine("Colour should change to red");
                                 break;
 
                             case "":
-                                Console.WriteLine("Colour should stay white");
                                 break;
                         }
                     }
@@ -649,7 +663,7 @@ namespace DynamicTable
 
         private void generalDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Console.WriteLine("Cell clicked");
+            //Console.WriteLine("Cell clicked");
             var senderGrid = (DataGridView)sender;
             senderGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
             if (e.RowIndex >= 0)
@@ -674,12 +688,13 @@ namespace DynamicTable
 
                         // Cast to image
                         string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                        Image img = Image.FromFile(imagePath);
+                        img = Image.FromFile(imagePath);
                         // Load image data in memory stream
-                        MemoryStream ms = new MemoryStream();
-                        img.Save(ms, ImageFormat.Png);
-                        pictureBox1.Image = Image.FromStream(ms);
-                        //originalPictureBoxSize = pictureBox1.Size;
+                        //MemoryStream ms = new MemoryStream();
+                        //img.Save(ms, ImageFormat.Png);
+                        //pictureBox1.Image = Image.FromStream(ms);
+                        pictureBox1.Image = new Bitmap(img);
+                        originalPictureBoxSize = pictureBox1.Size;
                     }
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
@@ -698,18 +713,19 @@ namespace DynamicTable
                     if (repairDataList[rowIndex].relatedFigures != null)
                     {
 
-                        Console.WriteLine("Image clicked");
+                        //Console.WriteLine("Image clicked");
 
 
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
                         string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                        Image img = Image.FromFile(imagePath);
+                        img = Image.FromFile(imagePath);
                         // Load image data in memory stream
-                        MemoryStream ms = new MemoryStream();
-                        img.Save(ms, ImageFormat.Png);
-                        pictureBox1.Image = Image.FromStream(ms);
-                        //originalPictureBoxSize = pictureBox1.Size;
+                        //MemoryStream ms = new MemoryStream();
+                        //img.Save(ms, ImageFormat.Png);
+                        //pictureBox1.Image = Image.FromStream(ms);
+                        pictureBox1.Image = new Bitmap(img);
+                        originalPictureBoxSize = pictureBox1.Size;
 
 
                         GenerateImageListView(relatedFiguresArr);
@@ -722,13 +738,13 @@ namespace DynamicTable
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("Selection changed");
+            //Console.WriteLine("Selection changed");
             dataGridView1.ClearSelection();
         }
 
         private void generalDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            Console.WriteLine("Selection changed");
+            //Console.WriteLine("Selection changed");
             generalDataGridView.ClearSelection();
         }
 
@@ -750,48 +766,20 @@ namespace DynamicTable
                             //repairDataList[i].checkComplete = true
                             if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.LightGreen)
                             {
-                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
-                                        repairDataList[i].headingName,
-                                        repairDataList[i].useableLimits,
-                                        repairDataList[i].repairableLimits,
-                                        repairDataList[i].correctiveAction,
-                                        repairDataList[i].relatedFigures,
-                                        true);*/
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                             }
                             else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Orange)
                             {
-                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
-                                        repairDataList[i].headingName,
-                                        repairDataList[i].useableLimits,
-                                        repairDataList[i].repairableLimits,
-                                        repairDataList[i].correctiveAction,
-                                        repairDataList[i].relatedFigures,
-                                        true);*/
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                                 containsSalvageable = true;
                             }
                             else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.PaleVioletRed)
                             {
-                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
-                                        repairDataList[i].headingName,
-                                        repairDataList[i].useableLimits,
-                                        repairDataList[i].repairableLimits,
-                                        repairDataList[i].correctiveAction,
-                                        repairDataList[i].relatedFigures,
-                                        true);*/
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                                 containsUnsalvageable = true;
                             }
                             else
                             {
-                                /*repairDataList[i] = new RepairData(repairDataList[i].headingNumber,
-                                        repairDataList[i].headingName,
-                                        repairDataList[i].useableLimits,
-                                        repairDataList[i].repairableLimits,
-                                        repairDataList[i].correctiveAction,
-                                        repairDataList[i].relatedFigures,
-                                        false);*/
                                 repairDataList[i] = new RepairData(repairDataList[i], false);
                                 isFullyComplete = false;
                                 containsSalvageable = false;
@@ -917,11 +905,12 @@ namespace DynamicTable
             if (selectedIndex >= 0)
             {
                 string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
-                Image img = Image.FromFile(imagePath);
+                img = Image.FromFile(imagePath);
                 // Load image data in memory stream
-                MemoryStream ms = new MemoryStream();
-                img.Save(ms, ImageFormat.Png);
-                pictureBox1.Image = Image.FromStream(ms);
+                //MemoryStream ms = new MemoryStream();
+                ///img.Save(ms, ImageFormat.Png);
+                //pictureBox1.Image = Image.FromStream(ms);
+                pictureBox1.Image = new Bitmap(img);
             }
 
         }
@@ -942,5 +931,34 @@ t
         {
             var asForm = System.Windows.Automation.AutomationElement.FromHandle(this.Handle);
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+                const double maxScale = 2.0; // The scale factor when the is at it's max
+
+                //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
+                double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
+                Console.WriteLine(trackBar1.Value);
+                Console.WriteLine(scale);
+                Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)scale),
+                              Convert.ToInt32((double)originalPictureBoxSize.Height * (double)scale));
+
+                //pictureBox1.Size = newSize;
+                //pictureBox1.Image.Size = newSize;
+                Console.WriteLine(newSize.Width);
+                Console.WriteLine(newSize.Height);
+                Bitmap bmp = new Bitmap(img, newSize);
+                pictureBox1.Image = bmp;
+            
+
+
+        }
+
+        private void finishbutton_Click_1(object sender, EventArgs e)
+        {
+            WriteValues();
+        }
+
     }
 }
