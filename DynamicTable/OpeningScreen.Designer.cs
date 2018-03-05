@@ -44,10 +44,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(1366, 378);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+
             // 
             // panel1
             // 

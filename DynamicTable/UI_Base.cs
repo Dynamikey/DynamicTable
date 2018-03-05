@@ -12,6 +12,7 @@ using System.Xml;
 using System.IO;
 using System.Drawing.Imaging;
 using Excel = Microsoft.Office.Interop.Excel;
+using DynamicTable.Properties;
 //using MySql.Data.MySqlClient;
 
 namespace DynamicTable
@@ -21,10 +22,10 @@ namespace DynamicTable
 
         int PW;
         bool Hiden;
-        String InspectorID;
-        String EngineID;
-        String PartNumber;
-        String RepairNoteNumber;
+        String InspectorID = "";
+        String EngineID = "";
+        String PartNumber = "";
+        String RepairNoteNumber = "";
         List<RepairNoteInformation> repairNoteList = new List<RepairNoteInformation>();
         RepairNoteInformation repairNoteInformation = new RepairNoteInformation();
         string[] relatedFiguresArr;
@@ -39,6 +40,7 @@ namespace DynamicTable
             InitializeSubrowDataTable();
             InitializeGeneralDataTable();
             this.ActiveControl = textBox1;
+            updatetoolbartext();
             //GenerateRepairData(); Moved to later when switching to table tab
         }
 
@@ -84,6 +86,7 @@ namespace DynamicTable
             if(InspectorID != "")
             {
                 tabControl1.SelectedTab = tabPage2;
+                updatetoolbartext();
             }
 
             
@@ -97,6 +100,7 @@ namespace DynamicTable
             {
                 tabControl1.SelectedTab = tabPage3;
                 this.ActiveControl = textBox3;
+                updatetoolbartext();
             }
 
         }
@@ -110,8 +114,7 @@ namespace DynamicTable
             {
                 repairNoteSearch();
                 tabControl1.SelectedTab = tabPage4;
-                //int top = 80;
-                //int left = 19;
+                updatetoolbartext();
 
                 for (int i = 0; i < repairNoteList.Count; i++)
                 {
@@ -190,6 +193,7 @@ namespace DynamicTable
             RepairNoteNumber = RepairNoteNumber.Substring(RepairNoteNumber.IndexOf(":") + 2);
             GenerateRepairData();
             tabControl1.SelectedTab = tabPage5;
+            updatetoolbartext();
 
             // *******
 
@@ -480,9 +484,9 @@ namespace DynamicTable
             //{
             if (count == 0)
             {
-                DataGridViewButtonColumn dataGridViewButtonColumn = new DataGridViewButtonColumn();
-                dataGridViewButtonColumn.HeaderText = "Comments";
-                dataGridViewButtonColumn.FlatStyle = FlatStyle.Flat;
+                DataGridViewImageColumn dataGridViewButtonColumn = new DataGridViewImageColumn();
+                Image image = Resources.pencil;
+                dataGridViewButtonColumn.Image = image;
                 dataGridView.Columns.Add(dataGridViewButtonColumn);
             }
             count = 1;
@@ -522,23 +526,7 @@ namespace DynamicTable
             if (e.RowIndex >= 0)
             {
                 var row = senderGrid.Rows[e.RowIndex];
-                if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
-                {
-                    if (row.DefaultCellStyle.BackColor == Color.White)
-                    {
-                        row.DefaultCellStyle.BackColor = Color.LightGreen;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","");
-                        PrintList(repairDataList);
-                    }
-                    else
-                    {
-                        row.DefaultCellStyle.BackColor = Color.White;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "");
-                        PrintList(repairDataList);
-                        // TODO: Add some sort of confirmation to deselect
-                    }
-                }
-                else if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
                 {
                     launchSAPcomment(e.RowIndex + globalSubRowNumber);
                     switch (repairDataList[e.RowIndex + globalSubRowNumber].conditionInput)
@@ -560,6 +548,23 @@ namespace DynamicTable
                     }
 
                 }
+                else if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
+                {
+                    if (row.DefaultCellStyle.BackColor == Color.White)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","");
+                        PrintList(repairDataList);
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White;
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "");
+                        PrintList(repairDataList);
+                        // TODO: Add some sort of confirmation to deselect
+                    }
+                }
+
             }
             senderGrid.EndEdit();
         }
@@ -914,7 +919,7 @@ namespace DynamicTable
             }
 
         }
-t
+
         private void dataGridView1_ColumnAdded_1(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -958,6 +963,15 @@ t
         private void finishbutton_Click_1(object sender, EventArgs e)
         {
             WriteValues();
+        }
+
+        private void updatetoolbartext()
+        {
+            if (RepairNoteNumber != "") Part_Name.Text = $"{InspectorID} > Engine: {EngineID} > Part: {PartNumber} > {RepairNoteNumber}";
+            else if (PartNumber != "") Part_Name.Text = $"{InspectorID} > Engine: {EngineID} > Part: {PartNumber}";
+            else if (EngineID != "") Part_Name.Text = $"{InspectorID} > Engine: {EngineID}";
+            else if (InspectorID != "") Part_Name.Text = $"{InspectorID}";
+            else Part_Name.Text = "Welcome to the Rolls Royce Interactive Repair Note App";
         }
 
     }
