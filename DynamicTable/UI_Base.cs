@@ -958,7 +958,17 @@ namespace DynamicTable
         private void finishbutton_Click_1(object sender, EventArgs e)
         {
             WriteValues();
+            tabControl1.SelectedTab = tabPage6;
         }
 
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage1;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage5;
+        }
     }
 }
