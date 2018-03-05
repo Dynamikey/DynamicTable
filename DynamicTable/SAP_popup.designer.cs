@@ -51,6 +51,8 @@
             this.button6 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.CameraPreview = new System.Windows.Forms.PictureBox();
+            this.webCameraControl1 = new WebEye.Controls.WinForms.WebCameraControl.WebCameraControl();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             this.SuspendLayout();
@@ -231,7 +233,7 @@
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(22, 153);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(342, 35);
+            this.textBox1.Size = new System.Drawing.Size(207, 35);
             this.textBox1.TabIndex = 8;
             // 
             // label2
@@ -306,15 +308,37 @@
             this.CameraPreview.TabIndex = 15;
             this.CameraPreview.TabStop = false;
             // 
+            // webCameraControl1
+            // 
+            this.webCameraControl1.Location = new System.Drawing.Point(801, 13);
+            this.webCameraControl1.Name = "webCameraControl1";
+            this.webCameraControl1.Size = new System.Drawing.Size(532, 368);
+            this.webCameraControl1.TabIndex = 16;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "µm",
+            "mm",
+            "cm"});
+            this.comboBox2.Location = new System.Drawing.Point(240, 153);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(124, 38);
+            this.comboBox2.TabIndex = 17;
+            // 
             // SAP_popup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1824, 400);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.CameraPreview);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.SAP_Preview);
+            this.Controls.Add(this.webCameraControl1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
@@ -363,7 +387,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox CameraPreview;
-
-
+        private WebEye.Controls.WinForms.WebCameraControl.WebCameraControl webCameraControl1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

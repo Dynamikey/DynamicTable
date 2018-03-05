@@ -15,7 +15,10 @@ namespace DynamicTable
         public string correctiveAction { get; set; }
         public string relatedFigures { get; set; }
         public bool checkComplete { get; set; }
-        public string condition { get; set; }
+        public string conditionInput { get; set; }
+        public string damageTypeInput { get; set; }
+        public string damageMeasurementInput { get; set; }
+        public string damageFurtherCommentsInput { get; set; }
 
         public RepairData(RepairData rd, bool b)
         {
@@ -26,9 +29,12 @@ namespace DynamicTable
             this.correctiveAction = rd.correctiveAction;
             this.relatedFigures = rd.relatedFigures;
             this.checkComplete = b;
-            this.condition = rd.condition;
+            this.conditionInput = rd.conditionInput;
+            this.damageTypeInput = rd.damageTypeInput;
+            this.damageMeasurementInput = rd.damageMeasurementInput;
+            this.damageFurtherCommentsInput = rd.damageFurtherCommentsInput;
         }
-        public RepairData(RepairData rd, string str)
+        public RepairData(RepairData rd, string condition, string damagetype, string measurement, string furthercomments)
         {
             this.headingNumber = rd.headingNumber;
             this.headingName = rd.headingName;
@@ -37,7 +43,10 @@ namespace DynamicTable
             this.correctiveAction = rd.correctiveAction;
             this.relatedFigures = rd.relatedFigures;
             this.checkComplete = rd.checkComplete;
-            this.condition = str;
+            this.conditionInput = condition;
+            this.damageTypeInput = damagetype;
+            this.damageMeasurementInput = measurement;
+            this.damageFurtherCommentsInput = furthercomments;
         }
     }
 
