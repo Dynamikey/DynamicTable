@@ -12,14 +12,13 @@ using System.Xml;
 using System.IO;
 using System.Drawing.Imaging;
 using Excel = Microsoft.Office.Interop.Excel;
-
+//using MySql.Data.MySqlClient;
 
 namespace DynamicTable
 {
     public partial class UI_Base : Form
     {
-        //hello
-        //hello
+
         int PW;
         bool Hiden;
         String InspectorID;
@@ -29,6 +28,8 @@ namespace DynamicTable
         List<RepairNoteInformation> repairNoteList = new List<RepairNoteInformation>();
         RepairNoteInformation repairNoteInformation = new RepairNoteInformation();
         string[] relatedFiguresArr;
+        Size originalPictureBoxSize;
+        Image img;
         public UI_Base()
         {
             InitializeComponent();
@@ -408,6 +409,8 @@ namespace DynamicTable
                     {
                         string[] relatedFiguresArrTemp = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
                         string imagePathTemp = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArrTemp[0]}.png";
+
+
                         Image imageTemp = Image.FromFile(imagePathTemp);
                         Size newsizeTemp = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * imageTemp.Height / imageTemp.Width));
                         //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
@@ -653,12 +656,13 @@ namespace DynamicTable
 
                         // Cast to image
                         string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                        Image img = Image.FromFile(imagePath);
+                        img = Image.FromFile(imagePath);
                         // Load image data in memory stream
-                        MemoryStream ms = new MemoryStream();
-                        img.Save(ms, ImageFormat.Png);
-                        pictureBox1.Image = Image.FromStream(ms);
-                        //originalPictureBoxSize = pictureBox1.Size;
+                        //MemoryStream ms = new MemoryStream();
+                        //img.Save(ms, ImageFormat.Png);
+                        //pictureBox1.Image = Image.FromStream(ms);
+                        pictureBox1.Image = new Bitmap(img);
+                        originalPictureBoxSize = pictureBox1.Size;
                     }
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
@@ -683,12 +687,13 @@ namespace DynamicTable
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
                         string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
-                        Image img = Image.FromFile(imagePath);
+                        img = Image.FromFile(imagePath);
                         // Load image data in memory stream
-                        MemoryStream ms = new MemoryStream();
-                        img.Save(ms, ImageFormat.Png);
-                        pictureBox1.Image = Image.FromStream(ms);
-                        //originalPictureBoxSize = pictureBox1.Size;
+                        //MemoryStream ms = new MemoryStream();
+                        //img.Save(ms, ImageFormat.Png);
+                        //pictureBox1.Image = Image.FromStream(ms);
+                        pictureBox1.Image = new Bitmap(img);
+                        originalPictureBoxSize = pictureBox1.Size;
 
 
                         GenerateImageListView(relatedFiguresArr);
@@ -896,11 +901,12 @@ namespace DynamicTable
             if (selectedIndex >= 0)
             {
                 string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
-                Image img = Image.FromFile(imagePath);
+                img = Image.FromFile(imagePath);
                 // Load image data in memory stream
-                MemoryStream ms = new MemoryStream();
-                img.Save(ms, ImageFormat.Png);
-                pictureBox1.Image = Image.FromStream(ms);
+                //MemoryStream ms = new MemoryStream();
+                ///img.Save(ms, ImageFormat.Png);
+                //pictureBox1.Image = Image.FromStream(ms);
+                pictureBox1.Image = new Bitmap(img);
             }
 
         }
@@ -914,5 +920,29 @@ namespace DynamicTable
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+                const double maxScale = 2.0; // The scale factor when the is at it's max
+
+                //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
+                double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
+                Console.WriteLine(trackBar1.Value);
+                Console.WriteLine(scale);
+                Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)scale),
+                              Convert.ToInt32((double)originalPictureBoxSize.Height * (double)scale));
+
+                //pictureBox1.Size = newSize;
+                //pictureBox1.Image.Size = newSize;
+                Console.WriteLine(newSize.Width);
+                Console.WriteLine(newSize.Height);
+                Bitmap bmp = new Bitmap(img, newSize);
+                pictureBox1.Image = bmp;
+            
+
+
+        }
+
     }
 }
