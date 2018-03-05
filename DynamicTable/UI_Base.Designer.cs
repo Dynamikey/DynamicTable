@@ -87,6 +87,14 @@ namespace DynamicTable
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.shapeContainer4 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape7 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            this.Label3 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.shapeContainer5 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape8 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            this.button6 = new System.Windows.Forms.Button();
             this.Slide_Panel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -102,7 +110,6 @@ namespace DynamicTable
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
@@ -3175,14 +3182,15 @@ namespace DynamicTable
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.White;
-            this.tabPage5.Controls.Add(this.finishbutton);
             this.tabPage5.Controls.Add(this.listView1);
+            this.tabPage5.Controls.Add(this.finishbutton);
             this.tabPage5.Controls.Add(this.generalDataGridView);
             this.tabPage5.Controls.Add(this.button5);
             this.tabPage5.Controls.Add(this.trackBar1);
             this.tabPage5.Controls.Add(this.dataGridView1);
             this.tabPage5.Controls.Add(this.Main_Picture_Box);
             this.tabPage5.Controls.Add(this.panel1);
+            this.tabPage5.Controls.Add(this.shapeContainer4);
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -3192,21 +3200,25 @@ namespace DynamicTable
             // 
             // finishbutton
             // 
-            this.finishbutton.Location = new System.Drawing.Point(1723, 1031);
+            this.finishbutton.BackColor = System.Drawing.SystemColors.Control;
+            this.finishbutton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.finishbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.finishbutton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.finishbutton.Location = new System.Drawing.Point(1650, 878);
             this.finishbutton.Name = "finishbutton";
-            this.finishbutton.Size = new System.Drawing.Size(120, 40);
+            this.finishbutton.Size = new System.Drawing.Size(184, 187);
             this.finishbutton.TabIndex = 0;
-            this.finishbutton.Text = "Finish!";
-            this.finishbutton.UseVisualStyleBackColor = true;
+            this.finishbutton.Text = "Finish Inspection";
+            this.finishbutton.UseVisualStyleBackColor = false;
             this.finishbutton.Click += new System.EventHandler(this.finishbutton_Click_1);
             // 
             // listView1
             // 
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.Location = new System.Drawing.Point(989, 873);
+            this.listView1.Location = new System.Drawing.Point(1021, 873);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(844, 171);
+            this.listView1.Size = new System.Drawing.Size(600, 196);
             this.listView1.TabIndex = 16;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -3335,14 +3347,14 @@ namespace DynamicTable
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(1019, 57);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(798, 869);
+            this.panel1.Size = new System.Drawing.Size(798, 800);
             this.panel1.TabIndex = 18;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(2, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(854, 839);
+            this.pictureBox1.Size = new System.Drawing.Size(800, 800);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
@@ -3350,7 +3362,11 @@ namespace DynamicTable
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.White;
-            this.tabPage6.Controls.Add(this.pictureBox2);
+            this.tabPage6.Controls.Add(this.button6);
+            this.tabPage6.Controls.Add(this.button4);
+            this.tabPage6.Controls.Add(this.textBox4);
+            this.tabPage6.Controls.Add(this.Label3);
+            this.tabPage6.Controls.Add(this.shapeContainer5);
             this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
@@ -3391,7 +3407,95 @@ namespace DynamicTable
             this.label2.TabIndex = 12;
             this.label2.Text = ">";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // shapeContainer4
+            // 
+            this.shapeContainer4.Location = new System.Drawing.Point(3, 3);
+            this.shapeContainer4.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer4.Name = "shapeContainer4";
+            this.shapeContainer4.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape7});
+            this.shapeContainer4.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer4.TabIndex = 19;
+            this.shapeContainer4.TabStop = false;
+            // 
+            // rectangleShape7
+            // 
+            this.rectangleShape7.BorderColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape7.CornerRadius = 5;
+            this.rectangleShape7.FillColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape7.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape7.Location = new System.Drawing.Point(1638, 871);
+            this.rectangleShape7.Name = "rectangleShape7";
+            this.rectangleShape7.Size = new System.Drawing.Size(200, 191);
+            // 
+            // Label3
+            // 
+            this.Label3.AutoSize = true;
+            this.Label3.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label3.Location = new System.Drawing.Point(150, 76);
+            this.Label3.Name = "Label3";
+            this.Label3.Size = new System.Drawing.Size(257, 37);
+            this.Label3.TabIndex = 0;
+            this.Label3.Text = "Finalise SAP Report?";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox4.Location = new System.Drawing.Point(168, 142);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(1145, 858);
+            this.textBox4.TabIndex = 2;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(1386, 716);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(439, 335);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Finalise, Submit Report";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // shapeContainer5
+            // 
+            this.shapeContainer5.Location = new System.Drawing.Point(3, 3);
+            this.shapeContainer5.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer5.Name = "shapeContainer5";
+            this.shapeContainer5.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape8});
+            this.shapeContainer5.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer5.TabIndex = 4;
+            this.shapeContainer5.TabStop = false;
+            // 
+            // rectangleShape8
+            // 
+            this.rectangleShape8.BackColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape8.BorderColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape8.CornerRadius = 5;
+            this.rectangleShape8.FillColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape8.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape8.Location = new System.Drawing.Point(1380, 707);
+            this.rectangleShape8.Name = "rectangleShape8";
+            this.rectangleShape8.Size = new System.Drawing.Size(445, 347);
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(1354, 79);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(68, 45);
+            this.button6.TabIndex = 13;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // UI_Base
             // 
@@ -3399,10 +3503,10 @@ namespace DynamicTable
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.Slide_Panel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.ExitBtn);
-            this.Controls.Add(this.Slide_Panel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -3431,7 +3535,7 @@ namespace DynamicTable
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -3470,7 +3574,6 @@ namespace DynamicTable
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
         private System.Windows.Forms.PictureBox Main_Picture_Box;
         private System.Windows.Forms.Label Part_Name;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button5;
@@ -3486,6 +3589,14 @@ namespace DynamicTable
         private System.Windows.Forms.Panel panel1;
         private PictureBox pictureBox3;
         private Label label2;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer4;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape7;
+        private Label Label3;
+        private TextBox textBox4;
+        private Button button4;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer5;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape8;
+        private Button button6;
     }
 }
 
