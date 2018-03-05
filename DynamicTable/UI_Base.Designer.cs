@@ -3576,6 +3576,7 @@ namespace DynamicTable
         private System.Windows.Forms.Label Part_Name;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button finishbutton;
         private System.Windows.Forms.DataGridView generalDataGridView;
