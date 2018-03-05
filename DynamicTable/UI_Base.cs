@@ -83,11 +83,12 @@ namespace DynamicTable
         {
             InspectorID = textBox1.Text;
 
-            if(InspectorID != "")
+            if (InspectorID != "")
             {
                 tabControl1.SelectedTab = tabPage2;
                 updatetoolbartext();
             }
+            else textBox1.Focus();
 
             
         }
@@ -102,6 +103,7 @@ namespace DynamicTable
                 this.ActiveControl = textBox3;
                 updatetoolbartext();
             }
+            else textBox2.Focus();
 
         }
 
@@ -172,7 +174,8 @@ namespace DynamicTable
                 }
 
             }
-            
+            else textBox3.Focus();
+
         }
 
 
@@ -210,8 +213,17 @@ namespace DynamicTable
 
             }
             generalDataGridView.DataSource = generalDataTable;
-
+                        
             CreateGraphicsColumn(ref generalDataGridView);
+
+            DataGridViewColumn column = generalDataGridView.Columns[0];
+            column.Width = 60;
+            column = generalDataGridView.Columns[1];
+            column.Width = 542;
+            column = generalDataGridView.Columns[2];
+            column.Width = 110;
+            column = generalDataGridView.Columns[3];
+            column.Width = 200;
 
         }
 
@@ -438,11 +450,11 @@ namespace DynamicTable
         private void CreateGraphicsColumn(ref DataGridView dataGridView)
         {
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
-            newDataGridViewImageColumn.Width = 120;
+            newDataGridViewImageColumn.Width = 200;
             newDataGridViewImageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
             newDataGridViewImageColumn.HeaderText = "Images";
             dataGridView.Columns.Add(newDataGridViewImageColumn);
-
+            
             int col = dataGridView.ColumnCount - 1;
             int row = 0;
 
@@ -593,7 +605,7 @@ namespace DynamicTable
             //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
 
             // Resize "Number" column
-            dataGridView1.AutoResizeColumn(0);
+            //dataGridView1.AutoResizeColumn(0);
             // Resize "Completed" column
             //dataGridView1.AutoResizeColumn(5);
             CreateButtonsColumn(ref dataGridView1);
@@ -634,6 +646,19 @@ namespace DynamicTable
                     break;
                 }
             }
+
+            DataGridViewColumn column = dataGridView1.Columns[0];
+            column.Width = 80;
+            column = dataGridView1.Columns[1];
+            column.Width = 140;
+            column = dataGridView1.Columns[2];
+            column.Width = 200;
+            column = dataGridView1.Columns[3];
+            column.Width = 142;
+            column = dataGridView1.Columns[4];
+            column.Width = 300;
+            column = dataGridView1.Columns[5];
+            column.Width = 50;
 
         }
 
@@ -923,13 +948,13 @@ namespace DynamicTable
         private void dataGridView1_ColumnAdded_1(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
 
         private void generalDataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
 
         private void UI_Base_Load(object sender, EventArgs e)
