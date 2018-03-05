@@ -37,6 +37,7 @@ namespace DynamicTable
             Slide_Panel.Width = 0;
             InitializeSubrowDataTable();
             InitializeGeneralDataTable();
+            this.ActiveControl = textBox1;
             //GenerateRepairData(); Moved to later when switching to table tab
         }
 
@@ -85,6 +86,7 @@ namespace DynamicTable
         {
             EngineID = textBox2.Text;
             tabControl1.SelectedTab = tabPage3;
+            this.ActiveControl = textBox3;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -239,6 +241,16 @@ namespace DynamicTable
                     else columns.Add(" ");
                     if (repairDataList[i].relatedFigures != null) columns.Add(repairDataList[i].relatedFigures);
                     else columns.Add(" ");
+                    if (repairDataList[i].conditionInput != null) columns.Add(repairDataList[i].conditionInput);
+                    else columns.Add(" ");
+                    if (repairDataList[i].damageTypeInput != null) columns.Add(repairDataList[i].damageTypeInput);
+                    else columns.Add(" ");
+                    if (repairDataList[i].damageMeasurementInput != null) columns.Add(repairDataList[i].damageMeasurementInput);
+                    else columns.Add(" ");
+                    if (repairDataList[i].damageFurtherCommentsInput != null) columns.Add(repairDataList[i].damageFurtherCommentsInput);
+                    else columns.Add(" ");
+
+
                     writer.WriteRow(columns);
                     columns.Clear();
                 }
@@ -366,7 +378,7 @@ namespace DynamicTable
         private void PrintList(List<RepairData> l)
         {
             for (int i = 0; i < l.Count; i++)
-                Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures} {l[i].condition}");
+                Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures} {l[i].conditionInput}");
         }
 
         public void AddToList(List<RepairData> l, ref RepairData d)
@@ -492,13 +504,13 @@ namespace DynamicTable
                     if (row.DefaultCellStyle.BackColor == Color.White)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable");
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","");
                         PrintList(repairDataList);
                     }
                     else
                     {
                         row.DefaultCellStyle.BackColor = Color.White;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "");
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "");
                         PrintList(repairDataList);
                         // TODO: Add some sort of confirmation to deselect
                     }
@@ -507,7 +519,7 @@ namespace DynamicTable
                 {
                     launchSAPcomment(e.RowIndex + globalSubRowNumber);
                     Console.WriteLine("About to start switch case");
-                    switch (repairDataList[e.RowIndex + globalSubRowNumber].condition)
+                    switch (repairDataList[e.RowIndex + globalSubRowNumber].conditionInput)
                     {
                         case "Serviceable":
                             row.DefaultCellStyle.BackColor = Color.LightGreen;
@@ -571,7 +583,7 @@ namespace DynamicTable
                     {
                         //dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
 
-                        switch (repairDataList[i].condition)
+                        switch (repairDataList[i].conditionInput)
                         {
                             case "Serviceable":
                                 dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
@@ -924,6 +936,11 @@ namespace DynamicTable
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
             e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void UI_Base_Load(object sender, EventArgs e)
+        {
+            var asForm = System.Windows.Automation.AutomationElement.FromHandle(this.Handle);
         }
     }
 }
