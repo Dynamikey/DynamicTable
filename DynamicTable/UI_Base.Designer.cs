@@ -84,7 +84,7 @@ namespace DynamicTable
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.finishbutton = new System.Windows.Forms.Button();
             this.Slide_Panel.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -3173,7 +3173,7 @@ namespace DynamicTable
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.White;
-            this.tabPage5.Controls.Add(this.button4);
+            this.tabPage5.Controls.Add(this.finishbutton);
             this.tabPage5.Controls.Add(this.listView1);
             this.tabPage5.Controls.Add(this.generalDataGridView);
             this.tabPage5.Controls.Add(this.button5);
@@ -3354,15 +3354,14 @@ namespace DynamicTable
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
-            // button4
+            // finishbutton
             // 
-            this.button4.Location = new System.Drawing.Point(1723, 1031);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(120, 40);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Finish!";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            this.finishbutton.Location = new System.Drawing.Point(1723, 1031);
+            this.finishbutton.Name = "finishbutton";
+            this.finishbutton.Size = new System.Drawing.Size(120, 40);
+            this.finishbutton.Text = "Finish!";
+            this.finishbutton.UseVisualStyleBackColor = true;
+            this.finishbutton.Click += new System.EventHandler(this.finishbutton_Click_1);
             // 
             // UI_Base
             // 
@@ -3443,6 +3442,7 @@ namespace DynamicTable
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button finishbutton;
         private System.Windows.Forms.DataGridView generalDataGridView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label7;
@@ -3452,7 +3452,6 @@ namespace DynamicTable
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Panel panel1;
-        private Button button4;
     }
 }
 
