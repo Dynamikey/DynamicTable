@@ -925,7 +925,7 @@ namespace DynamicTable
             }
 
         }
-
+t
         private void dataGridView1_ColumnAdded_1(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;

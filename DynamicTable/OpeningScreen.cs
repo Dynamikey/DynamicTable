@@ -15,11 +15,12 @@ namespace DynamicTable
         public OpeningScreen()
         {
             InitializeComponent();
+            Op = pictureBox1.this.opacity;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            timer1.Start;
         }
     }
 }
