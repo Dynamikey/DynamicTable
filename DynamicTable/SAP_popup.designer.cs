@@ -36,12 +36,10 @@
             this.button3 = new System.Windows.Forms.Button();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape6 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.rectangleShape5 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape4 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape3 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape2 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,12 +47,12 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.SAP_Preview = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.CameraPreview = new System.Windows.Forms.PictureBox();
             this.webCameraControl1 = new WebEye.Controls.WinForms.WebCameraControl.WebCameraControl();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.CameraPreview = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -131,7 +129,6 @@
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape6,
-            this.rectangleShape5,
             this.rectangleShape4,
             this.rectangleShape3,
             this.rectangleShape2,
@@ -149,16 +146,6 @@
             this.rectangleShape6.Location = new System.Drawing.Point(1360, 12);
             this.rectangleShape6.Name = "rectangleShape6";
             this.rectangleShape6.Size = new System.Drawing.Size(217, 166);
-            // 
-            // rectangleShape5
-            // 
-            this.rectangleShape5.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.rectangleShape5.CornerRadius = 5;
-            this.rectangleShape5.FillColor = System.Drawing.SystemColors.ControlLight;
-            this.rectangleShape5.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape5.Location = new System.Drawing.Point(1360, 202);
-            this.rectangleShape5.Name = "rectangleShape5";
-            this.rectangleShape5.Size = new System.Drawing.Size(216, 179);
             // 
             // rectangleShape4
             // 
@@ -199,19 +186,6 @@
             this.rectangleShape1.Location = new System.Drawing.Point(391, 8);
             this.rectangleShape1.Name = "rectangleShape1";
             this.rectangleShape1.Size = new System.Drawing.Size(382, 115);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(1367, 207);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(206, 170);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Raise RDR";
-            this.button4.UseVisualStyleBackColor = false;
             // 
             // button5
             // 
@@ -288,26 +262,6 @@
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(1418, 28);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(104, 103);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
-            // 
-            // CameraPreview
-            // 
-            this.CameraPreview.Location = new System.Drawing.Point(801, 13);
-            this.CameraPreview.Name = "CameraPreview";
-            this.CameraPreview.Size = new System.Drawing.Size(532, 368);
-            this.CameraPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.CameraPreview.TabIndex = 15;
-            this.CameraPreview.TabStop = false;
-            // 
             // webCameraControl1
             // 
             this.webCameraControl1.Location = new System.Drawing.Point(801, 13);
@@ -328,6 +282,26 @@
             this.comboBox2.Size = new System.Drawing.Size(124, 38);
             this.comboBox2.TabIndex = 17;
             // 
+            // CameraPreview
+            // 
+            this.CameraPreview.Location = new System.Drawing.Point(1360, 202);
+            this.CameraPreview.Name = "CameraPreview";
+            this.CameraPreview.Size = new System.Drawing.Size(218, 181);
+            this.CameraPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CameraPreview.TabIndex = 15;
+            this.CameraPreview.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1418, 28);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(104, 103);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
             // SAP_popup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -344,7 +318,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -352,12 +325,12 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(96, 680);
+            this.Location = new System.Drawing.Point(96, 0);
             this.Name = "SAP_popup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SAP_Comment_pop";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,9 +347,7 @@
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape3;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape2;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape4;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;

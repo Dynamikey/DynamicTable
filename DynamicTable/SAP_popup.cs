@@ -31,11 +31,6 @@ namespace DynamicTable
             // webCameraControl1.Size = new System.Drawing.Size(532, 368);
             // this.Controls.Add(this.webCameraControl1);
 
-            cameras = new List<WebCameraId>(webCameraControl1.GetVideoCaptureDevices());
-            webCameraControl1.Visible = false;
-            if (cameras.Count > 0)
-                webCameraControl1.StartCapture(cameras[0]);
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -85,17 +80,23 @@ namespace DynamicTable
         private void button6_Click(object sender, EventArgs e)
         {
 
-            if (!webCameraControl1.Visible)
+            if (!webCameraControl1.IsCapturing)
             {
+                cameras = new List<WebCameraId>(webCameraControl1.GetVideoCaptureDevices());
+                webCameraControl1.Visible = false;
+                if (cameras.Count > 0)
+                    webCameraControl1.StartCapture(cameras[0]);
+
                 webCameraControl1.Visible = true;
                 webCameraControl1.BringToFront();
             }
-            else if (webCameraControl1.Visible)
+            else if (webCameraControl1.IsCapturing)
             {
                 Bitmap image = webCameraControl1.GetCurrentImage();
                 CameraPreview.Image = image;
                 CameraPreview.BringToFront();
                 webCameraControl1.Visible = false;
+                webCameraControl1.StopCapture();
             }
 
             

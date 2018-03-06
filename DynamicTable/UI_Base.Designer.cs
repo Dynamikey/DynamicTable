@@ -46,6 +46,9 @@ namespace DynamicTable
             this.Slide_Panel = new System.Windows.Forms.Panel();
             this.Part_Name = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage0 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Inspector_ID_Label = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -75,6 +78,7 @@ namespace DynamicTable
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.finishbutton = new System.Windows.Forms.Button();
             this.generalDataGridView = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -82,10 +86,22 @@ namespace DynamicTable
             this.Main_Picture_Box = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.shapeContainer4 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape7 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.Label3 = new System.Windows.Forms.Label();
+            this.shapeContainer5 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape8 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.Slide_Panel.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage0.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -100,6 +116,7 @@ namespace DynamicTable
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // ExitBtn
@@ -147,11 +164,10 @@ namespace DynamicTable
             // 
             // Part_Name
             // 
-            this.Part_Name.AutoSize = true;
-            this.Part_Name.Font = new System.Drawing.Font("Segoe UI Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Part_Name.Font = new System.Drawing.Font("Segoe UI Light", 20F);
             this.Part_Name.Location = new System.Drawing.Point(5, 9);
             this.Part_Name.Name = "Part_Name";
-            this.Part_Name.Size = new System.Drawing.Size(191, 42);
+            this.Part_Name.Size = new System.Drawing.Size(377, 151);
             this.Part_Name.TabIndex = 0;
             this.Part_Name.Text = "U1111 > Engine XXYYZZ \r\nPart XXYYZZ > RN XXYYZZ";
             // 
@@ -161,6 +177,7 @@ namespace DynamicTable
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.tabControl1.Controls.Add(this.tabPage0);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -171,9 +188,39 @@ namespace DynamicTable
             this.tabControl1.Location = new System.Drawing.Point(48, -25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(48, 1);
-            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.SelectedIndex = 7;
             this.tabControl1.Size = new System.Drawing.Size(1924, 1113);
             this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage0
+            // 
+            this.tabPage0.BackColor = System.Drawing.Color.White;
+            this.tabPage0.Controls.Add(this.label8);
+            this.tabPage0.Controls.Add(this.pictureBox4);
+            this.tabPage0.Location = new System.Drawing.Point(4, 24);
+            this.tabPage0.Name = "tabPage0";
+            this.tabPage0.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage0.TabIndex = 7;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(818, 1032);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(285, 42);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "Rolls Royce Interactive Repair Note App\r\nLOADING...";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DynamicTable.Properties.Resources.rolls;
+            this.pictureBox4.Location = new System.Drawing.Point(277, 250);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(1366, 378);
+            this.pictureBox4.TabIndex = 1;
+            this.pictureBox4.TabStop = false;
             // 
             // tabPage1
             // 
@@ -193,7 +240,7 @@ namespace DynamicTable
             // 
             this.Inspector_ID_Label.AutoSize = true;
             this.Inspector_ID_Label.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.Inspector_ID_Label.Location = new System.Drawing.Point(462, 444);
+            this.Inspector_ID_Label.Location = new System.Drawing.Point(462, 194);
             this.Inspector_ID_Label.Name = "Inspector_ID_Label";
             this.Inspector_ID_Label.Size = new System.Drawing.Size(200, 45);
             this.Inspector_ID_Label.TabIndex = 3;
@@ -204,7 +251,7 @@ namespace DynamicTable
             this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox1.Location = new System.Drawing.Point(470, 500);
+            this.textBox1.Location = new System.Drawing.Point(470, 250);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(386, 43);
             this.textBox1.TabIndex = 1;
@@ -216,7 +263,7 @@ namespace DynamicTable
             this.Inspector_ID_Nxt_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Inspector_ID_Nxt_btn.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.Inspector_ID_Nxt_btn.ForeColor = System.Drawing.Color.White;
-            this.Inspector_ID_Nxt_btn.Location = new System.Drawing.Point(1028, 477);
+            this.Inspector_ID_Nxt_btn.Location = new System.Drawing.Point(1028, 227);
             this.Inspector_ID_Nxt_btn.Name = "Inspector_ID_Nxt_btn";
             this.Inspector_ID_Nxt_btn.Size = new System.Drawing.Size(358, 92);
             this.Inspector_ID_Nxt_btn.TabIndex = 0;
@@ -242,7 +289,7 @@ namespace DynamicTable
             this.rectangleShape2.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape2.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.rectangleShape2.CornerRadius = 5;
-            this.rectangleShape2.Location = new System.Drawing.Point(1020, 470);
+            this.rectangleShape2.Location = new System.Drawing.Point(1020, 220);
             this.rectangleShape2.Name = "rectangleShape2";
             this.rectangleShape2.Size = new System.Drawing.Size(368, 100);
             // 
@@ -252,7 +299,7 @@ namespace DynamicTable
             this.rectangleShape1.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape1.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape1.CornerRadius = 5;
-            this.rectangleShape1.Location = new System.Drawing.Point(460, 490);
+            this.rectangleShape1.Location = new System.Drawing.Point(460, 240);
             this.rectangleShape1.Name = "rectangleShape1";
             this.rectangleShape1.Size = new System.Drawing.Size(410, 56);
             // 
@@ -274,11 +321,11 @@ namespace DynamicTable
             // 
             this.Engine_nb_lbl.AutoSize = true;
             this.Engine_nb_lbl.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.Engine_nb_lbl.Location = new System.Drawing.Point(462, 444);
+            this.Engine_nb_lbl.Location = new System.Drawing.Point(462, 194);
             this.Engine_nb_lbl.Name = "Engine_nb_lbl";
-            this.Engine_nb_lbl.Size = new System.Drawing.Size(242, 45);
+            this.Engine_nb_lbl.Size = new System.Drawing.Size(249, 45);
             this.Engine_nb_lbl.TabIndex = 4;
-            this.Engine_nb_lbl.Text = "Engine Number";
+            this.Engine_nb_lbl.Text = "Engine Number:";
             // 
             // button2
             // 
@@ -287,7 +334,7 @@ namespace DynamicTable
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(1028, 477);
+            this.button2.Location = new System.Drawing.Point(1028, 227);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(358, 92);
             this.button2.TabIndex = 3;
@@ -300,7 +347,7 @@ namespace DynamicTable
             this.textBox2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox2.Location = new System.Drawing.Point(470, 500);
+            this.textBox2.Location = new System.Drawing.Point(470, 250);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(386, 43);
             this.textBox2.TabIndex = 2;
@@ -323,7 +370,7 @@ namespace DynamicTable
             this.rectangleShape4.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape4.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape4.CornerRadius = 5;
-            this.rectangleShape4.Location = new System.Drawing.Point(460, 490);
+            this.rectangleShape4.Location = new System.Drawing.Point(460, 240);
             this.rectangleShape4.Name = "rectangleShape4";
             this.rectangleShape4.Size = new System.Drawing.Size(410, 56);
             // 
@@ -333,7 +380,7 @@ namespace DynamicTable
             this.rectangleShape3.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape3.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.rectangleShape3.CornerRadius = 5;
-            this.rectangleShape3.Location = new System.Drawing.Point(1020, 470);
+            this.rectangleShape3.Location = new System.Drawing.Point(1020, 220);
             this.rectangleShape3.Name = "rectangleShape3";
             this.rectangleShape3.Size = new System.Drawing.Size(368, 100);
             // 
@@ -3020,7 +3067,7 @@ namespace DynamicTable
             this.textBox3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox3.Location = new System.Drawing.Point(470, 500);
+            this.textBox3.Location = new System.Drawing.Point(470, 250);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(386, 43);
             this.textBox3.TabIndex = 7;
@@ -3032,7 +3079,7 @@ namespace DynamicTable
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(1028, 477);
+            this.button3.Location = new System.Drawing.Point(1028, 227);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(358, 92);
             this.button3.TabIndex = 6;
@@ -3044,11 +3091,11 @@ namespace DynamicTable
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.label1.Location = new System.Drawing.Point(462, 444);
+            this.label1.Location = new System.Drawing.Point(462, 194);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 45);
+            this.label1.Size = new System.Drawing.Size(209, 45);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Part Number";
+            this.label1.Text = "Part Number:";
             // 
             // shapeContainer3
             // 
@@ -3068,7 +3115,7 @@ namespace DynamicTable
             this.rectangleShape6.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape6.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.rectangleShape6.CornerRadius = 5;
-            this.rectangleShape6.Location = new System.Drawing.Point(1020, 470);
+            this.rectangleShape6.Location = new System.Drawing.Point(1020, 220);
             this.rectangleShape6.Name = "rectangleShape6";
             this.rectangleShape6.Size = new System.Drawing.Size(368, 100);
             // 
@@ -3078,7 +3125,7 @@ namespace DynamicTable
             this.rectangleShape5.BackStyle = Microsoft.VisualBasic.PowerPacks.BackStyle.Opaque;
             this.rectangleShape5.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape5.CornerRadius = 5;
-            this.rectangleShape5.Location = new System.Drawing.Point(460, 490);
+            this.rectangleShape5.Location = new System.Drawing.Point(460, 240);
             this.rectangleShape5.Name = "rectangleShape5";
             this.rectangleShape5.Size = new System.Drawing.Size(410, 56);
             // 
@@ -3173,12 +3220,14 @@ namespace DynamicTable
             // 
             this.tabPage5.BackColor = System.Drawing.Color.White;
             this.tabPage5.Controls.Add(this.listView1);
+            this.tabPage5.Controls.Add(this.finishbutton);
             this.tabPage5.Controls.Add(this.generalDataGridView);
             this.tabPage5.Controls.Add(this.button5);
             this.tabPage5.Controls.Add(this.trackBar1);
             this.tabPage5.Controls.Add(this.dataGridView1);
             this.tabPage5.Controls.Add(this.Main_Picture_Box);
             this.tabPage5.Controls.Add(this.panel1);
+            this.tabPage5.Controls.Add(this.shapeContainer4);
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -3189,26 +3238,39 @@ namespace DynamicTable
             // listView1
             // 
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.Location = new System.Drawing.Point(989, 873);
+            this.listView1.Location = new System.Drawing.Point(1021, 873);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(844, 171);
+            this.listView1.Size = new System.Drawing.Size(600, 176);
             this.listView1.TabIndex = 16;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            // 
+            // finishbutton
+            // 
+            this.finishbutton.BackColor = System.Drawing.SystemColors.Control;
+            this.finishbutton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.finishbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.finishbutton.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.finishbutton.Location = new System.Drawing.Point(1645, 878);
+            this.finishbutton.Name = "finishbutton";
+            this.finishbutton.Size = new System.Drawing.Size(193, 167);
+            this.finishbutton.TabIndex = 0;
+            this.finishbutton.Text = "Finish Inspection";
+            this.finishbutton.UseVisualStyleBackColor = false;
+            this.finishbutton.Click += new System.EventHandler(this.finishbutton_Click_1);
             // 
             // generalDataGridView
             // 
             this.generalDataGridView.AllowUserToAddRows = false;
             this.generalDataGridView.AllowUserToDeleteRows = false;
-            //this.generalDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.generalDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.generalDataGridView.BackgroundColor = System.Drawing.Color.White;
             this.generalDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.generalDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -3217,7 +3279,7 @@ namespace DynamicTable
             this.generalDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -3232,7 +3294,7 @@ namespace DynamicTable
             this.generalDataGridView.Name = "generalDataGridView";
             this.generalDataGridView.ReadOnly = true;
             this.generalDataGridView.RowHeadersVisible = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.generalDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.generalDataGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.generalDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -3269,14 +3331,13 @@ namespace DynamicTable
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            //this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -3285,7 +3346,7 @@ namespace DynamicTable
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -3298,7 +3359,7 @@ namespace DynamicTable
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -3307,6 +3368,7 @@ namespace DynamicTable
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded_1);
+            this.dataGridView1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged_1);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // Main_Picture_Box
@@ -3323,28 +3385,121 @@ namespace DynamicTable
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(1019, 57);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(798, 869);
+            this.panel1.Size = new System.Drawing.Size(798, 800);
             this.panel1.TabIndex = 18;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(2, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(854, 839);
+            this.pictureBox1.Size = new System.Drawing.Size(800, 800);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
+            // shapeContainer4
+            // 
+            this.shapeContainer4.Location = new System.Drawing.Point(3, 3);
+            this.shapeContainer4.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer4.Name = "shapeContainer4";
+            this.shapeContainer4.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape7});
+            this.shapeContainer4.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer4.TabIndex = 19;
+            this.shapeContainer4.TabStop = false;
+            // 
+            // rectangleShape7
+            // 
+            this.rectangleShape7.BorderColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape7.CornerRadius = 5;
+            this.rectangleShape7.FillColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape7.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape7.Location = new System.Drawing.Point(1638, 871);
+            this.rectangleShape7.Name = "rectangleShape7";
+            this.rectangleShape7.Size = new System.Drawing.Size(200, 174);
+            // 
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.White;
-            this.tabPage6.Controls.Add(this.pictureBox2);
+            this.tabPage6.Controls.Add(this.button6);
+            this.tabPage6.Controls.Add(this.button4);
+            this.tabPage6.Controls.Add(this.textBox4);
+            this.tabPage6.Controls.Add(this.Label3);
+            this.tabPage6.Controls.Add(this.shapeContainer5);
             this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(1916, 1085);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "tabPage6";
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button6.BackgroundImage")));
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(1354, 79);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(68, 45);
+            this.button6.TabIndex = 13;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(1370, 149);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(439, 335);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "Finalise, Submit Report";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox4.Location = new System.Drawing.Point(160, 142);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(1145, 916);
+            this.textBox4.TabIndex = 2;
+            // 
+            // Label3
+            // 
+            this.Label3.AutoSize = true;
+            this.Label3.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label3.Location = new System.Drawing.Point(150, 76);
+            this.Label3.Name = "Label3";
+            this.Label3.Size = new System.Drawing.Size(257, 37);
+            this.Label3.TabIndex = 0;
+            this.Label3.Text = "Finalise SAP Report?";
+            // 
+            // shapeContainer5
+            // 
+            this.shapeContainer5.Location = new System.Drawing.Point(3, 3);
+            this.shapeContainer5.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer5.Name = "shapeContainer5";
+            this.shapeContainer5.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape8});
+            this.shapeContainer5.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer5.TabIndex = 4;
+            this.shapeContainer5.TabStop = false;
+            // 
+            // rectangleShape8
+            // 
+            this.rectangleShape8.BackColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape8.BorderColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape8.CornerRadius = 5;
+            this.rectangleShape8.FillColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape8.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape8.Location = new System.Drawing.Point(1363, 139);
+            this.rectangleShape8.Name = "rectangleShape8";
+            this.rectangleShape8.Size = new System.Drawing.Size(445, 347);
             // 
             // pictureBox2
             // 
@@ -3354,14 +3509,43 @@ namespace DynamicTable
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackColor = System.Drawing.Color.MidnightBlue;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(0, -1);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(95, 113);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 11;
+            this.pictureBox3.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(52, 540);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 40);
+            this.label2.TabIndex = 12;
+            this.label2.Text = ">";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // UI_Base
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.Slide_Panel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -3370,8 +3554,10 @@ namespace DynamicTable
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.UI_Base_Load);
             this.Slide_Panel.ResumeLayout(false);
-            this.Slide_Panel.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage0.ResumeLayout(false);
+            this.tabPage0.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -3391,7 +3577,9 @@ namespace DynamicTable
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3409,6 +3597,7 @@ namespace DynamicTable
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage0;
         private System.Windows.Forms.Button Inspector_ID_Nxt_btn;
         private System.Windows.Forms.Label Inspector_ID_Label;
         private System.Windows.Forms.TextBox textBox1;
@@ -3429,10 +3618,11 @@ namespace DynamicTable
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
         private System.Windows.Forms.PictureBox Main_Picture_Box;
         private System.Windows.Forms.Label Part_Name;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button finishbutton;
         private System.Windows.Forms.DataGridView generalDataGridView;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label7;
@@ -3442,6 +3632,18 @@ namespace DynamicTable
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Panel panel1;
+        private PictureBox pictureBox3;
+        private Label label2;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer4;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape7;
+        private Label Label3;
+        private TextBox textBox4;
+        private Button button4;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer5;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape8;
+        private Button button6;
+        private Label label8;
+        private PictureBox pictureBox4;
     }
 }
 
