@@ -69,6 +69,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(346, 38);
             this.comboBox1.TabIndex = 0;
+            this.comboBox1.TextChanged += new System.EventHandler(this.updateSAPComment);
             // 
             // label1
             // 
@@ -209,6 +210,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(207, 35);
             this.textBox1.TabIndex = 8;
+            this.textBox1.TextChanged += new System.EventHandler(this.updateSAPComment);
             // 
             // label2
             // 
@@ -238,9 +240,11 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(345, 144);
             this.textBox2.TabIndex = 10;
+            this.textBox2.TextChanged += new System.EventHandler(this.updateSAPComment);
             // 
             // SAP_Preview
             // 
+            this.SAP_Preview.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SAP_Preview.Location = new System.Drawing.Point(801, 13);
             this.SAP_Preview.Multiline = true;
             this.SAP_Preview.Name = "SAP_Preview";
@@ -281,6 +285,7 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(124, 38);
             this.comboBox2.TabIndex = 17;
+            this.comboBox2.TextChanged += new System.EventHandler(this.updateSAPComment);
             // 
             // CameraPreview
             // 
@@ -329,6 +334,7 @@
             this.Name = "SAP_popup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SAP_Comment_pop";
+            this.Load += new System.EventHandler(this.updateSAPComment);
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

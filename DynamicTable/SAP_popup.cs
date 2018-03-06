@@ -40,6 +40,7 @@ namespace DynamicTable
             button3.Font = new Font(button3.Font, FontStyle.Regular);
 
             condition =  "Serviceable";
+            updateSAPComment(this, EventArgs.Empty);
             
         }
 
@@ -50,6 +51,7 @@ namespace DynamicTable
             button2.Font = new Font(button2.Font, FontStyle.Regular);
 
             condition = "Salvageable";
+            updateSAPComment(this, EventArgs.Empty);
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -59,7 +61,8 @@ namespace DynamicTable
             button3.Font = new Font(button3.Font, FontStyle.Regular);
 
             condition = "Unsalvageable";
- 
+            updateSAPComment(this, EventArgs.Empty);
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -70,7 +73,7 @@ namespace DynamicTable
                 webCameraControl1.Visible = false;
             }
 
-            repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], condition, comboBox1.Text, textBox1.Text + comboBox2.Text , textBox2.Text);
+            repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], condition, comboBox1.Text, textBox1.Text + comboBox2.Text , textBox2.Text, SAP_Preview.Text);
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -102,6 +105,13 @@ namespace DynamicTable
             
         }
 
-        
+        private void updateSAPComment(object sender, EventArgs e)
+        {
+            SAP_Preview.Text = $@"{repairDataList2[rowIndex].headingNumber} {repairDataList2[rowIndex].headingName} 
+Part is: {condition}
+Damage: {comboBox1.Text}
+Amount: {textBox1.Text + comboBox2.Text}
+Further Comment: {textBox2.Text}";
+        }
     }
 }

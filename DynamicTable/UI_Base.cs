@@ -576,13 +576,13 @@ namespace DynamicTable
                     if (row.DefaultCellStyle.BackColor == Color.White)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","");
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","","");
                         PrintList(repairDataList);
                     }
                     else
                     {
                         row.DefaultCellStyle.BackColor = Color.White;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "");
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "", "");
                         PrintList(repairDataList);
                         // TODO: Add some sort of confirmation to deselect
                     }
@@ -1067,6 +1067,13 @@ namespace DynamicTable
         {
             WriteValues();
             tabControl1.SelectedTab = tabPage6;
+            string OverallSAPComment = "";
+
+            for (int i = 0; i < repairDataList.Count; i++)
+            {
+                if(repairDataList[i].SAPcomment != null) OverallSAPComment += repairDataList[i].SAPcomment;
+            }
+            textBox4.Text = OverallSAPComment;
         }
 
         private void button4_Click_1(object sender, EventArgs e)
