@@ -3325,6 +3325,7 @@ namespace DynamicTable
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBar1.Size = new System.Drawing.Size(45, 296);
             this.trackBar1.TabIndex = 17;
+            this.trackBar1.Visible = false;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // dataGridView1
@@ -3396,6 +3397,7 @@ namespace DynamicTable
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // shapeContainer4
             // 
