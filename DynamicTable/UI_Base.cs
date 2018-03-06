@@ -51,9 +51,10 @@ namespace DynamicTable
 
 
             //GenerateRepairData(); Moved to later when switching to table tab
-        }
 
-        
+            
+  
+        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -92,6 +93,7 @@ namespace DynamicTable
         {
             Environment.Exit(0);
         }
+
 
         private void Inspector_ID_Nxt_btn_Click(object sender, EventArgs e)
         {
@@ -743,7 +745,9 @@ namespace DynamicTable
 
 
                         GenerateImageListView(relatedFiguresArr);
-
+                        pictureBox1.Visible = true;
+                        trackBar1.Visible = true;
+                        trackBar1.Value = 0;
                         // Cast to image
                         string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
                         img = Image.FromFile(imagePath);
@@ -773,7 +777,9 @@ namespace DynamicTable
 
                         //Console.WriteLine("Image clicked");
 
-
+                        pictureBox1.Visible = true;
+                        trackBar1.Visible = true;
+                        trackBar1.Value = 0;
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
                         string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
@@ -961,6 +967,7 @@ namespace DynamicTable
             int selectedIndex = listView1.SelectedIndices[0];
             if (selectedIndex >= 0)
             {
+                trackBar1.Value = 0;
                 string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
                 img = Image.FromFile(imagePath);
                 // Load image data in memory stream

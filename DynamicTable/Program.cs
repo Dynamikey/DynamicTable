@@ -11,7 +11,6 @@ namespace DynamicTable
 
     static class Program
     {
-        static OpeningScreen openingScreen;
 
 
 
