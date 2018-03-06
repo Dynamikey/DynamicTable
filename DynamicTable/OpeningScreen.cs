@@ -7,15 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace DynamicTable
 {
     public partial class OpeningScreen : Form
     {
+        
+
         public OpeningScreen()
         {
             InitializeComponent();
+            this.Close();
         }
 
+        public void CloseForm()
+        {
+            this.Close();
+        }
     }
 }

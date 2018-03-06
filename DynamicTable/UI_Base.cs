@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -13,6 +12,10 @@ using System.IO;
 using System.Drawing.Imaging;
 using Excel = Microsoft.Office.Interop.Excel;
 using DynamicTable.Properties;
+using System.Diagnostics;
+using System.Threading;
+
+
 //using MySql.Data.MySqlClient;
 
 namespace DynamicTable
@@ -31,18 +34,26 @@ namespace DynamicTable
         string[] relatedFiguresArr;
         Size originalPictureBoxSize;
         Image img;
+
+        public static Excel.Application app;
+        public static Excel.Workbook wb;
+        public static Excel.Worksheet xlWorkSheet;
+        Excel.Range PartNameRange;
+
         public UI_Base()
         {
             InitializeComponent();
-            PW = Slide_Panel.Width;
-            Hiden = true;
-            Slide_Panel.Width = 0;
-            InitializeSubrowDataTable();
-            InitializeGeneralDataTable();
-            this.ActiveControl = textBox1;
-            updatetoolbartext();
+            showGIF();
+            ThreadStart myThreadStart = new ThreadStart(loadXL);
+            Thread myThread = new Thread(myThreadStart);
+            myThread.Start();
+            //loadXL();
+
+
             //GenerateRepairData(); Moved to later when switching to table tab
         }
+
+        
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -228,11 +239,8 @@ namespace DynamicTable
         }
 
 
-        static string path = "C:\\Users\\Fin\\Documents\\RR\\";
-        //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
-        //static string path = "Z:\\Downloads\\RR\\";
-        //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
-        XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1009-03.xml");
+
+        XmlTextReader reader = new XmlTextReader($"{Program.path}RN-EJ-412-1009-03.xml");
         //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
         public List<RepairData> repairDataList = new List<RepairData>();
         RepairData repairData = new RepairData();
@@ -241,7 +249,7 @@ namespace DynamicTable
 
         private void WriteValues()
         {
-            using (var writer = new CsvFileWriter($"{path}CSVoutput.csv"))
+            using (var writer = new CsvFileWriter($"{Program.path}CSVoutput.csv"))
             {
 
 
@@ -435,7 +443,6 @@ namespace DynamicTable
             //subrowDataTable.Columns.Add("Related Figures", typeof(string));
             //dataTable.Columns.Add("Completed", typeof(bool));
 
-
         }
 
         private void InitializeGeneralDataTable()
@@ -465,7 +472,7 @@ namespace DynamicTable
                     if (repairDataList[i].relatedFigures != null)
                     {
                         string[] relatedFiguresArrTemp = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
-                        string imagePathTemp = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArrTemp[0]}.png";
+                        string imagePathTemp = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArrTemp[0]}.png";
 
 
                         Image imageTemp = Image.FromFile(imagePathTemp);
@@ -478,7 +485,7 @@ namespace DynamicTable
 
                 }
             }
-            string imagePath = $"{path}figfolder\\default.png";
+            string imagePath = $"{Program.path}figfolder\\default.png";
             Image image = Image.FromFile(imagePath);
             Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
             Bitmap resizedImage = new Bitmap(image, newsize);
@@ -500,6 +507,7 @@ namespace DynamicTable
                 Image image = Resources.pencil;
                 dataGridViewButtonColumn.Image = image;
                 dataGridView.Columns.Add(dataGridViewButtonColumn);
+                
             }
             count = 1;
             //}
@@ -581,10 +589,19 @@ namespace DynamicTable
             senderGrid.EndEdit();
         }
 
-        public int globalSubRowNumber = -1;
+
+    public int globalSubRowNumber = -1;
         private void GenerateSubrowDataGridView(int row)
         {
             subrowDataTable.Clear();
+            /*
+            Console.WriteLine("Column count = " + dataGridView1.ColumnCount);
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+                {
+                dataGridView1.Columns.RemoveAt(i);
+                }
+            Console.WriteLine("Column count = " + dataGridView1.ColumnCount);*/
+
             globalSubRowNumber = row + 1;
             for (int i = row + 1; i < repairDataList.Count; i++)
             {
@@ -608,7 +625,25 @@ namespace DynamicTable
             //dataGridView1.AutoResizeColumn(0);
             // Resize "Completed" column
             //dataGridView1.AutoResizeColumn(5);
+            
             CreateButtonsColumn(ref dataGridView1);
+
+            
+
+            DataGridViewColumn column0 = dataGridView1.Columns[0];
+            column0.Width = 80;
+            DataGridViewColumn column1 = dataGridView1.Columns[1];
+            column1.Width = 140;
+            DataGridViewColumn column2 = dataGridView1.Columns[2];
+            column2.Width = 200;
+            DataGridViewColumn column3 = dataGridView1.Columns[3];
+            column3.Width = 142;
+            DataGridViewColumn column4 = dataGridView1.Columns[4];
+            column4.Width = 300;
+            DataGridViewColumn column5 = dataGridView1.Columns[5];
+            column5.Width = 50;
+            Console.WriteLine("Column count = " + dataGridView1.ColumnCount);
+
 
             for (int i = globalSubRowNumber; i < repairDataList.Count; i++)
             {
@@ -647,18 +682,7 @@ namespace DynamicTable
                 }
             }
 
-            DataGridViewColumn column = dataGridView1.Columns[0];
-            column.Width = 80;
-            column = dataGridView1.Columns[1];
-            column.Width = 140;
-            column = dataGridView1.Columns[2];
-            column.Width = 200;
-            column = dataGridView1.Columns[3];
-            column.Width = 142;
-            column = dataGridView1.Columns[4];
-            column.Width = 300;
-            column = dataGridView1.Columns[5];
-            column.Width = 50;
+            
 
         }
 
@@ -672,7 +696,7 @@ namespace DynamicTable
             {
                 if (arr[j] != "")
                 {
-                    string tempImagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{arr[j]}.png";
+                    string tempImagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{arr[j]}.png";
                     Image tempImage = Image.FromFile(tempImagePath);
 
                     Console.WriteLine(tempImagePath);
@@ -717,7 +741,7 @@ namespace DynamicTable
                         GenerateImageListView(relatedFiguresArr);
 
                         // Cast to image
-                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
+                        string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
                         img = Image.FromFile(imagePath);
                         // Load image data in memory stream
                         //MemoryStream ms = new MemoryStream();
@@ -748,7 +772,7 @@ namespace DynamicTable
 
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
-                        string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
+                        string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
                         img = Image.FromFile(imagePath);
                         // Load image data in memory stream
                         //MemoryStream ms = new MemoryStream();
@@ -870,15 +894,14 @@ namespace DynamicTable
 
         private void repairNoteSearch()
         {
-            Excel.Application app = new Excel.Application();
-            Excel.Workbook wb = app.Workbooks.Open($"{path}EJ200 Repair Note Finder.xlsx");
-            //Excel.Workbook wb = app.Workbooks.Open($"C:\\Users\\Fin\\Documents\\RR\\{EngineID} Repair Note Finder.xlsx");
-            Excel.Worksheet xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
+            //Excel.Application app = new Excel.Application();
+            //Excel.Workbook wb = app.Workbooks.Open($"{path}EJ200 Repair Note Finder.xlsx");
+           // Excel.Worksheet xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
 
             Excel.Range currentFind = null;
             Excel.Range firstFind = null;
 
-            Excel.Range PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
+           // Excel.Range PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
 
             currentFind = PartNameRange.Find(PartNumber, Type.Missing, Excel.XlFindLookIn.xlValues, Excel.XlLookAt.xlPart, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlNext, false, Type.Missing, Type.Missing);
 
@@ -910,7 +933,7 @@ namespace DynamicTable
                 currentFind = PartNameRange.FindNext(currentFind);
             }
 
-            wb.Close(false);
+           wb.Close(false);
         }
 
         private void launchSAPcomment(int rowIndex)
@@ -934,7 +957,7 @@ namespace DynamicTable
             int selectedIndex = listView1.SelectedIndices[0];
             if (selectedIndex >= 0)
             {
-                string imagePath = $"{path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
+                string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
                 img = Image.FromFile(imagePath);
                 // Load image data in memory stream
                 //MemoryStream ms = new MemoryStream();
@@ -957,9 +980,60 @@ namespace DynamicTable
             e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
 
-        private void UI_Base_Load(object sender, EventArgs e)
+        System.Windows.Forms.Timer sw = new System.Windows.Forms.Timer(); // sw cotructor
+
+        public void UI_Base_Load(object sender, EventArgs e)
         {
             var asForm = System.Windows.Automation.AutomationElement.FromHandle(this.Handle);
+            PW = Slide_Panel.Width;
+            Hiden = true;
+            Slide_Panel.Width = 0;
+            
+
+
+            InitializeSubrowDataTable();
+            InitializeGeneralDataTable();
+
+            updatetoolbartext();
+            
+            
+            sw.Interval = 3000;
+            sw.Start(); // starts the stopwatch
+            sw.Tick += new EventHandler(exitOpeningScreen);
+            
+           
+
+        }
+
+        void exitOpeningScreen(Object myObject, EventArgs myEventArgs)
+        {
+            sw.Stop();
+            tabControl1.SelectedTab = tabPage1;
+            this.ActiveControl = textBox1;
+            
+        }
+
+        void loadXL()
+        {
+            app = new Excel.Application();
+            wb = app.Workbooks.Open($"{Program.path}EJ200 Repair Note Finder.xlsx");
+            xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
+            PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
+        }
+
+        void showGIF()
+        {
+            // 
+            // pictureBox5
+            // 
+            PictureBox pictureBox5 = new PictureBox();
+            pictureBox5.Image = Resources.ajax_loader;
+            pictureBox5.Location = new System.Drawing.Point(850, 647);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new System.Drawing.Size(220, 220);
+            pictureBox5.TabIndex = 2;
+            pictureBox5.TabStop = false;
+            tabPage0.Controls.Add(pictureBox5);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -1009,5 +1083,12 @@ namespace DynamicTable
         {
             tabControl1.SelectedTab = tabPage5;
         }
+
+        private void dataGridView1_ColumnWidthChanged_1(object sender, DataGridViewColumnEventArgs e)
+        {
+            //Console.WriteLine("Width has been changed to" + dataGridView1.Columns[0].Width + dataGridView1.Columns[1].Width + dataGridView1.Columns[2].Width + dataGridView1.Columns[3].Width + dataGridView1.Columns[4].Width + dataGridView1.Columns[5].Width);
+        }
+
+           
     }
 }
