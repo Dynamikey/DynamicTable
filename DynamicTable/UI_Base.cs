@@ -51,9 +51,10 @@ namespace DynamicTable
 
 
             //GenerateRepairData(); Moved to later when switching to table tab
-        }
 
-        
+            
+  
+        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -92,6 +93,7 @@ namespace DynamicTable
         {
             Environment.Exit(0);
         }
+
 
         private void Inspector_ID_Nxt_btn_Click(object sender, EventArgs e)
         {
