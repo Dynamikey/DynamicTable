@@ -325,7 +325,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Location = new System.Drawing.Point(96, 680);
+            this.Location = new System.Drawing.Point(96, 0);
             this.Name = "SAP_popup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SAP_Comment_pop";

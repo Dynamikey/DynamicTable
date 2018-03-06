@@ -58,6 +58,7 @@ namespace DynamicTable
         private void button1_Click_1(object sender, EventArgs e)
         {
             timer1.Start();
+            label2.Text = "<";
         }
 
         private void timer1_Tick_1(object sender, EventArgs e)
@@ -75,11 +76,13 @@ namespace DynamicTable
             }
             else
             {
+                label2.Text = ">";
                 Slide_Panel.Width = Slide_Panel.Width - 40;
                 if (Slide_Panel.Width <= 0)
                 {
                     timer1.Stop();
                     Hiden = true;
+                    
                     this.Refresh();
                 }
 
@@ -495,21 +498,21 @@ namespace DynamicTable
             //dataGridView.AutoResizeRows();
         }
 
-        int count = 0;
+        //int count = 0;
         private void CreateButtonsColumn(ref DataGridView dataGridView)
         {
 
             //if (!dataGridView.Columns.Contains("Comments"))
             //{
-            if (count == 0)
-            {
+            //if (count == 0)
+            //{
                 DataGridViewImageColumn dataGridViewButtonColumn = new DataGridViewImageColumn();
                 Image image = Resources.pencil;
                 dataGridViewButtonColumn.Image = image;
                 dataGridView.Columns.Add(dataGridViewButtonColumn);
                 
-            }
-            count = 1;
+            //}
+            //count = 1;
             //}
         }
 
@@ -594,13 +597,11 @@ namespace DynamicTable
         private void GenerateSubrowDataGridView(int row)
         {
             subrowDataTable.Clear();
-            /*
-            Console.WriteLine("Column count = " + dataGridView1.ColumnCount);
-            for (int i = 0; i < dataGridView1.ColumnCount; i++)
-                {
-                dataGridView1.Columns.RemoveAt(i);
-                }
-            Console.WriteLine("Column count = " + dataGridView1.ColumnCount);*/
+            //Console.WriteLine("Column count at start of GenerateSubrowDataGridView = " + dataGridView1.ColumnCount);
+
+            dataGridView1.DataSource = null; //Gets rid of datasource
+            dataGridView1.Columns.Clear(); //Gets rid of button
+            dataGridView1.Refresh(); 
 
             globalSubRowNumber = row + 1;
             for (int i = row + 1; i < repairDataList.Count; i++)
@@ -609,16 +610,19 @@ namespace DynamicTable
                 {
                     DataRow newDataRow = subrowDataTable.NewRow();
                     newDataRow[0] = repairDataList[i].headingNumber;
+                    
                     newDataRow[1] = repairDataList[i].headingName;
                     newDataRow[2] = repairDataList[i].useableLimits;
                     newDataRow[3] = repairDataList[i].repairableLimits;
                     newDataRow[4] = repairDataList[i].correctiveAction;
                     subrowDataTable.Rows.Add(newDataRow);
+                    
                 }
                 else break;
 
             }
             dataGridView1.DataSource = subrowDataTable;
+            //Console.WriteLine(subrowDataTable.Rows[0].ToString());
             //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
 
             // Resize "Number" column
@@ -628,7 +632,7 @@ namespace DynamicTable
             
             CreateButtonsColumn(ref dataGridView1);
 
-            
+            Console.WriteLine("Column count before resize = " + dataGridView1.ColumnCount);
 
             DataGridViewColumn column0 = dataGridView1.Columns[0];
             column0.Width = 80;
@@ -642,7 +646,7 @@ namespace DynamicTable
             column4.Width = 300;
             DataGridViewColumn column5 = dataGridView1.Columns[5];
             column5.Width = 50;
-            Console.WriteLine("Column count = " + dataGridView1.ColumnCount);
+            Console.WriteLine("Column count at end of GenerateSubrowDataGridView = " + dataGridView1.ColumnCount);
 
 
             for (int i = globalSubRowNumber; i < repairDataList.Count; i++)

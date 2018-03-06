@@ -15,10 +15,10 @@ namespace DynamicTable
 
         
 
-        public const string path = "C:\\Users\\Fin\\Documents\\RR\\";
+        //public const string path = "C:\\Users\\Fin\\Documents\\RR\\";
         //static string path = "C:\\Users\\METIIB\\Documents\\RR\\";
         //static string path = "Z:\\Downloads\\RR\\";
-        //static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
+        static string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
 
         /// <summary>
         /// The main entry point for the application.
