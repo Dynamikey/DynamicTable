@@ -747,6 +747,9 @@ namespace DynamicTable
                         GenerateImageListView(relatedFiguresArr);
                         pictureBox1.Visible = true;
                         trackBar1.Visible = true;
+                        plusButton.Visible = true;
+                        minusButton.Visible = true;
+                        currentScale = 0;
                         trackBar1.Value = 0;
                         // Cast to image
                         string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
@@ -779,6 +782,9 @@ namespace DynamicTable
 
                         pictureBox1.Visible = true;
                         trackBar1.Visible = true;
+                        plusButton.Visible = true;
+                        minusButton.Visible = true;
+                        currentScale = 0;
                         trackBar1.Value = 0;
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
@@ -968,6 +974,7 @@ namespace DynamicTable
             if (selectedIndex >= 0)
             {
                 trackBar1.Value = 0;
+                currentScale = 1.0;
                 string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
                 img = Image.FromFile(imagePath);
                 // Load image data in memory stream
@@ -1107,6 +1114,49 @@ namespace DynamicTable
             //Console.WriteLine("Width has been changed to" + dataGridView1.Columns[0].Width + dataGridView1.Columns[1].Width + dataGridView1.Columns[2].Width + dataGridView1.Columns[3].Width + dataGridView1.Columns[4].Width + dataGridView1.Columns[5].Width);
         }
 
-           
+        const double maxScale = 2.0; // The scale factor when it is at its max
+        const double minScale = 1.0;
+        const double scaleIncrement = 0.2;
+        double currentScale = 1.0;
+
+        private void plusButton_Click(object sender, EventArgs e)
+        {
+            currentScale += scaleIncrement;
+            if (currentScale > maxScale)
+                currentScale = 2.0;
+            //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
+            //double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
+            //Console.WriteLine(trackBar1.Value);
+            //Console.WriteLine(scale);
+            Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)currentScale),
+                          Convert.ToInt32((double)originalPictureBoxSize.Height * (double)currentScale));
+
+            //pictureBox1.Size = newSize;
+            //pictureBox1.Image.Size = newSize;
+            Console.WriteLine(newSize.Width);
+            Console.WriteLine(newSize.Height);
+            Bitmap bmp = new Bitmap(img, newSize);
+            pictureBox1.Image = bmp;
+        }
+
+        private void minusButton_Click(object sender, EventArgs e)
+        {
+            currentScale -= scaleIncrement;
+            if (currentScale < minScale)
+                currentScale = 1.0;
+            //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
+            //double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
+            //Console.WriteLine(trackBar1.Value);
+            //Console.WriteLine(scale);
+            Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)currentScale),
+                          Convert.ToInt32((double)originalPictureBoxSize.Height * (double)currentScale));
+
+            //pictureBox1.Size = newSize;
+            //pictureBox1.Image.Size = newSize;
+            Console.WriteLine(newSize.Width);
+            Console.WriteLine(newSize.Height);
+            Bitmap bmp = new Bitmap(img, newSize);
+            pictureBox1.Image = bmp;
+        }
     }
 }
