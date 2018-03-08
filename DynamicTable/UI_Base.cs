@@ -34,6 +34,10 @@ namespace DynamicTable
         string[] relatedFiguresArr;
         Size originalPictureBoxSize;
         Image img;
+        const double maxScale = 2.0; // The scale factor when it is at its max
+        const double minScale = 1.0;
+        const double scaleIncrement = 0.2;
+        double currentScale = 1.0;
 
         public static Excel.Application app;
         public static Excel.Workbook wb;
@@ -51,10 +55,9 @@ namespace DynamicTable
 
 
             //GenerateRepairData(); Moved to later when switching to table tab
-
-            
-  
         }
+
+
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -749,7 +752,7 @@ namespace DynamicTable
                         trackBar1.Visible = true;
                         plusButton.Visible = true;
                         minusButton.Visible = true;
-                        currentScale = 0;
+                        currentScale = 1.0;
                         trackBar1.Value = 0;
                         // Cast to image
                         string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
@@ -785,7 +788,7 @@ namespace DynamicTable
                         trackBar1.Visible = true;
                         plusButton.Visible = true;
                         minusButton.Visible = true;
-                        currentScale = 0;
+                        currentScale = 1.0;
                         trackBar1.Value = 0;
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
@@ -902,11 +905,6 @@ namespace DynamicTable
                 button5.Visible = false;
                 dataGridView1.Visible = false;
                 generalDataGridView.Visible = true;
-            }
-            else
-            {
-                //dataGridView1.Visible = true;
-                //generalDataGridView.Visible = false;
             }
         }
 
@@ -1094,7 +1092,9 @@ namespace DynamicTable
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage1;
+            tabControl1.SelectedTab = tabPage2;
+
+
         }
 
         private void updatetoolbartext()
@@ -1129,7 +1129,7 @@ namespace DynamicTable
             //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
             //double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
             //Console.WriteLine(trackBar1.Value);
-            //Console.WriteLine(scale);
+            Console.WriteLine(currentScale);
             Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)currentScale),
                           Convert.ToInt32((double)originalPictureBoxSize.Height * (double)currentScale));
 
@@ -1159,6 +1159,31 @@ namespace DynamicTable
             Console.WriteLine(newSize.Height);
             Bitmap bmp = new Bitmap(img, newSize);
             pictureBox1.Image = bmp;
+        }
+
+
+        private void textBox3_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button3_Click(this, EventArgs.Empty);
+            }
+        }
+
+        private void textBox2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button2_Click(this, EventArgs.Empty);
+            }
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Inspector_ID_Nxt_btn_Click(this, EventArgs.Empty);
+            }
         }
     }
 }
