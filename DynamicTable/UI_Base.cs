@@ -265,12 +265,15 @@ namespace DynamicTable
 
                 columns.Add(RepairNoteNumber);
                 writer.WriteRow(columns);
+                columns.Clear();
                 columns.Add(Inspector_ID_Label.Text);
                 columns.Add(InspectorID);
                 writer.WriteRow(columns);
+                columns.Clear();
                 columns.Add(Engine_nb_lbl.Text);
                 columns.Add(EngineID);
                 writer.WriteRow(columns);
+                columns.Clear();
                 columns.Add(label1.Text);
                 columns.Add(PartNumber);
                 writer.WriteRow(columns);
@@ -623,12 +626,15 @@ namespace DynamicTable
                     if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","", $@"{repairDataList[e.RowIndex + globalSubRowNumber].headingNumber} {repairDataList[e.RowIndex + globalSubRowNumber].headingName} 
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","", "", "");
+
+                        //If we want servicable in SAP comment:
+                        /*$@"{repairDataList[e.RowIndex + globalSubRowNumber].headingNumber} {repairDataList[e.RowIndex + globalSubRowNumber].headingName} 
 Part is: Serviceable
 Damage: N/A
 Amount: N/A
-Further Comment: N/A", "");
-                        
+Further Comment: N/A"*/
+
                         PrintList(repairDataList);
                     }
                     else if(row.DefaultCellStyle.BackColor != Color.White && row.DefaultCellStyle.BackColor != Color.Empty)
@@ -949,7 +955,7 @@ Further Comment: N/A", "");
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
                     }*/
 
-                    if (containsUnsalvageable)
+                        if (containsUnsalvageable)
                     {
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.PaleVioletRed;
                     }
@@ -1137,9 +1143,11 @@ Further Comment: N/A", "");
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage2;
-
-
+            showGIF();
+            ThreadStart myThreadStart = new ThreadStart(loadXL);
+            Thread myThread = new Thread(myThreadStart);
+            myThread.Start();
+            
         }
 
         private void updatetoolbartext()
