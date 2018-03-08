@@ -1140,6 +1140,19 @@ namespace DynamicTable
             generalDataGridView.DataSource = generalDataTable;
 
 
+        
+            CreateGraphicsColumn(ref generalDataGridView);
+
+            DataGridViewColumn column = generalDataGridView.Columns[0];
+            column.Width = 60;
+            column = generalDataGridView.Columns[1];
+            column.Width = 542;
+            column = generalDataGridView.Columns[2];
+            column.Width = 110;
+            column = generalDataGridView.Columns[3];
+            column.Width = 200;
+        }
+
         private void plusButton_Click(object sender, EventArgs e)
         {
             currentScale += scaleIncrement;
@@ -1203,17 +1216,6 @@ namespace DynamicTable
             {
                 Inspector_ID_Nxt_btn_Click(this, EventArgs.Empty);
             }
-        }
-            CreateGraphicsColumn(ref generalDataGridView);
-
-            DataGridViewColumn column = generalDataGridView.Columns[0];
-            column.Width = 60;
-            column = generalDataGridView.Columns[1];
-            column.Width = 542;
-            column = generalDataGridView.Columns[2];
-            column.Width = 110;
-            column = generalDataGridView.Columns[3];
-            column.Width = 200;
         }
     }
 }
