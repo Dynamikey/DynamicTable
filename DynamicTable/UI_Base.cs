@@ -1116,10 +1116,6 @@ namespace DynamicTable
             //Console.WriteLine("Width has been changed to" + dataGridView1.Columns[0].Width + dataGridView1.Columns[1].Width + dataGridView1.Columns[2].Width + dataGridView1.Columns[3].Width + dataGridView1.Columns[4].Width + dataGridView1.Columns[5].Width);
         }
 
-        const double maxScale = 2.0; // The scale factor when it is at its max
-        const double minScale = 1.0;
-        const double scaleIncrement = 0.2;
-        double currentScale = 1.0;
 
         private void plusButton_Click(object sender, EventArgs e)
         {
