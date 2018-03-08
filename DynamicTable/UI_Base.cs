@@ -321,96 +321,115 @@ namespace DynamicTable
 
         private void ParseXML()
         {
-            while (reader.Read())
+            int preSentenceCount = 0;
+            //reader.Read();
+            while (!reader.EOF)
             {
                 if (reader.NodeType == XmlNodeType.Element) // If the node is an element.
                 {
-                    if(reader.Name == "step1")
+                    Console.WriteLine(reader.Name);
+
+                    if (reader.Name == "step1" && preSentenceCount < 3)
                     {
+
+
                         //preSentenceChecks += Regex.Replace(reader.ReadInnerXml(), "<[^>]+>", " ") + "\r" + "\r";
-                        string preSentenceChecks1 = reader.ReadInnerXml().Replace("<para>", " <para>");
+                        string preSentenceChecks1 = reader.ReadInnerXml();//.Replace("<para>", " <para>");
+                        Console.WriteLine(preSentenceChecks1);
                         preSentenceChecks1 = preSentenceChecks1.Replace("General", "General \r");
                         preSentenceChecks1 = preSentenceChecks1.Replace("Cleaning Procedures", "Cleaning Procedures \r");
                         preSentenceChecks1 = preSentenceChecks1.Replace("Examination Procedure", "Examination Procedure \r");
 
                         preSentenceChecks += Regex.Replace(preSentenceChecks1, "<[^>]+>", "") + "\r" + "\r";
-                    }
-
-                    if (reader.Name == "featureDamage") //If XML line is a feature damage heading (e.g. "4.4 Heatshield")
+                        preSentenceCount += 1;
+                    } else
                     {
-                        repairData.headingNumber = reader.GetAttribute("id").Substring(1); //Extract heading number "4.4" (minus the first character which is a F)
-                                                                                           //Console.WriteLine($"Found a heading number: {data.headingNumber}");
+                        reader.Read();
                     }
+                } else
+                {
+                    reader.Read();
+                }
+            }
 
-                    if (reader.Name == "feature")
+            // temporary solution to start reading at beginning
+            reader = new XmlTextReader($"{Program.path}RN-EJ-412-1009-03.xml");
+            while (reader.Read())
+            {
+                if (reader.Name == "featureDamage") //If XML line is a feature damage heading (e.g. "4.4 Heatshield")
+                {
+                    repairData.headingNumber = reader.GetAttribute("id").Substring(1); //Extract heading number "4.4" (minus the first character which is a F)
+                                                                                       //Console.WriteLine($"Found a heading number: {data.headingNumber}");
+                }
+
+                if (reader.Name == "feature")
+                {
+                    string featureText = Regex.Replace(reader.ReadInnerXml(), "\"([A-Z0-9a-z]+)\"", ">$1 <"); // Extracts figure attributes from useable limits
+
+                    featureText = Regex.Replace(featureText, "figure", "Fig.");
+                    featureText = Regex.Replace(featureText, "F0+[^1-9]", string.Empty);
+                    featureText = Regex.Replace(featureText, "bold", string.Empty);
+
+                    featureText = Regex.Replace(featureText, "<[^>]+>", string.Empty);
+                    featureText = Regex.Replace(featureText, "<>", string.Empty);
+                    featureText = featureText.Replace("&amp;", "&");
+                    featureText = featureText.Replace("(.", " (");
+                    featureText = Regex.Replace(featureText, @"\s+", " ");
+                    if (char.IsWhiteSpace(featureText, 0))
                     {
-                        string featureText = Regex.Replace(reader.ReadInnerXml(), "\"([A-Z0-9a-z]+)\"", ">$1 <"); // Extracts figure attributes from useable limits
+                        featureText = featureText.Remove(0, 1);
+                    }
+                    repairData.headingName = featureText;
 
-                        featureText = Regex.Replace(featureText, "figure", "Fig.");
-                        featureText = Regex.Replace(featureText, "F0+[^1-9]", string.Empty);
-                        featureText = Regex.Replace(featureText, "bold", string.Empty);
+                    AddToList(repairDataList, ref repairData);
+                }
 
-                        featureText = Regex.Replace(featureText, "<[^>]+>", string.Empty);
-                        featureText = Regex.Replace(featureText, "<>", string.Empty);
-                        featureText = featureText.Replace("&amp;", "&");
-                        featureText = featureText.Replace("(.", " (");
-                        featureText = Regex.Replace(featureText, @"\s+", " ");
-                        if (char.IsWhiteSpace(featureText, 0))
+                if (reader.Name == "damageAndActions")
+                {
+                    do
+                    {
+                        repairData.headingNumber = reader.GetAttribute("id").Substring(1); //Extract sub-heading number "4.4.1" (minus the first character which is a D)
+
+                        XmlReader fdsub = reader.ReadSubtree();
+
+                        while (fdsub.Read())
                         {
-                            featureText = featureText.Remove(0, 1);
-                        }
-                        repairData.headingName = featureText;
-
-                        AddToList(repairDataList, ref repairData);
-                    }
-
-                    if (reader.Name == "damageAndActions")
-                    {
-                        do
-                        {
-                            repairData.headingNumber = reader.GetAttribute("id").Substring(1); //Extract sub-heading number "4.4.1" (minus the first character which is a D)
-
-                            XmlReader fdsub = reader.ReadSubtree();
-
-                            while (fdsub.Read())
+                            if (fdsub.Name == "damage")
                             {
-                                if (fdsub.Name == "damage")
+
+                                string damageHeading = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
+                                if (damageHeading.StartsWith(".")) //Bit of clean up code to move sub-sub-heading number (e.g. "4.2.3.1") from headingName to headingNumber
                                 {
-
-                                    string damageHeading = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
-                                    if (damageHeading.StartsWith(".")) //Bit of clean up code to move sub-sub-heading number (e.g. "4.2.3.1") from headingName to headingNumber
-                                    {
-                                        repairData.headingNumber += damageHeading.Substring(0, damageHeading.IndexOf(" "));
-                                        damageHeading = damageHeading.Remove(0, damageHeading.IndexOf(" ") + 1);
-                                    }
-
-                                    repairData.headingName = damageHeading;
+                                    repairData.headingNumber += damageHeading.Substring(0, damageHeading.IndexOf(" "));
+                                    damageHeading = damageHeading.Remove(0, damageHeading.IndexOf(" ") + 1);
                                 }
 
-                                if (fdsub.Name == "useableLimits")
-                                {
-                                    string useableLimitsText = Regex.Replace(fdsub.ReadInnerXml(), "\"([A-Z0-9a-z]+)\"", ">$1 <"); // Extracts figure attributes from useable limits
-                                    useableLimitsText = Regex.Replace(useableLimitsText, "figure", "Fig.");
-                                    useableLimitsText = Regex.Replace(useableLimitsText, "F0+[^1-9]", string.Empty);
-                                    repairData.useableLimits = Regex.Replace(useableLimitsText, "<[^>]+>", string.Empty);
-                                }
-
-                                if (fdsub.Name == "repairableLimits")
-                                {
-                                    repairData.repairableLimits = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
-                                }
-
-                                if (fdsub.Name == "correctiveAction")
-                                {
-                                    repairData.correctiveAction = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
-                                }
-
+                                repairData.headingName = damageHeading;
                             }
 
-                            AddToList(repairDataList, ref repairData);
+                            if (fdsub.Name == "useableLimits")
+                            {
+                                string useableLimitsText = Regex.Replace(fdsub.ReadInnerXml(), "\"([A-Z0-9a-z]+)\"", ">$1 <"); // Extracts figure attributes from useable limits
+                                useableLimitsText = Regex.Replace(useableLimitsText, "figure", "Fig.");
+                                useableLimitsText = Regex.Replace(useableLimitsText, "F0+[^1-9]", string.Empty);
+                                repairData.useableLimits = Regex.Replace(useableLimitsText, "<[^>]+>", string.Empty);
+                            }
 
-                        } while (reader.ReadToNextSibling("damageAndActions")); //Multiple sub-headings
-                    }
+                            if (fdsub.Name == "repairableLimits")
+                            {
+                                repairData.repairableLimits = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
+                            }
+
+                            if (fdsub.Name == "correctiveAction")
+                            {
+                                repairData.correctiveAction = Regex.Replace(fdsub.ReadInnerXml(), "<[^>]+>", string.Empty);
+                            }
+
+                        }
+
+                        AddToList(repairDataList, ref repairData);
+
+                    } while (reader.ReadToNextSibling("damageAndActions")); //Multiple sub-headings
                 }
             }
         }
