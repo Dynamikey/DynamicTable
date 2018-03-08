@@ -612,15 +612,15 @@ namespace DynamicTable
                     switch (repairDataList[e.RowIndex + globalSubRowNumber].conditionInput)
                     {
                         case "Serviceable":
-                            row.DefaultCellStyle.BackColor = Color.LightGreen;
+                            row.DefaultCellStyle.BackColor = Color.LimeGreen;
                             break;
 
                         case "Salvageable":
-                            row.DefaultCellStyle.BackColor = Color.Orange;
+                            row.DefaultCellStyle.BackColor = Color.Gold;
                             break;
 
                         case "Unsalvageable":
-                            row.DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                            row.DefaultCellStyle.BackColor = Color.Tomato;
                             break;
 
                         case "":
@@ -632,7 +632,7 @@ namespace DynamicTable
                 {
                     if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty)
                     {
-                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                        row.DefaultCellStyle.BackColor = Color.LimeGreen;
                         repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "", "", "", "", false);
                         repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], true);
 
@@ -740,20 +740,20 @@ Further Comment: N/A"*/
                 {
                     if (repairDataList[i].checkComplete)
                     {
-                        //dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
+                        //dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LimeGreen;
 
                         switch (repairDataList[i].conditionInput)
                         {
                             case "Serviceable":
-                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LightGreen;
+                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LimeGreen;
                                 break;
 
                             case "Salvageable":
-                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Orange;
+                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Gold;
                                 break;
 
                             case "Unsalvageable":
-                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Tomato;
                                 break;
 
                             case "":
@@ -918,16 +918,16 @@ Further Comment: N/A"*/
                             Console.WriteLine(i);
                             //Console.WriteLine(globalSubRowNumber);
                             //repairDataList[i].checkComplete = true
-                            if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.LightGreen)
+                            if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.LimeGreen)
                             {
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                             }
-                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Orange)
+                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Gold)
                             {
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                                 containsSalvageable = true;
                             }
-                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.PaleVioletRed)
+                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Tomato)
                             {
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                                 containsUnsalvageable = true;
@@ -958,7 +958,7 @@ Further Comment: N/A"*/
                     /*
                     if (isFullyComplete)
                     {
-                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.LightGreen;
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.LimeGreen;
                     }
                     else
                     {
@@ -967,15 +967,15 @@ Further Comment: N/A"*/
 
                         if (containsUnsalvageable)
                     {
-                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.Tomato;
                     }
                     else if (containsSalvageable)
                     {
-                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.Orange;
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.Gold;
                     }
                     else if (isFullyComplete)
                     {
-                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.LightGreen;
+                        generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.LimeGreen;
                     }
                     else
                     {
@@ -1156,8 +1156,9 @@ Further Comment: N/A"*/
 
             for (int i = 0; i < repairDataList.Count; i++)
             {
-                if(repairDataList[i].SAPcomment != "") OverallSAPComment += repairDataList[i].SAPcomment + System.Environment.NewLine + System.Environment.NewLine;
+                if(repairDataList[i].SAPcomment != null && repairDataList[i].SAPcomment != "") OverallSAPComment += repairDataList[i].SAPcomment + System.Environment.NewLine + System.Environment.NewLine;
             }
+
             OverallSAPComment += "Inspection checks satisfactory to " + RepairNoteNumber;
             textBox4.Text = OverallSAPComment;
         }
@@ -1173,7 +1174,9 @@ Further Comment: N/A"*/
             ThreadStart myThreadStart = new ThreadStart(loadXL);
             Thread myThread = new Thread(myThreadStart);
             myThread.Start();
-            
+            sw.Interval = 3000;
+            sw.Start(); // starts the stopwatch
+            sw.Tick += new EventHandler(exitOpeningScreen);
         }
 
         private void updatetoolbartext()
