@@ -641,7 +641,7 @@ namespace DynamicTable
                     if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","", "", "", false);
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "", "", "", "", false);
                         repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], true);
 
                         //If we want servicable in SAP comment:
@@ -1164,7 +1164,7 @@ Further Comment: N/A"*/
 
             for (int i = 0; i < repairDataList.Count; i++)
             {
-                if(repairDataList[i].SAPcomment != null) OverallSAPComment += repairDataList[i].SAPcomment + System.Environment.NewLine + System.Environment.NewLine;
+                if(repairDataList[i].SAPcomment != "") OverallSAPComment += repairDataList[i].SAPcomment + System.Environment.NewLine + System.Environment.NewLine;
             }
             OverallSAPComment += "Inspection checks satisfactory to " + RepairNoteNumber;
             textBox4.Text = OverallSAPComment;
