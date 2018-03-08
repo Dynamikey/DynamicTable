@@ -18,6 +18,8 @@ namespace DynamicTable
         //public const string path = "C:\\Users\\mr_mi\\OneDrive\\Documents\\RR\\";
         //public const string path = "C:\\Users\\RRCATablet\\Documents\\RR\\";
 
+        
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
