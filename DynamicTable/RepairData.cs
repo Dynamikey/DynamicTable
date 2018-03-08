@@ -21,6 +21,7 @@ namespace DynamicTable
         public string damageFurtherCommentsInput { get; set; }
         public string SAPcomment { get; set; }
         public string imagePath { get; set; }
+        public bool raiseRDR { get; set; }
 
         public RepairData(RepairData rd, bool b)
         {
@@ -37,8 +38,9 @@ namespace DynamicTable
             this.damageFurtherCommentsInput = rd.damageFurtherCommentsInput;
             this.SAPcomment = rd.SAPcomment;
             this.imagePath = rd.imagePath;
+            this.raiseRDR = rd.raiseRDR;
         }
-        public RepairData(RepairData rd, string condition, string damagetype, string measurement, string furthercomments, string SAPcomment, string imagepath)
+        public RepairData(RepairData rd, string condition, string damagetype, string measurement, string furthercomments, string SAPcomment, string imagepath, bool b2)
         {
             this.headingNumber = rd.headingNumber;
             this.headingName = rd.headingName;
@@ -53,6 +55,7 @@ namespace DynamicTable
             this.damageFurtherCommentsInput = furthercomments;
             this.SAPcomment = SAPcomment;
             this.imagePath = imagepath;
+            this.raiseRDR = b2;
         }
     }
 

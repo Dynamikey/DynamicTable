@@ -21,8 +21,9 @@ namespace DynamicTable
        // WebCameraControl webCameraControl1 = new WebCameraControl();
         List<WebCameraId> cameras;
         string condition = "";
+        bool raiseRDR;
         string imagePath;
-        public Bitmap image;
+        public Image image;
         string datetime;
 
         public SAP_popup(int rowIndexTemp, List<RepairData> list)
@@ -91,7 +92,8 @@ namespace DynamicTable
                 }
 
 
-                repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], condition, comboBox1.Text, textBox1.Text + comboBox2.Text, textBox2.Text, SAP_Preview.Text, imagePath);
+                repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], condition, comboBox1.Text, textBox1.Text + comboBox2.Text, textBox2.Text, SAP_Preview.Text, imagePath, raiseRDR);
+                repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], true);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -132,7 +134,8 @@ namespace DynamicTable
 Part is: {condition}
 Damage: {comboBox1.Text}
 Amount: {textBox1.Text + comboBox2.Text}
-Further Comment: {textBox2.Text}";
+Further Comment: {textBox2.Text}
+Raise RDR: {raiseRDR}";
         }
 
         private void ExitBtn_Click(object sender, EventArgs e)
@@ -142,7 +145,10 @@ Further Comment: {textBox2.Text}";
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            raiseRDR = !raiseRDR;
+            if(raiseRDR) button4.Font = new Font(button4.Font, FontStyle.Bold);
+            else button4.Font = new Font(button4.Font, FontStyle.Strikeout);
+            updateSAPComment(this, EventArgs.Empty);
         }
     }
 }
