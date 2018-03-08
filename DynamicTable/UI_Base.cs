@@ -156,6 +156,9 @@ namespace DynamicTable
                     button.Height = 60;
                     button.Width = 800;
                     button.Name = "Option" + i;
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.BackColor = SystemColors.Control;
+                    button.FlatAppearance.BorderSize = 0;
                     button.Text = repairNoteList[i].rn;
                     button.Click += button4_Click;//function
                     tableLayoutPanel1.Controls.Add(button, 3, i + 1);
@@ -321,19 +324,22 @@ namespace DynamicTable
 
         private void ParseXML()
         {
+            int step1count = 0;
             while (reader.Read())
             {
                 if (reader.NodeType == XmlNodeType.Element) // If the node is an element.
                 {
-                    if(reader.Name == "step1")
+                    if(reader.Name == "step1" && step1count <= 2)
                     {
                         //preSentenceChecks += Regex.Replace(reader.ReadInnerXml(), "<[^>]+>", " ") + "\r" + "\r";
-                        string preSentenceChecks1 = reader.ReadInnerXml().Replace("<para>", " <para>");
+                        string preSentenceChecks1 = reader.ReadInnerXml();
+                        Console.WriteLine(preSentenceChecks1);
                         preSentenceChecks1 = preSentenceChecks1.Replace("General", "General \r");
                         preSentenceChecks1 = preSentenceChecks1.Replace("Cleaning Procedures", "Cleaning Procedures \r");
                         preSentenceChecks1 = preSentenceChecks1.Replace("Examination Procedure", "Examination Procedure \r");
 
                         preSentenceChecks += Regex.Replace(preSentenceChecks1, "<[^>]+>", "") + "\r" + "\r";
+                        step1count += 1;
                     }
 
                     if (reader.Name == "featureDamage") //If XML line is a feature damage heading (e.g. "4.4 Heatshield")
