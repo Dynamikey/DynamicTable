@@ -68,6 +68,14 @@ namespace DynamicTable
             PartNumber = "";
             EngineID = "";
             updatetoolbartext();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            repairDataList = new List<RepairData>();
+            dataGridView1 = new DataGridView();
+            generalDataGridView = new DataGridView();
+            plusButton.Visible = false;
+            minusButton.Visible = false;
+            panel1.Visible = false;
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -1168,7 +1176,7 @@ Further Comment: N/A"*/
             isFinsFirstTime = false;
 
             // Reset variables after exporting to CSV
-
+            ResetApp();
 
             showGIF();
             ThreadStart myThreadStart = new ThreadStart(loadXL);
