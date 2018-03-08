@@ -47,6 +47,8 @@ namespace DynamicTable
 
         string datetime;
 
+        bool isFinsFirstTime = true;
+
         public UI_Base()
         {
             InitializeComponent();
@@ -60,7 +62,13 @@ namespace DynamicTable
             //GenerateRepairData(); Moved to later when switching to table tab
         }
 
-
+        public void ResetApp()
+        {
+            RepairNoteNumber = "";
+            PartNumber = "";
+            EngineID = "";
+            updatetoolbartext();
+        }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -119,8 +127,6 @@ namespace DynamicTable
                 updatetoolbartext();
             }
             else textBox1.Focus();
-
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -134,7 +140,6 @@ namespace DynamicTable
                 updatetoolbartext();
             }
             else textBox2.Focus();
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -225,14 +230,12 @@ namespace DynamicTable
 
         private void button4_Click(object sender, EventArgs e)
         {
-
             RepairNoteNumber = sender.ToString();
             RepairNoteNumber = RepairNoteNumber.Substring(RepairNoteNumber.IndexOf(":") + 2);
             GenerateRepairData();
             tabControl1.SelectedTab = tabPage7;
             PresentenceChecksBody.Text = preSentenceChecks;
             updatetoolbartext();
-
         }
 
 
@@ -1096,8 +1099,15 @@ Further Comment: N/A"*/
         void exitOpeningScreen(Object myObject, EventArgs myEventArgs)
         {
             sw.Stop();
-            tabControl1.SelectedTab = tabPage1;
-            this.ActiveControl = textBox1;
+            if (isFinsFirstTime)
+            {
+                tabControl1.SelectedTab = tabPage1;
+                this.ActiveControl = textBox1;
+            } else
+            {
+                tabControl1.SelectedTab = tabPage2;
+                this.ActiveControl = textBox2;
+            }
             
         }
 
@@ -1143,6 +1153,11 @@ Further Comment: N/A"*/
 
         private void button4_Click_1(object sender, EventArgs e)
         {
+            isFinsFirstTime = false;
+
+            // Reset variables after exporting to CSV
+
+
             showGIF();
             ThreadStart myThreadStart = new ThreadStart(loadXL);
             Thread myThread = new Thread(myThreadStart);
