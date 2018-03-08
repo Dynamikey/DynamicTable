@@ -342,10 +342,8 @@ namespace DynamicTable
 
                     if (reader.Name == "step1" && preSentenceCount < 3)
                     {
-
-
                         //preSentenceChecks += Regex.Replace(reader.ReadInnerXml(), "<[^>]+>", " ") + "\r" + "\r";
-                        string preSentenceChecks1 = reader.ReadInnerXml();//.Replace("<para>", " <para>");
+                        string preSentenceChecks1 = reader.ReadInnerXml().Replace("<para>", " <para>");
                         Console.WriteLine(preSentenceChecks1);
                         preSentenceChecks1 = preSentenceChecks1.Replace("General", "General \r");
                         preSentenceChecks1 = preSentenceChecks1.Replace("Cleaning Procedures", "Cleaning Procedures \r");
@@ -353,7 +351,10 @@ namespace DynamicTable
 
                         preSentenceChecks += Regex.Replace(preSentenceChecks1, "<[^>]+>", "") + "\r" + "\r";
                         preSentenceCount += 1;
-                    } else
+                    } else if (preSentenceCount == 3) {
+                        break;
+                    }
+                    else
                     {
                         reader.Read();
                     }
