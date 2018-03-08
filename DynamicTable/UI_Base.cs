@@ -761,6 +761,7 @@ namespace DynamicTable
                         pictureBox1.Image = new Bitmap(img);
                         originalPictureBoxSize = pictureBox1.Size;
                     }
+                    button5.Visible = true;
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
                 }
@@ -898,13 +899,14 @@ namespace DynamicTable
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
                     }
                 }
+                button5.Visible = false;
                 dataGridView1.Visible = false;
                 generalDataGridView.Visible = true;
             }
             else
             {
-                dataGridView1.Visible = true;
-                generalDataGridView.Visible = false;
+                //dataGridView1.Visible = true;
+                //generalDataGridView.Visible = false;
             }
         }
 
