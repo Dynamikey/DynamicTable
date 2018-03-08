@@ -45,6 +45,11 @@ namespace DynamicTable
         public static Excel.Worksheet xlWorkSheet;
         Excel.Range PartNameRange;
 
+        void ResetSession()
+        {
+
+        }
+
         public UI_Base()
         {
             InitializeComponent();
