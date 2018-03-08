@@ -753,11 +753,11 @@ namespace DynamicTable
 
                         GenerateImageListView(relatedFiguresArr);
                         pictureBox1.Visible = true;
-                        trackBar1.Visible = true;
+                       
                         plusButton.Visible = true;
                         minusButton.Visible = true;
                         currentScale = 1.0;
-                        trackBar1.Value = 0;
+                       
                         // Cast to image
                         string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
                         img = Image.FromFile(imagePath);
@@ -789,11 +789,11 @@ namespace DynamicTable
                         //Console.WriteLine("Image clicked");
 
                         pictureBox1.Visible = true;
-                        trackBar1.Visible = true;
+                        
                         plusButton.Visible = true;
                         minusButton.Visible = true;
                         currentScale = 1.0;
-                        trackBar1.Value = 0;
+                        
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
                         string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
@@ -977,7 +977,7 @@ namespace DynamicTable
             int selectedIndex = listView1.SelectedIndices[0];
             if (selectedIndex >= 0)
             {
-                trackBar1.Value = 0;
+              
                 currentScale = 1.0;
                 string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
                 img = Image.FromFile(imagePath);
@@ -1059,28 +1059,6 @@ namespace DynamicTable
             tabPage0.Controls.Add(pictureBox5);
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-
-                const double maxScale = 2.0; // The scale factor when the is at it's max
-
-                //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
-                double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
-                Console.WriteLine(trackBar1.Value);
-                Console.WriteLine(scale);
-                Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)scale),
-                              Convert.ToInt32((double)originalPictureBoxSize.Height * (double)scale));
-
-                //pictureBox1.Size = newSize;
-                //pictureBox1.Image.Size = newSize;
-                Console.WriteLine(newSize.Width);
-                Console.WriteLine(newSize.Height);
-                Bitmap bmp = new Bitmap(img, newSize);
-                pictureBox1.Image = bmp;
-            
-
-
-        }
 
         private void finishbutton_Click_1(object sender, EventArgs e)
         {
