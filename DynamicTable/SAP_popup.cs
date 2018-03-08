@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WebEye.Controls.WinForms.WebCameraControl;
 using System.Threading;
+using System.Drawing.Imaging;
 
 namespace DynamicTable
 {
@@ -19,7 +20,10 @@ namespace DynamicTable
         int rowIndex;
        // WebCameraControl webCameraControl1 = new WebCameraControl();
         List<WebCameraId> cameras;
-        string condition;
+        string condition = "";
+        string imagePath;
+        public Bitmap image;
+        string datetime;
 
         public SAP_popup(int rowIndexTemp, List<RepairData> list)
         {
@@ -67,20 +71,35 @@ namespace DynamicTable
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (webCameraControl1.IsCapturing)
+            if (condition != "")
             {
-                webCameraControl1.StopCapture();
-                webCameraControl1.Visible = false;
+                if (webCameraControl1.IsCapturing)
+                {
+                    webCameraControl1.StopCapture();
+                    webCameraControl1.Visible = false;
+                }
+
+                try
+                {
+                    datetime = $"{DateTime.Now.Day.ToString()}_{DateTime.Now.Month.ToString()}_{DateTime.Now.Year.ToString()}_{DateTime.Now.Hour.ToString()}_{DateTime.Now.Minute.ToString()}_{DateTime.Now.Second.ToString()}";
+                    imagePath = $"{Program.path}CameraPicsFolder\\{repairDataList2[rowIndex].headingNumber}_{condition}_{datetime}.jpeg";
+                    image.Save(imagePath, ImageFormat.Jpeg);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Can't save file");
+                }
+
+
+                repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], condition, comboBox1.Text, textBox1.Text + comboBox2.Text, textBox2.Text, SAP_Preview.Text, imagePath);
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], condition, comboBox1.Text, textBox1.Text + comboBox2.Text , textBox2.Text, SAP_Preview.Text);
-
-            this.DialogResult = DialogResult.OK;
-            this.Close();
             
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        void button6_Click(object sender, EventArgs e)
         {
 
             if (!webCameraControl1.IsCapturing)
@@ -95,8 +114,9 @@ namespace DynamicTable
             }
             else if (webCameraControl1.IsCapturing)
             {
-                Bitmap image = webCameraControl1.GetCurrentImage();
+                image = webCameraControl1.GetCurrentImage();
                 CameraPreview.Image = image;
+                
                 CameraPreview.BringToFront();
                 webCameraControl1.Visible = false;
                 webCameraControl1.StopCapture();
@@ -118,6 +138,11 @@ Further Comment: {textBox2.Text}";
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

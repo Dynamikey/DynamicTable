@@ -49,15 +49,20 @@
             this.button6 = new System.Windows.Forms.Button();
             this.webCameraControl1 = new WebEye.Controls.WinForms.WebCameraControl.WebCameraControl();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.ExitBtn = new System.Windows.Forms.Button();
             this.CameraPreview = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ExitBtn = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.rectangleShape5 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
+            this.rectangleShape7 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
             // 
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -130,6 +135,8 @@
             this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.rectangleShape7,
+            this.rectangleShape5,
             this.rectangleShape6,
             this.rectangleShape4,
             this.rectangleShape3,
@@ -155,9 +162,9 @@
             this.rectangleShape4.CornerRadius = 5;
             this.rectangleShape4.FillColor = System.Drawing.Color.MidnightBlue;
             this.rectangleShape4.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape4.Location = new System.Drawing.Point(1606, 49);
+            this.rectangleShape4.Location = new System.Drawing.Point(1606, 202);
             this.rectangleShape4.Name = "rectangleShape4";
-            this.rectangleShape4.Size = new System.Drawing.Size(204, 333);
+            this.rectangleShape4.Size = new System.Drawing.Size(204, 180);
             // 
             // rectangleShape3
             // 
@@ -196,9 +203,9 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(1610, 57);
+            this.button5.Location = new System.Drawing.Point(1610, 202);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(192, 320);
+            this.button5.Size = new System.Drawing.Size(192, 175);
             this.button5.TabIndex = 7;
             this.button5.Text = "Generate SAP Note";
             this.button5.UseVisualStyleBackColor = false;
@@ -277,6 +284,8 @@
             // comboBox2
             // 
             this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.ItemHeight = 30;
@@ -290,6 +299,22 @@
             this.comboBox2.Size = new System.Drawing.Size(124, 38);
             this.comboBox2.TabIndex = 17;
             this.comboBox2.TextChanged += new System.EventHandler(this.updateSAPComment);
+            // 
+            // ExitBtn
+            // 
+            this.ExitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ExitBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ExitBtn.FlatAppearance.BorderSize = 0;
+            this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExitBtn.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitBtn.Location = new System.Drawing.Point(1760, 0);
+            this.ExitBtn.Name = "ExitBtn";
+            this.ExitBtn.Size = new System.Drawing.Size(64, 48);
+            this.ExitBtn.TabIndex = 18;
+            this.ExitBtn.Text = "x";
+            this.ExitBtn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
             // CameraPreview
             // 
@@ -311,27 +336,46 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // ExitBtn
+            // button4
             // 
-            this.ExitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ExitBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.ExitBtn.FlatAppearance.BorderSize = 0;
-            this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExitBtn.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitBtn.Location = new System.Drawing.Point(1760, 0);
-            this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(64, 48);
-            this.ExitBtn.TabIndex = 18;
-            this.ExitBtn.Text = "x";
-            this.ExitBtn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.ExitBtn.UseVisualStyleBackColor = true;
-            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
+            this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Segoe UI Symbol", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(1614, 62);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(194, 111);
+            this.button4.TabIndex = 19;
+            this.button4.Text = "Raise RDR";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // rectangleShape5
+            // 
+            this.rectangleShape5.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape5.CornerRadius = 5;
+            this.rectangleShape5.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape5.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape5.Location = new System.Drawing.Point(804, 117);
+            this.rectangleShape5.Name = "rectangleShape5";
+            this.rectangleShape5.Size = new System.Drawing.Size(217, 166);
+            // 
+            // rectangleShape7
+            // 
+            this.rectangleShape7.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape7.CornerRadius = 5;
+            this.rectangleShape7.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape7.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape7.Location = new System.Drawing.Point(1609, 57);
+            this.rectangleShape7.Name = "rectangleShape7";
+            this.rectangleShape7.Size = new System.Drawing.Size(204, 118);
             // 
             // SAP_popup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1824, 400);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.CameraPreview);
@@ -388,5 +432,8 @@
         private WebEye.Controls.WinForms.WebCameraControl.WebCameraControl webCameraControl1;
         private System.Windows.Forms.ComboBox comboBox2;
         protected System.Windows.Forms.Button ExitBtn;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape7;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
+        private System.Windows.Forms.Button button4;
     }
 }

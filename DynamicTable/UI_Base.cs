@@ -45,10 +45,7 @@ namespace DynamicTable
         public static Excel.Worksheet xlWorkSheet;
         Excel.Range PartNameRange;
 
-        void ResetSession()
-        {
-
-        }
+        string datetime;
 
         public UI_Base()
         {
@@ -246,10 +243,12 @@ namespace DynamicTable
         RepairData repairData = new RepairData();
         DataTable subrowDataTable;
         DataTable generalDataTable;
+        
 
         private void WriteValues()
         {
-            using (var writer = new CsvFileWriter($"{Program.path}CSVoutput.csv"))
+            datetime = $"{DateTime.Now.Day.ToString()}_{DateTime.Now.Month.ToString()}_{DateTime.Now.Year.ToString()}_{DateTime.Now.Hour.ToString()}_{DateTime.Now.Minute.ToString()}_{DateTime.Now.Second.ToString()}";
+            using (var writer = new CsvFileWriter($"{Program.path}CSVFolder//{PartNumber}_{RepairNoteNumber}_{InspectorID}_{datetime}.csv"))
             {
 
 
@@ -265,12 +264,33 @@ namespace DynamicTable
                 Console.WriteLine(PartNumber);
 
                 columns.Add(RepairNoteNumber);
+                writer.WriteRow(columns);
+                columns.Clear();
                 columns.Add(Inspector_ID_Label.Text);
                 columns.Add(InspectorID);
+                writer.WriteRow(columns);
+                columns.Clear();
                 columns.Add(Engine_nb_lbl.Text);
                 columns.Add(EngineID);
+                writer.WriteRow(columns);
+                columns.Clear();
                 columns.Add(label1.Text);
                 columns.Add(PartNumber);
+                writer.WriteRow(columns);
+                columns.Clear();
+
+                columns.Add("Feature Number");
+                columns.Add("Feature Name");
+                columns.Add("Usable Limits");
+                columns.Add("Repairable Limits");
+                columns.Add("Corrective Action");
+                columns.Add("Associated Figures");
+                columns.Add("Condition");
+                columns.Add("Damage Type");
+                columns.Add("Damage Amount");
+                columns.Add("Further Comments");
+                columns.Add("Image Path");
+
                 writer.WriteRow(columns);
                 columns.Clear();
 
@@ -294,6 +314,8 @@ namespace DynamicTable
                     if (repairDataList[i].damageMeasurementInput != null) columns.Add(repairDataList[i].damageMeasurementInput);
                     else columns.Add(" ");
                     if (repairDataList[i].damageFurtherCommentsInput != null) columns.Add(repairDataList[i].damageFurtherCommentsInput);
+                    else columns.Add(" ");
+                    if (repairDataList[i].imagePath != null) columns.Add(repairDataList[i].imagePath);
                     else columns.Add(" ");
 
 
@@ -604,7 +626,15 @@ namespace DynamicTable
                     if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","","");
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","", "", "");
+
+                        //If we want servicable in SAP comment:
+                        /*$@"{repairDataList[e.RowIndex + globalSubRowNumber].headingNumber} {repairDataList[e.RowIndex + globalSubRowNumber].headingName} 
+Part is: Serviceable
+Damage: N/A
+Amount: N/A
+Further Comment: N/A"*/
+
                         PrintList(repairDataList);
                     }
                     else if(row.DefaultCellStyle.BackColor != Color.White && row.DefaultCellStyle.BackColor != Color.Empty)
@@ -612,7 +642,7 @@ namespace DynamicTable
                         if (launchUndoConfirmation())
                         {
                             row.DefaultCellStyle.BackColor = Color.White;
-                            repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "", "");
+                            repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "", "", "");
                             PrintList(repairDataList);
                         }
                             
@@ -925,7 +955,7 @@ namespace DynamicTable
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
                     }*/
 
-                    if (containsUnsalvageable)
+                        if (containsUnsalvageable)
                     {
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.PaleVioletRed;
                     }
@@ -1099,22 +1129,25 @@ namespace DynamicTable
 
         private void finishbutton_Click_1(object sender, EventArgs e)
         {
+            
             WriteValues();
             tabControl1.SelectedTab = tabPage6;
             string OverallSAPComment = "";
 
             for (int i = 0; i < repairDataList.Count; i++)
             {
-                if(repairDataList[i].SAPcomment != null) OverallSAPComment += repairDataList[i].SAPcomment + "\r";
+                if(repairDataList[i].SAPcomment != null) OverallSAPComment += repairDataList[i].SAPcomment + System.Environment.NewLine + System.Environment.NewLine;
             }
             textBox4.Text = OverallSAPComment;
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage2;
-
-
+            showGIF();
+            ThreadStart myThreadStart = new ThreadStart(loadXL);
+            Thread myThread = new Thread(myThreadStart);
+            myThread.Start();
+            
         }
 
         private void updatetoolbartext()
