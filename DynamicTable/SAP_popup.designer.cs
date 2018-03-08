@@ -54,7 +54,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.rectangleShape5 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.rectangleShape7 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -135,7 +134,6 @@
             this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
             this.shapeContainer1.Name = "shapeContainer1";
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.rectangleShape7,
             this.rectangleShape5,
             this.rectangleShape6,
             this.rectangleShape4,
@@ -264,7 +262,7 @@
             this.button6.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button6.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Segoe UI Symbol", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.Location = new System.Drawing.Point(1367, 19);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(206, 157);
@@ -307,9 +305,9 @@
             this.ExitBtn.FlatAppearance.BorderSize = 0;
             this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitBtn.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitBtn.Location = new System.Drawing.Point(1760, 0);
+            this.ExitBtn.Location = new System.Drawing.Point(1788, 0);
             this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(64, 48);
+            this.ExitBtn.Size = new System.Drawing.Size(36, 48);
             this.ExitBtn.TabIndex = 18;
             this.ExitBtn.Text = "x";
             this.ExitBtn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -341,10 +339,10 @@
             this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI Symbol", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(1614, 62);
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(1611, 19);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(194, 111);
+            this.button4.Size = new System.Drawing.Size(194, 155);
             this.button4.TabIndex = 19;
             this.button4.Text = "Raise RDR";
             this.button4.UseVisualStyleBackColor = false;
@@ -352,31 +350,23 @@
             // 
             // rectangleShape5
             // 
+            this.rectangleShape5.BackColor = System.Drawing.SystemColors.Control;
             this.rectangleShape5.BorderColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape5.CornerRadius = 5;
+            this.rectangleShape5.Cursor = System.Windows.Forms.Cursors.Default;
             this.rectangleShape5.FillColor = System.Drawing.SystemColors.ControlLight;
             this.rectangleShape5.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape5.Location = new System.Drawing.Point(804, 117);
-            this.rectangleShape5.Name = "rectangleShape5";
-            this.rectangleShape5.Size = new System.Drawing.Size(217, 166);
-            // 
-            // rectangleShape7
-            // 
-            this.rectangleShape7.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.rectangleShape7.CornerRadius = 5;
-            this.rectangleShape7.FillColor = System.Drawing.SystemColors.ControlLight;
-            this.rectangleShape7.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape7.Location = new System.Drawing.Point(1609, 57);
-            this.rectangleShape7.Name = "rectangleShape7";
-            this.rectangleShape7.Size = new System.Drawing.Size(204, 118);
+            this.rectangleShape5.Location = new System.Drawing.Point(1606, 12);
+            this.rectangleShape5.Name = "rectangleShape6";
+            this.rectangleShape5.Size = new System.Drawing.Size(204, 166);
             // 
             // SAP_popup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1824, 400);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.ExitBtn);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.CameraPreview);
             this.Controls.Add(this.pictureBox1);
@@ -432,8 +422,7 @@
         private WebEye.Controls.WinForms.WebCameraControl.WebCameraControl webCameraControl1;
         private System.Windows.Forms.ComboBox comboBox2;
         protected System.Windows.Forms.Button ExitBtn;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape7;
-        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
         private System.Windows.Forms.Button button4;
+        private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
     }
 }

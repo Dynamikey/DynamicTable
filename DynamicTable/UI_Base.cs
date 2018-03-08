@@ -72,6 +72,7 @@ namespace DynamicTable
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            //changePercentComplete();
             timer1.Start();
             label2.Text = "<";
         }
@@ -80,7 +81,7 @@ namespace DynamicTable
         {
             if (Hiden)
             {
-                Slide_Panel.Width = Slide_Panel.Width + 40;
+                Slide_Panel.Width = Slide_Panel.Width + 10;
                 if (Slide_Panel.Width >= PW)
                 {
                     timer1.Stop();
@@ -92,7 +93,7 @@ namespace DynamicTable
             else
             {
                 label2.Text = ">";
-                Slide_Panel.Width = Slide_Panel.Width - 40;
+                Slide_Panel.Width = Slide_Panel.Width - 10;
                 if (Slide_Panel.Width <= 0)
                 {
                     timer1.Stop();
@@ -292,6 +293,7 @@ namespace DynamicTable
                 columns.Add("Damage Type");
                 columns.Add("Damage Amount");
                 columns.Add("Further Comments");
+                columns.Add("Raise RDR");
                 columns.Add("Image Path");
 
                 writer.WriteRow(columns);
@@ -317,6 +319,8 @@ namespace DynamicTable
                     if (repairDataList[i].damageMeasurementInput != null) columns.Add(repairDataList[i].damageMeasurementInput);
                     else columns.Add(" ");
                     if (repairDataList[i].damageFurtherCommentsInput != null) columns.Add(repairDataList[i].damageFurtherCommentsInput);
+                    else columns.Add(" ");
+                    if (repairDataList[i].raiseRDR != null) columns.Add(repairDataList[i].raiseRDR.ToString());
                     else columns.Add(" ");
                     if (repairDataList[i].imagePath != null) columns.Add(repairDataList[i].imagePath);
                     else columns.Add(" ");
@@ -422,7 +426,7 @@ namespace DynamicTable
                         featureText = featureText.Remove(0, 1);
                     }
                     repairData.headingName = featureText;
-
+                    repairData.raiseRDR = false;
                     AddToList(repairDataList, ref repairData);
                 }
 
@@ -468,7 +472,7 @@ namespace DynamicTable
                             }
 
                         }
-
+                        repairData.raiseRDR = false;
                         AddToList(repairDataList, ref repairData);
 
                     } while (reader.ReadToNextSibling("damageAndActions")); //Multiple sub-headings
@@ -629,7 +633,8 @@ namespace DynamicTable
                     if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","", "", "");
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","", "", "", false);
+                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], true);
 
                         //If we want servicable in SAP comment:
                         /*$@"{repairDataList[e.RowIndex + globalSubRowNumber].headingNumber} {repairDataList[e.RowIndex + globalSubRowNumber].headingName} 
@@ -645,7 +650,8 @@ Further Comment: N/A"*/
                         if (launchUndoConfirmation())
                         {
                             row.DefaultCellStyle.BackColor = Color.White;
-                            repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "", "", "");
+                            repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "", "", "", false);
+                            repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], false);
                             PrintList(repairDataList);
                         }
                             
@@ -655,6 +661,7 @@ Further Comment: N/A"*/
                 }
 
             }
+            changePercentComplete();
             senderGrid.EndEdit();
         }
 
@@ -1144,10 +1151,14 @@ Further Comment: N/A"*/
             tabControl1.SelectedTab = tabPage6;
             string OverallSAPComment = "";
 
+            OverallSAPComment = DateTime.Now.ToString() + System.Environment.NewLine + System.Environment.NewLine;
+            OverallSAPComment += "Inspector ID: " + InspectorID + System.Environment.NewLine + System.Environment.NewLine;
+
             for (int i = 0; i < repairDataList.Count; i++)
             {
                 if(repairDataList[i].SAPcomment != null) OverallSAPComment += repairDataList[i].SAPcomment + System.Environment.NewLine + System.Environment.NewLine;
             }
+            OverallSAPComment += "Inspection checks satisfactory to " + RepairNoteNumber;
             textBox4.Text = OverallSAPComment;
         }
 
@@ -1280,5 +1291,30 @@ Further Comment: N/A"*/
                 Inspector_ID_Nxt_btn_Click(this, EventArgs.Empty);
             }
         }
+
+        private void changePercentComplete()
+        {
+            Console.WriteLine("Hello Everyone");
+            int NoOfComplete = 0;
+            for (int i = 0; i < repairDataList.Count; i++)
+            {
+                if (repairDataList[i].checkComplete == true)
+                {
+                    Console.WriteLine("check");
+                    NoOfComplete += 1;
+                }
+            }
+            Console.WriteLine(NoOfComplete);
+            if(repairDataList.Count > 0)
+            {
+                Console.WriteLine("HELLO MIAFHJKASLKD");
+                Console.WriteLine((float)NoOfComplete / (float)repairDataList.Count);
+                float percentCompletefloat =  (float) NoOfComplete * 100f / (float) repairDataList.Count;
+                int percentComplete = (int)percentCompletefloat;
+                label9.Text = percentComplete.ToString() + "%";
+            }
+
+        }
+
     }
 }
