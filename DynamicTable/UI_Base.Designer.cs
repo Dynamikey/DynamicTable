@@ -77,6 +77,8 @@ namespace DynamicTable
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.minusButton = new System.Windows.Forms.Button();
+            this.plusButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.finishbutton = new System.Windows.Forms.Button();
             this.generalDataGridView = new System.Windows.Forms.DataGridView();
@@ -197,7 +199,7 @@ namespace DynamicTable
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(48, 1);
             this.tabControl1.SelectedIndex = 7;
-            this.tabControl1.Size = new System.Drawing.Size(1924, 1113);
+            this.tabControl1.Size = new System.Drawing.Size(1704, 1103);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage0
@@ -207,7 +209,7 @@ namespace DynamicTable
             this.tabPage0.Controls.Add(this.pictureBox4);
             this.tabPage0.Location = new System.Drawing.Point(4, 24);
             this.tabPage0.Name = "tabPage0";
-            this.tabPage0.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage0.Size = new System.Drawing.Size(1696, 1075);
             this.tabPage0.TabIndex = 7;
             // 
             // label8
@@ -240,7 +242,7 @@ namespace DynamicTable
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage1.Size = new System.Drawing.Size(1696, 1075);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             // 
@@ -263,6 +265,7 @@ namespace DynamicTable
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(386, 43);
             this.textBox1.TabIndex = 1;
+            this.textBox1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox1_PreviewKeyDown);
             // 
             // Inspector_ID_Nxt_btn
             // 
@@ -287,7 +290,7 @@ namespace DynamicTable
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape2,
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer1.Size = new System.Drawing.Size(1690, 1069);
             this.shapeContainer1.TabIndex = 2;
             this.shapeContainer1.TabStop = false;
             // 
@@ -321,7 +324,7 @@ namespace DynamicTable
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage2.Size = new System.Drawing.Size(1696, 1075);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
@@ -359,6 +362,7 @@ namespace DynamicTable
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(386, 43);
             this.textBox2.TabIndex = 2;
+            this.textBox2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox2_PreviewKeyDown);
             // 
             // shapeContainer2
             // 
@@ -368,7 +372,7 @@ namespace DynamicTable
             this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape4,
             this.rectangleShape3});
-            this.shapeContainer2.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer2.Size = new System.Drawing.Size(1690, 1069);
             this.shapeContainer2.TabIndex = 0;
             this.shapeContainer2.TabStop = false;
             // 
@@ -402,7 +406,7 @@ namespace DynamicTable
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage3.Size = new System.Drawing.Size(1696, 1075);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             // 
@@ -3079,6 +3083,7 @@ namespace DynamicTable
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(386, 43);
             this.textBox3.TabIndex = 7;
+            this.textBox3.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox3_PreviewKeyDown);
             // 
             // button3
             // 
@@ -3101,7 +3106,7 @@ namespace DynamicTable
             this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.label1.Location = new System.Drawing.Point(462, 194);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 45);
+            this.label1.Size = new System.Drawing.Size(208, 45);
             this.label1.TabIndex = 5;
             this.label1.Text = "Part Number:";
             // 
@@ -3113,7 +3118,7 @@ namespace DynamicTable
             this.shapeContainer3.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape6,
             this.rectangleShape5});
-            this.shapeContainer3.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer3.Size = new System.Drawing.Size(1690, 1069);
             this.shapeContainer3.TabIndex = 8;
             this.shapeContainer3.TabStop = false;
             // 
@@ -3144,7 +3149,7 @@ namespace DynamicTable
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage4.Size = new System.Drawing.Size(1696, 1075);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             // 
@@ -3227,6 +3232,8 @@ namespace DynamicTable
             // tabPage5
             // 
             this.tabPage5.BackColor = System.Drawing.Color.White;
+            this.tabPage5.Controls.Add(this.minusButton);
+            this.tabPage5.Controls.Add(this.plusButton);
             this.tabPage5.Controls.Add(this.listView1);
             this.tabPage5.Controls.Add(this.finishbutton);
             this.tabPage5.Controls.Add(this.generalDataGridView);
@@ -3239,9 +3246,31 @@ namespace DynamicTable
             this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage5.Size = new System.Drawing.Size(1696, 1075);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "tabPage5";
+            // 
+            // minusButton
+            // 
+            this.minusButton.Location = new System.Drawing.Point(969, 842);
+            this.minusButton.Name = "minusButton";
+            this.minusButton.Size = new System.Drawing.Size(52, 52);
+            this.minusButton.TabIndex = 21;
+            this.minusButton.Text = "-";
+            this.minusButton.UseVisualStyleBackColor = true;
+            this.minusButton.Visible = false;
+            this.minusButton.Click += new System.EventHandler(this.minusButton_Click);
+            // 
+            // plusButton
+            // 
+            this.plusButton.Location = new System.Drawing.Point(969, 784);
+            this.plusButton.Name = "plusButton";
+            this.plusButton.Size = new System.Drawing.Size(52, 52);
+            this.plusButton.TabIndex = 20;
+            this.plusButton.Text = "+";
+            this.plusButton.UseVisualStyleBackColor = true;
+            this.plusButton.Visible = false;
+            this.plusButton.Click += new System.EventHandler(this.plusButton_Click);
             // 
             // listView1
             // 
@@ -3323,6 +3352,7 @@ namespace DynamicTable
             this.button5.Size = new System.Drawing.Size(68, 45);
             this.button5.TabIndex = 12;
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // trackBar1
@@ -3414,7 +3444,7 @@ namespace DynamicTable
             this.shapeContainer4.Name = "shapeContainer4";
             this.shapeContainer4.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape7});
-            this.shapeContainer4.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer4.Size = new System.Drawing.Size(1690, 1069);
             this.shapeContainer4.TabIndex = 19;
             this.shapeContainer4.TabStop = false;
             // 
@@ -3424,9 +3454,9 @@ namespace DynamicTable
             this.rectangleShape7.CornerRadius = 5;
             this.rectangleShape7.FillColor = System.Drawing.SystemColors.Control;
             this.rectangleShape7.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape7.Location = new System.Drawing.Point(1638, 871);
+            this.rectangleShape7.Location = new System.Drawing.Point(1638, 974);
             this.rectangleShape7.Name = "rectangleShape7";
-            this.rectangleShape7.Size = new System.Drawing.Size(200, 174);
+            this.rectangleShape7.Size = new System.Drawing.Size(200, 71);
             // 
             // tabPage6
             // 
@@ -3439,7 +3469,7 @@ namespace DynamicTable
             this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1916, 1085);
+            this.tabPage6.Size = new System.Drawing.Size(1696, 1075);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "tabPage6";
             // 
@@ -3485,7 +3515,7 @@ namespace DynamicTable
             this.Label3.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label3.Location = new System.Drawing.Point(150, 76);
             this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(257, 37);
+            this.Label3.Size = new System.Drawing.Size(256, 37);
             this.Label3.TabIndex = 0;
             this.Label3.Text = "Finalise SAP Report?";
             // 
@@ -3496,7 +3526,7 @@ namespace DynamicTable
             this.shapeContainer5.Name = "shapeContainer5";
             this.shapeContainer5.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape8});
-            this.shapeContainer5.Size = new System.Drawing.Size(1910, 1079);
+            this.shapeContainer5.Size = new System.Drawing.Size(1690, 1069);
             this.shapeContainer5.TabIndex = 4;
             this.shapeContainer5.TabStop = false;
             // 
@@ -3622,7 +3652,7 @@ namespace DynamicTable
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.ClientSize = new System.Drawing.Size(1700, 1070);
             this.Controls.Add(this.Slide_Panel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox3);
@@ -3733,6 +3763,8 @@ namespace DynamicTable
         private Button button8;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer6;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape9;
+        private Button minusButton;
+        private Button plusButton;
     }
 }
 

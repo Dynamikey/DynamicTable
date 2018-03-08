@@ -35,6 +35,10 @@ namespace DynamicTable
         string[] relatedFiguresArr;
         Size originalPictureBoxSize;
         Image img;
+        const double maxScale = 2.0; // The scale factor when it is at its max
+        const double minScale = 1.0;
+        const double scaleIncrement = 0.2;
+        double currentScale = 1.0;
 
         public static Excel.Application app;
         public static Excel.Workbook wb;
@@ -52,10 +56,9 @@ namespace DynamicTable
             
 
             //GenerateRepairData(); Moved to later when switching to table tab
-
-            
-  
         }
+
+
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -751,6 +754,9 @@ namespace DynamicTable
                         GenerateImageListView(relatedFiguresArr);
                         pictureBox1.Visible = true;
                         trackBar1.Visible = true;
+                        plusButton.Visible = true;
+                        minusButton.Visible = true;
+                        currentScale = 1.0;
                         trackBar1.Value = 0;
                         // Cast to image
                         string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
@@ -762,6 +768,7 @@ namespace DynamicTable
                         pictureBox1.Image = new Bitmap(img);
                         originalPictureBoxSize = pictureBox1.Size;
                     }
+                    button5.Visible = true;
                     dataGridView1.Visible = true;
                     generalDataGridView.Visible = false;
                 }
@@ -783,6 +790,9 @@ namespace DynamicTable
 
                         pictureBox1.Visible = true;
                         trackBar1.Visible = true;
+                        plusButton.Visible = true;
+                        minusButton.Visible = true;
+                        currentScale = 1.0;
                         trackBar1.Value = 0;
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
@@ -896,13 +906,9 @@ namespace DynamicTable
                         generalDataGridView.Rows[rowCount].DefaultCellStyle.BackColor = Color.White;
                     }
                 }
+                button5.Visible = false;
                 dataGridView1.Visible = false;
                 generalDataGridView.Visible = true;
-            }
-            else
-            {
-                dataGridView1.Visible = true;
-                generalDataGridView.Visible = false;
             }
         }
 
@@ -972,6 +978,7 @@ namespace DynamicTable
             if (selectedIndex >= 0)
             {
                 trackBar1.Value = 0;
+                currentScale = 1.0;
                 string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
                 img = Image.FromFile(imagePath);
                 // Load image data in memory stream
@@ -1090,7 +1097,9 @@ namespace DynamicTable
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage1;
+            tabControl1.SelectedTab = tabPage2;
+
+
         }
 
         private void updatetoolbartext()
@@ -1130,6 +1139,71 @@ namespace DynamicTable
             }
             generalDataGridView.DataSource = generalDataTable;
 
+
+        private void plusButton_Click(object sender, EventArgs e)
+        {
+            currentScale += scaleIncrement;
+            if (currentScale > maxScale)
+                currentScale = 2.0;
+            //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
+            //double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
+            //Console.WriteLine(trackBar1.Value);
+            Console.WriteLine(currentScale);
+            Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)currentScale),
+                          Convert.ToInt32((double)originalPictureBoxSize.Height * (double)currentScale));
+
+            //pictureBox1.Size = newSize;
+            //pictureBox1.Image.Size = newSize;
+            Console.WriteLine(newSize.Width);
+            Console.WriteLine(newSize.Height);
+            Bitmap bmp = new Bitmap(img, newSize);
+            pictureBox1.Image = bmp;
+        }
+
+        private void minusButton_Click(object sender, EventArgs e)
+        {
+            currentScale -= scaleIncrement;
+            if (currentScale < minScale)
+                currentScale = 1.0;
+            //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
+            //double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
+            //Console.WriteLine(trackBar1.Value);
+            //Console.WriteLine(scale);
+            Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)currentScale),
+                          Convert.ToInt32((double)originalPictureBoxSize.Height * (double)currentScale));
+
+            //pictureBox1.Size = newSize;
+            //pictureBox1.Image.Size = newSize;
+            Console.WriteLine(newSize.Width);
+            Console.WriteLine(newSize.Height);
+            Bitmap bmp = new Bitmap(img, newSize);
+            pictureBox1.Image = bmp;
+        }
+
+
+        private void textBox3_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button3_Click(this, EventArgs.Empty);
+            }
+        }
+
+        private void textBox2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button2_Click(this, EventArgs.Empty);
+            }
+        }
+
+        private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Inspector_ID_Nxt_btn_Click(this, EventArgs.Empty);
+            }
+        }
             CreateGraphicsColumn(ref generalDataGridView);
 
             DataGridViewColumn column = generalDataGridView.Columns[0];
