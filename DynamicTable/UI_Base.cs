@@ -29,6 +29,7 @@ namespace DynamicTable
         String EngineID = "";
         String PartNumber = "";
         String RepairNoteNumber = "";
+        string preSentenceChecks = "";
         List<RepairNoteInformation> repairNoteList = new List<RepairNoteInformation>();
         RepairNoteInformation repairNoteInformation = new RepairNoteInformation();
         string[] relatedFiguresArr;
@@ -48,7 +49,7 @@ namespace DynamicTable
             Thread myThread = new Thread(myThreadStart);
             myThread.Start();
             //loadXL();
-
+            
 
             //GenerateRepairData(); Moved to later when switching to table tab
 
@@ -208,38 +209,13 @@ namespace DynamicTable
 
         private void button4_Click(object sender, EventArgs e)
         {
-            RepairNoteNumber =  sender.ToString();
+
+            RepairNoteNumber = sender.ToString();
             RepairNoteNumber = RepairNoteNumber.Substring(RepairNoteNumber.IndexOf(":") + 2);
             GenerateRepairData();
-            tabControl1.SelectedTab = tabPage5;
+            tabControl1.SelectedTab = tabPage7;
+            PresentenceChecksBody.Text = preSentenceChecks;
             updatetoolbartext();
-
-            // *******
-
-            for (int i = 0; i < repairDataList.Count; i++)
-            {
-                if (isSubRow(repairDataList[i].headingNumber) == false)
-                {
-                    DataRow newDataRow = generalDataTable.NewRow();
-                    newDataRow[0] = repairDataList[i].headingNumber;
-                    newDataRow[1] = repairDataList[i].headingName;
-                    newDataRow[2] = repairDataList[i].relatedFigures;
-                    generalDataTable.Rows.Add(newDataRow);
-                }
-
-            }
-            generalDataGridView.DataSource = generalDataTable;
-                        
-            CreateGraphicsColumn(ref generalDataGridView);
-
-            DataGridViewColumn column = generalDataGridView.Columns[0];
-            column.Width = 60;
-            column = generalDataGridView.Columns[1];
-            column.Width = 542;
-            column = generalDataGridView.Columns[2];
-            column.Width = 110;
-            column = generalDataGridView.Columns[3];
-            column.Width = 200;
 
         }
 
@@ -346,6 +322,17 @@ namespace DynamicTable
             {
                 if (reader.NodeType == XmlNodeType.Element) // If the node is an element.
                 {
+                    if(reader.Name == "step1")
+                    {
+                        //preSentenceChecks += Regex.Replace(reader.ReadInnerXml(), "<[^>]+>", " ") + "\r" + "\r";
+                        string preSentenceChecks1 = reader.ReadInnerXml().Replace("<para>", " <para>");
+                        preSentenceChecks1 = preSentenceChecks1.Replace("General", "General \r");
+                        preSentenceChecks1 = preSentenceChecks1.Replace("Cleaning Procedures", "Cleaning Procedures \r");
+                        preSentenceChecks1 = preSentenceChecks1.Replace("Examination Procedure", "Examination Procedure \r");
+
+                        preSentenceChecks += Regex.Replace(preSentenceChecks1, "<[^>]+>", "") + "\r" + "\r";
+                    }
+
                     if (reader.Name == "featureDamage") //If XML line is a feature damage heading (e.g. "4.4 Heatshield")
                     {
                         repairData.headingNumber = reader.GetAttribute("id").Substring(1); //Extract heading number "4.4" (minus the first character which is a F)
@@ -575,27 +562,44 @@ namespace DynamicTable
                 }
                 else if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
                 {
-                    if (row.DefaultCellStyle.BackColor == Color.White)
+                    if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty)
                     {
                         row.DefaultCellStyle.BackColor = Color.LightGreen;
                         repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "","","");
                         PrintList(repairDataList);
                     }
-                    else
-                    {
-                        row.DefaultCellStyle.BackColor = Color.White;
-                        repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "", "");
-                        PrintList(repairDataList);
+                    else if(row.DefaultCellStyle.BackColor != Color.White && row.DefaultCellStyle.BackColor != Color.Empty)
+                        {
+                        if (launchUndoConfirmation())
+                        {
+                            row.DefaultCellStyle.BackColor = Color.White;
+                            repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "", "", "", "", "");
+                            PrintList(repairDataList);
+                        }
+                            
+                        }
                         // TODO: Add some sort of confirmation to deselect
-                    }
+                    
                 }
 
             }
             senderGrid.EndEdit();
         }
 
+        private bool launchUndoConfirmation()
+        {
+            using (Undo undoConfirmation = new Undo())
+            {
+                var result = undoConfirmation.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    return true;
+                }
+                else return false;
+            }
+        }
 
-    public int globalSubRowNumber = -1;
+        public int globalSubRowNumber = -1;
         private void GenerateSubrowDataGridView(int row)
         {
             subrowDataTable.Clear();
@@ -1037,6 +1041,7 @@ namespace DynamicTable
             // 
             // pictureBox5
             // 
+            tabControl1.SelectedTab = tabPage0;
             PictureBox pictureBox5 = new PictureBox();
             pictureBox5.Image = Resources.ajax_loader;
             pictureBox5.Location = new System.Drawing.Point(850, 647);
@@ -1078,7 +1083,7 @@ namespace DynamicTable
 
             for (int i = 0; i < repairDataList.Count; i++)
             {
-                if(repairDataList[i].SAPcomment != null) OverallSAPComment += repairDataList[i].SAPcomment;
+                if(repairDataList[i].SAPcomment != null) OverallSAPComment += repairDataList[i].SAPcomment + "\r";
             }
             textBox4.Text = OverallSAPComment;
         }
@@ -1107,6 +1112,34 @@ namespace DynamicTable
             //Console.WriteLine("Width has been changed to" + dataGridView1.Columns[0].Width + dataGridView1.Columns[1].Width + dataGridView1.Columns[2].Width + dataGridView1.Columns[3].Width + dataGridView1.Columns[4].Width + dataGridView1.Columns[5].Width);
         }
 
-           
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage5;
+
+            for (int i = 0; i < repairDataList.Count; i++)
+            {
+                if (isSubRow(repairDataList[i].headingNumber) == false)
+                {
+                    DataRow newDataRow = generalDataTable.NewRow();
+                    newDataRow[0] = repairDataList[i].headingNumber;
+                    newDataRow[1] = repairDataList[i].headingName;
+                    newDataRow[2] = repairDataList[i].relatedFigures;
+                    generalDataTable.Rows.Add(newDataRow);
+                }
+
+            }
+            generalDataGridView.DataSource = generalDataTable;
+
+            CreateGraphicsColumn(ref generalDataGridView);
+
+            DataGridViewColumn column = generalDataGridView.Columns[0];
+            column.Width = 60;
+            column = generalDataGridView.Columns[1];
+            column.Width = 542;
+            column = generalDataGridView.Columns[2];
+            column.Width = 110;
+            column = generalDataGridView.Columns[3];
+            column.Width = 200;
+        }
     }
 }

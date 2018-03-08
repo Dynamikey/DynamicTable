@@ -51,6 +51,7 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.CameraPreview = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ExitBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -154,9 +155,9 @@
             this.rectangleShape4.CornerRadius = 5;
             this.rectangleShape4.FillColor = System.Drawing.Color.MidnightBlue;
             this.rectangleShape4.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape4.Location = new System.Drawing.Point(1606, 12);
+            this.rectangleShape4.Location = new System.Drawing.Point(1606, 49);
             this.rectangleShape4.Name = "rectangleShape4";
-            this.rectangleShape4.Size = new System.Drawing.Size(204, 370);
+            this.rectangleShape4.Size = new System.Drawing.Size(204, 333);
             // 
             // rectangleShape3
             // 
@@ -195,9 +196,9 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(1610, 19);
+            this.button5.Location = new System.Drawing.Point(1610, 57);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(192, 358);
+            this.button5.Size = new System.Drawing.Size(192, 320);
             this.button5.TabIndex = 7;
             this.button5.Text = "Generate SAP Note";
             this.button5.UseVisualStyleBackColor = false;
@@ -275,13 +276,16 @@
             // 
             // comboBox2
             // 
+            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.comboBox2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.ItemHeight = 30;
             this.comboBox2.Items.AddRange(new object[] {
             "µm",
             "mm",
             "cm"});
             this.comboBox2.Location = new System.Drawing.Point(240, 153);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(0);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(124, 38);
             this.comboBox2.TabIndex = 17;
@@ -307,11 +311,28 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
+            // ExitBtn
+            // 
+            this.ExitBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ExitBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ExitBtn.FlatAppearance.BorderSize = 0;
+            this.ExitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExitBtn.Font = new System.Drawing.Font("Segoe UI Symbol", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitBtn.Location = new System.Drawing.Point(1760, 0);
+            this.ExitBtn.Name = "ExitBtn";
+            this.ExitBtn.Size = new System.Drawing.Size(64, 48);
+            this.ExitBtn.TabIndex = 18;
+            this.ExitBtn.Text = "x";
+            this.ExitBtn.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
+            // 
             // SAP_popup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1824, 400);
+            this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.CameraPreview);
             this.Controls.Add(this.pictureBox1);
@@ -366,5 +387,6 @@
         private System.Windows.Forms.PictureBox CameraPreview;
         private WebEye.Controls.WinForms.WebCameraControl.WebCameraControl webCameraControl1;
         private System.Windows.Forms.ComboBox comboBox2;
+        protected System.Windows.Forms.Button ExitBtn;
     }
 }

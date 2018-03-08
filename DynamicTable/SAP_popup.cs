@@ -107,11 +107,17 @@ namespace DynamicTable
 
         private void updateSAPComment(object sender, EventArgs e)
         {
+
             SAP_Preview.Text = $@"{repairDataList2[rowIndex].headingNumber} {repairDataList2[rowIndex].headingName} 
 Part is: {condition}
 Damage: {comboBox1.Text}
 Amount: {textBox1.Text + comboBox2.Text}
 Further Comment: {textBox2.Text}";
+        }
+
+        private void ExitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

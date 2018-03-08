@@ -22,7 +22,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>28</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -103,6 +103,12 @@
     <Compile Include="UI_Base.Designer.cs">
       <DependentUpon>UI_Base.cs</DependentUpon>
     </Compile>
+    <Compile Include="Undo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Undo.Designer.cs">
+      <DependentUpon>Undo.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="OpeningScreen.resx">
       <DependentUpon>OpeningScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI_Base.resx">
       <DependentUpon>UI_Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Undo.resx">
+      <DependentUpon>Undo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
