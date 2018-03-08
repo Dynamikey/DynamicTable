@@ -53,7 +53,7 @@ namespace DynamicTable
             Thread myThread = new Thread(myThreadStart);
             myThread.Start();
             //loadXL();
-            
+           
 
             //GenerateRepairData(); Moved to later when switching to table tab
         }
@@ -95,7 +95,15 @@ namespace DynamicTable
         }
         private void ExitBtn_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            try
+            {
+                wb.Close(false);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Excel file is already closed");
+            }
+            Environment.Exit(0);          
         }
 
 
@@ -156,6 +164,9 @@ namespace DynamicTable
                     button.Height = 60;
                     button.Width = 800;
                     button.Name = "Option" + i;
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.BackColor = SystemColors.Control;
+                    button.FlatAppearance.BorderSize = 0;
                     button.Text = repairNoteList[i].rn;
                     button.Click += button4_Click;//function
                     tableLayoutPanel1.Controls.Add(button, 3, i + 1);
@@ -972,7 +983,7 @@ namespace DynamicTable
                 currentFind = PartNameRange.FindNext(currentFind);
             }
 
-           wb.Close(false);
+            wb.Close(false);
         }
 
         private void launchSAPcomment(int rowIndex)
@@ -1060,6 +1071,7 @@ namespace DynamicTable
             wb = app.Workbooks.Open($"{Program.path}EJ200 Repair Note Finder.xlsx");
             xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
             PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
+
         }
 
         void showGIF()
