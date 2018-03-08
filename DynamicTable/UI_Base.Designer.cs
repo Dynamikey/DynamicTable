@@ -199,7 +199,7 @@ namespace DynamicTable
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(48, 1);
             this.tabControl1.SelectedIndex = 7;
-            this.tabControl1.Size = new System.Drawing.Size(1924, 1113);
+            this.tabControl1.Size = new System.Drawing.Size(1704, 1103);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage0
@@ -242,7 +242,7 @@ namespace DynamicTable
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1696, 1075);
+            this.tabPage1.Size = new System.Drawing.Size(1916, 1085);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             // 
@@ -290,7 +290,7 @@ namespace DynamicTable
             this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape2,
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1690, 1069);
+            this.shapeContainer1.Size = new System.Drawing.Size(1910, 1079);
             this.shapeContainer1.TabIndex = 2;
             this.shapeContainer1.TabStop = false;
             // 
@@ -324,7 +324,7 @@ namespace DynamicTable
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1696, 1075);
+            this.tabPage2.Size = new System.Drawing.Size(1916, 1085);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             // 
@@ -372,7 +372,7 @@ namespace DynamicTable
             this.shapeContainer2.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
             this.rectangleShape4,
             this.rectangleShape3});
-            this.shapeContainer2.Size = new System.Drawing.Size(1690, 1069);
+            this.shapeContainer2.Size = new System.Drawing.Size(1910, 1079);
             this.shapeContainer2.TabIndex = 0;
             this.shapeContainer2.TabStop = false;
             // 
@@ -3106,7 +3106,7 @@ namespace DynamicTable
             this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.label1.Location = new System.Drawing.Point(462, 194);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 45);
+            this.label1.Size = new System.Drawing.Size(208, 45);
             this.label1.TabIndex = 5;
             this.label1.Text = "Part Number:";
             // 
@@ -3149,7 +3149,7 @@ namespace DynamicTable
             this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1696, 1075);
+            this.tabPage4.Size = new System.Drawing.Size(1916, 1085);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             // 
@@ -3512,7 +3512,7 @@ namespace DynamicTable
             this.Label3.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label3.Location = new System.Drawing.Point(150, 76);
             this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(257, 37);
+            this.Label3.Size = new System.Drawing.Size(256, 37);
             this.Label3.TabIndex = 0;
             this.Label3.Text = "Finalise SAP Report?";
             // 
@@ -3574,7 +3574,7 @@ namespace DynamicTable
             this.PresentenceChecksBody.Location = new System.Drawing.Point(102, 150);
             this.PresentenceChecksBody.MaximumSize = new System.Drawing.Size(1716, 800);
             this.PresentenceChecksBody.Name = "PresentenceChecksBody";
-            this.PresentenceChecksBody.Size = new System.Drawing.Size(52, 30);
+            this.PresentenceChecksBody.Size = new System.Drawing.Size(50, 30);
             this.PresentenceChecksBody.TabIndex = 1;
             this.PresentenceChecksBody.Text = "Text";
             // 
@@ -3654,7 +3654,7 @@ namespace DynamicTable
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.ClientSize = new System.Drawing.Size(1700, 1070);
             this.Controls.Add(this.Slide_Panel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox3);
