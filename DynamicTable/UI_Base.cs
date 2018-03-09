@@ -68,12 +68,37 @@ namespace DynamicTable
             PartNumber = "";
             EngineID = "";
             updatetoolbartext();
-            tableLayoutPanel1.Controls.Clear();
-            tableLayoutPanel1.RowCount = 0;
+            //tableLayoutPanel1.Controls.Clear();
+            //tableLayoutPanel1.RowCount = 0;
+
+            tableLayoutPanel1.SuspendLayout();
+
+            while (tableLayoutPanel1.RowCount > 1)
+            {
+                int row = tableLayoutPanel1.RowCount - 1;
+                for (int i = 0; i < tableLayoutPanel1.ColumnCount; i++)
+                {
+                    Control c = tableLayoutPanel1.GetControlFromPosition(i, row);
+                    tableLayoutPanel1.Controls.Remove(c);
+                    c.Dispose();
+                }
+
+                tableLayoutPanel1.RowStyles.RemoveAt(row);
+                tableLayoutPanel1.RowCount--;
+            }
+
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+
             //tableLayoutPanel1 = new TableLayoutPanel();
             repairDataList = new List<RepairData>();
             //dataGridView1 = new DataGridView();
             //generalDataGridView = new DataGridView();
+
+            generalDataGridView.Visible = true;
+            dataGridView1.Visible = false;
+            button5.Visible = false;
+
             plusButton.Visible = false;
             minusButton.Visible = false;
             panel1.Visible = false;
