@@ -90,6 +90,10 @@ namespace DynamicTable
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
 
+            repairNoteList = new List<RepairNoteInformation>();
+
+
+
             //tableLayoutPanel1 = new TableLayoutPanel();
             repairDataList = new List<RepairData>();
             //dataGridView1 = new DataGridView();
@@ -98,11 +102,15 @@ namespace DynamicTable
             generalDataGridView.Visible = true;
             dataGridView1.Visible = false;
             button5.Visible = false;
+            listView1.Items.Clear();
 
             plusButton.Visible = false;
             minusButton.Visible = false;
             panel1.Visible = false;
 
+            //generalDataGridView
+            generalDataTable = new DataTable();
+            subrowDataTable = new DataTable();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
