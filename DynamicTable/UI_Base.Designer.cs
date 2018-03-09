@@ -114,7 +114,6 @@ namespace DynamicTable
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.Slide_Panel.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -3775,15 +3774,6 @@ namespace DynamicTable
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
-            // 
-            // label9
-            // 
-            this.label9.Font = new System.Drawing.Font("Segoe UI Light", 80F);
-            this.label9.Location = new System.Drawing.Point(6, 181);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(377, 151);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "0%";
             // 
             // label10
             // 

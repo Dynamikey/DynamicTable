@@ -68,10 +68,12 @@ namespace DynamicTable
             PartNumber = "";
             EngineID = "";
             updatetoolbartext();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel1.Controls.Clear();
+            tableLayoutPanel1.RowCount = 0;
+            //tableLayoutPanel1 = new TableLayoutPanel();
             repairDataList = new List<RepairData>();
-            dataGridView1 = new DataGridView();
-            generalDataGridView = new DataGridView();
+            //dataGridView1 = new DataGridView();
+            //generalDataGridView = new DataGridView();
             plusButton.Visible = false;
             minusButton.Visible = false;
             panel1.Visible = false;
