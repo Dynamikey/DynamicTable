@@ -35,6 +35,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.rectangleShape5 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape6 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape4 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape3 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
@@ -53,7 +54,6 @@
             this.CameraPreview = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.rectangleShape5 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -82,14 +82,15 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.label1.Location = new System.Drawing.Point(14, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(215, 45);
+            this.label1.Size = new System.Drawing.Size(213, 45);
             this.label1.TabIndex = 1;
             this.label1.Text = "Damage Type";
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.BackColor = System.Drawing.Color.LimeGreen;
             this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.button1.Location = new System.Drawing.Point(394, 12);
@@ -102,8 +103,9 @@
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.button2.BackColor = System.Drawing.Color.Tomato;
             this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.button2.Location = new System.Drawing.Point(394, 273);
@@ -116,8 +118,9 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.button3.BackColor = System.Drawing.Color.Gold;
             this.button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.button3.Location = new System.Drawing.Point(394, 143);
@@ -140,9 +143,21 @@
             this.rectangleShape3,
             this.rectangleShape2,
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1824, 400);
+            this.shapeContainer1.Size = new System.Drawing.Size(1700, 400);
             this.shapeContainer1.TabIndex = 5;
             this.shapeContainer1.TabStop = false;
+            // 
+            // rectangleShape5
+            // 
+            this.rectangleShape5.BackColor = System.Drawing.SystemColors.Control;
+            this.rectangleShape5.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape5.CornerRadius = 5;
+            this.rectangleShape5.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rectangleShape5.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape5.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
+            this.rectangleShape5.Location = new System.Drawing.Point(1606, 12);
+            this.rectangleShape5.Name = "rectangleShape6";
+            this.rectangleShape5.Size = new System.Drawing.Size(204, 166);
             // 
             // rectangleShape6
             // 
@@ -166,9 +181,10 @@
             // 
             // rectangleShape3
             // 
-            this.rectangleShape3.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.rectangleShape3.BackColor = System.Drawing.Color.Tomato;
+            this.rectangleShape3.BorderColor = System.Drawing.Color.Tomato;
             this.rectangleShape3.CornerRadius = 5;
-            this.rectangleShape3.FillColor = System.Drawing.SystemColors.ControlDark;
+            this.rectangleShape3.FillColor = System.Drawing.Color.Tomato;
             this.rectangleShape3.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
             this.rectangleShape3.Location = new System.Drawing.Point(390, 267);
             this.rectangleShape3.Name = "rectangleShape3";
@@ -176,9 +192,10 @@
             // 
             // rectangleShape2
             // 
-            this.rectangleShape2.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape2.BackColor = System.Drawing.Color.Gold;
+            this.rectangleShape2.BorderColor = System.Drawing.Color.Gold;
             this.rectangleShape2.CornerRadius = 5;
-            this.rectangleShape2.FillColor = System.Drawing.SystemColors.ControlLight;
+            this.rectangleShape2.FillColor = System.Drawing.Color.Gold;
             this.rectangleShape2.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
             this.rectangleShape2.Location = new System.Drawing.Point(394, 137);
             this.rectangleShape2.Name = "rectangleShape2";
@@ -186,9 +203,10 @@
             // 
             // rectangleShape1
             // 
-            this.rectangleShape1.BorderColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rectangleShape1.BackColor = System.Drawing.Color.LimeGreen;
+            this.rectangleShape1.BorderColor = System.Drawing.Color.LimeGreen;
             this.rectangleShape1.CornerRadius = 5;
-            this.rectangleShape1.FillColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rectangleShape1.FillColor = System.Drawing.Color.LimeGreen;
             this.rectangleShape1.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
             this.rectangleShape1.Location = new System.Drawing.Point(391, 8);
             this.rectangleShape1.Name = "rectangleShape1";
@@ -348,23 +366,11 @@
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // rectangleShape5
-            // 
-            this.rectangleShape5.BackColor = System.Drawing.SystemColors.Control;
-            this.rectangleShape5.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.rectangleShape5.CornerRadius = 5;
-            this.rectangleShape5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.rectangleShape5.FillColor = System.Drawing.SystemColors.ControlLight;
-            this.rectangleShape5.FillStyle = Microsoft.VisualBasic.PowerPacks.FillStyle.Solid;
-            this.rectangleShape5.Location = new System.Drawing.Point(1606, 12);
-            this.rectangleShape5.Name = "rectangleShape6";
-            this.rectangleShape5.Size = new System.Drawing.Size(204, 166);
-            // 
             // SAP_popup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1824, 400);
+            this.ClientSize = new System.Drawing.Size(1700, 400);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox2);

@@ -23,11 +23,12 @@ namespace DynamicTable
         string condition = "";
         bool raiseRDR;
         string imagePath;
-        public Image image;
+        public Bitmap image;
         string datetime;
 
         public SAP_popup(int rowIndexTemp, List<RepairData> list)
         {
+
             InitializeComponent();
             repairDataList2 = list;
             rowIndex = rowIndexTemp;
@@ -109,7 +110,7 @@ namespace DynamicTable
                 cameras = new List<WebCameraId>(webCameraControl1.GetVideoCaptureDevices());
                 webCameraControl1.Visible = false;
                 if (cameras.Count > 0)
-                    webCameraControl1.StartCapture(cameras[0]);
+                    webCameraControl1.StartCapture(cameras[1]);
 
                 webCameraControl1.Visible = true;
                 webCameraControl1.BringToFront();
