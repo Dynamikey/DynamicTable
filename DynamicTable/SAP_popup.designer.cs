@@ -82,7 +82,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
             this.label1.Location = new System.Drawing.Point(14, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 45);
+            this.label1.Size = new System.Drawing.Size(215, 45);
             this.label1.TabIndex = 1;
             this.label1.Text = "Damage Type";
             // 
@@ -143,7 +143,7 @@
             this.rectangleShape3,
             this.rectangleShape2,
             this.rectangleShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(1700, 400);
+            this.shapeContainer1.Size = new System.Drawing.Size(1830, 400);
             this.shapeContainer1.TabIndex = 5;
             this.shapeContainer1.TabStop = false;
             // 
@@ -309,7 +309,7 @@
             "µm",
             "mm",
             "cm"});
-            this.comboBox2.Location = new System.Drawing.Point(240, 153);
+            this.comboBox2.Location = new System.Drawing.Point(236, 153);
             this.comboBox2.Margin = new System.Windows.Forms.Padding(0);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(124, 38);
@@ -370,7 +370,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1700, 400);
+            this.ClientSize = new System.Drawing.Size(1830, 400);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox2);
