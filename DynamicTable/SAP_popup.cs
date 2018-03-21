@@ -11,14 +11,13 @@ using WebEye.Controls.WinForms.WebCameraControl;
 using System.Threading;
 using System.Drawing.Imaging;
 
-namespace DynamicTable
+namespace RollsRoyceRNApp
 {
     public partial class SAP_popup : Form
     {
         UI_Base ui = new UI_Base();
         public List<RepairData> repairDataList2 { get; set; }
         int rowIndex;
-       // WebCameraControl webCameraControl1 = new WebCameraControl();
         List<WebCameraId> cameras;
         string condition = "";
         bool raiseRDR;
@@ -26,54 +25,49 @@ namespace DynamicTable
         public Bitmap image;
         string datetime;
 
+        //Called when SAP_popup form run
         public SAP_popup(int rowIndexTemp, List<RepairData> list)
         {
-
             InitializeComponent();
             repairDataList2 = list;
             rowIndex = rowIndexTemp;
-
-            //webCameraControl1.Location = new System.Drawing.Point(801, 13);
-            // webCameraControl1.Size = new System.Drawing.Size(532, 368);
-            // this.Controls.Add(this.webCameraControl1);
-
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        //Handles condition button clicks
+        private void serviceableButton_Click(object sender, EventArgs e)
         {
-            button1.Font = new Font(button1.Font, FontStyle.Bold);
-            button2.Font = new Font(button2.Font, FontStyle.Regular);
-            button3.Font = new Font(button3.Font, FontStyle.Regular);
+            serviceableButton.Font = new Font(serviceableButton.Font, FontStyle.Bold);
+            unsalvageableButton.Font = new Font(unsalvageableButton.Font, FontStyle.Regular);
+            salvageableButton.Font = new Font(salvageableButton.Font, FontStyle.Regular);
 
             condition =  "Serviceable";
             updateSAPComment(this, EventArgs.Empty);
             
         }
-
-        private void button3_Click_1(object sender, EventArgs e)
+        private void salvageableButton_Click_1(object sender, EventArgs e)
         {
-            button3.Font = new Font(button3.Font, FontStyle.Bold);
-            button1.Font = new Font(button1.Font, FontStyle.Regular);
-            button2.Font = new Font(button2.Font, FontStyle.Regular);
+            salvageableButton.Font = new Font(salvageableButton.Font, FontStyle.Bold);
+            serviceableButton.Font = new Font(serviceableButton.Font, FontStyle.Regular);
+            unsalvageableButton.Font = new Font(unsalvageableButton.Font, FontStyle.Regular);
 
             condition = "Salvageable";
             updateSAPComment(this, EventArgs.Empty);
         }
-
-        private void button2_Click_1(object sender, EventArgs e)
+        private void unsalvageableButton_Click_1(object sender, EventArgs e)
         {
-            button2.Font = new Font(button2.Font, FontStyle.Bold);
-            button1.Font = new Font(button1.Font, FontStyle.Regular);
-            button3.Font = new Font(button3.Font, FontStyle.Regular);
+            unsalvageableButton.Font = new Font(unsalvageableButton.Font, FontStyle.Bold);
+            serviceableButton.Font = new Font(serviceableButton.Font, FontStyle.Regular);
+            salvageableButton.Font = new Font(salvageableButton.Font, FontStyle.Regular);
 
             condition = "Unsalvageable";
             updateSAPComment(this, EventArgs.Empty);
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        //When user clicks 'generate sap comment# button
+        private void generateSAPCommentButton_Click(object sender, EventArgs e)
         {
-            if (condition != "")
+            if (condition != "") //Only do the following if a condition has been provided
             {
                 if (webCameraControl1.IsCapturing)
                 {
@@ -83,8 +77,9 @@ namespace DynamicTable
 
                 try
                 {
+                    //save image
                     datetime = $"{DateTime.Now.Day.ToString()}_{DateTime.Now.Month.ToString()}_{DateTime.Now.Year.ToString()}_{DateTime.Now.Hour.ToString()}_{DateTime.Now.Minute.ToString()}_{DateTime.Now.Second.ToString()}";
-                    imagePath = $"{Program.path}CameraPicsFolder\\{repairDataList2[rowIndex].headingNumber}_{condition}_{datetime}.jpeg";
+                    imagePath = $"{UI_Base.path}CameraPicsFolder\\{repairDataList2[rowIndex].headingNumber}_{condition}_{datetime}.jpeg";
                     image.Save(imagePath, ImageFormat.Jpeg);
                 }
                 catch (Exception)
@@ -92,7 +87,7 @@ namespace DynamicTable
                     Console.WriteLine("Can't save file");
                 }
 
-
+                //update repair data list
                 repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], condition, comboBox1.Text, textBox1.Text + comboBox2.Text, textBox2.Text, SAP_Preview.Text, imagePath, raiseRDR);
                 repairDataList2[rowIndex] = new RepairData(repairDataList2[rowIndex], true);
 
@@ -102,20 +97,21 @@ namespace DynamicTable
             
         }
 
-        void button6_Click(object sender, EventArgs e)
+        //Handles taking picture, does not save it yet (CURRENTLY ISSUES ON TABLET, WORKS FINE ON TEST PC) - we think it's a hardware issue, although it seems to work when you turn the tablet screen off for 5+ seconds or rotate screen.
+        void cameraButton_Click(object sender, EventArgs e)
         {
 
-            if (!webCameraControl1.IsCapturing)
+            if (!webCameraControl1.IsCapturing) //Start showing video feed
             {
                 cameras = new List<WebCameraId>(webCameraControl1.GetVideoCaptureDevices());
                 webCameraControl1.Visible = false;
                 if (cameras.Count > 0)
-                    webCameraControl1.StartCapture(cameras[0]);
+                    webCameraControl1.StartCapture(cameras[0]); // <---- Change to [1] for rear camera
 
                 webCameraControl1.Visible = true;
                 webCameraControl1.BringToFront();
             }
-            else if (webCameraControl1.IsCapturing)
+            else if (webCameraControl1.IsCapturing) //Take still image
             {
                 image = webCameraControl1.GetCurrentImage();
                 CameraPreview.Image = image;
@@ -123,14 +119,12 @@ namespace DynamicTable
                 CameraPreview.BringToFront();
                 webCameraControl1.Visible = false;
                 webCameraControl1.StopCapture();
-            }
-
-            
+            }            
         }
 
+        //Updates SAP preview text
         private void updateSAPComment(object sender, EventArgs e)
         {
-
             SAP_Preview.Text = $@"{repairDataList2[rowIndex].headingNumber} {repairDataList2[rowIndex].headingName} 
 Part is: {condition}
 Damage: {comboBox1.Text}
@@ -139,16 +133,18 @@ Further Comment: {textBox2.Text}
 Raise RDR: {raiseRDR}";
         }
 
+        //Handles X button click
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        //Handles raise RDR button click
+        private void raiseRDRButton_Click(object sender, EventArgs e)
         {
             raiseRDR = !raiseRDR;
-            if(raiseRDR) button4.Font = new Font(button4.Font, FontStyle.Bold);
-            else button4.Font = new Font(button4.Font, FontStyle.Strikeout);
+            if(raiseRDR) raiseRDRButton.Font = new Font(raiseRDRButton.Font, FontStyle.Bold);
+            else raiseRDRButton.Font = new Font(raiseRDRButton.Font, FontStyle.Strikeout);
             updateSAPComment(this, EventArgs.Empty);
         }
     }

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DynamicTable
+namespace RollsRoyceRNApp
 {
     public partial class Undo : Form
     {
@@ -17,19 +17,16 @@ namespace DynamicTable
             InitializeComponent();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void undoNO_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void undoYES_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
-        // this.DialogResult = DialogResult.OK;
-        //  this.Close();
     }
 }

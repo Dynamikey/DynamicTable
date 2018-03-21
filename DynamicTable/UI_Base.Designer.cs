@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace DynamicTable
+namespace RollsRoyceRNApp
 {
     partial class UI_Base
     {
@@ -41,11 +41,11 @@ namespace DynamicTable
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ExitBtn = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.SliderTimer = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.Slide_Panel = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.percentCompleteLabel = new System.Windows.Forms.Label();
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -55,83 +55,83 @@ namespace DynamicTable
             this.button7 = new System.Windows.Forms.Button();
             this.Part_Name = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage0 = new System.Windows.Forms.TabPage();
+            this.OpeningTab = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Inspector_ID_Label = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.inspectorIDTextbox = new System.Windows.Forms.TextBox();
             this.Inspector_ID_Nxt_btn = new System.Windows.Forms.Button();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape2 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape1 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.engineNumberTabPage = new System.Windows.Forms.TabPage();
             this.Engine_nb_lbl = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.engineIDTextbox = new System.Windows.Forms.TextBox();
             this.shapeContainer2 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape4 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape3 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.partNumberTabPage = new System.Windows.Forms.TabPage();
+            this.partNumberTextbox = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.partNumberLabel = new System.Windows.Forms.Label();
             this.shapeContainer3 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape6 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape5 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.ChooseRNTabpage = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.MainDataTab = new System.Windows.Forms.TabPage();
             this.minusButton = new System.Windows.Forms.Button();
             this.plusButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.finishbutton = new System.Windows.Forms.Button();
             this.generalDataGridView = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.LowLevelGridView = new System.Windows.Forms.DataGridView();
             this.Main_Picture_Box = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.shapeContainer4 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape7 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.FinalSAPPreviewPage = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.Label3 = new System.Windows.Forms.Label();
             this.shapeContainer5 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape8 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.button8 = new System.Windows.Forms.Button();
+            this.MainDataTabpage = new System.Windows.Forms.TabPage();
+            this.StartInspectionButton = new System.Windows.Forms.Button();
             this.PresentenceChecksBody = new System.Windows.Forms.Label();
             this.PresentenceChecksHeader = new System.Windows.Forms.Label();
             this.shapeContainer6 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape9 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.SliderArrow = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.Slide_Panel.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage0.SuspendLayout();
+            this.OpeningTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.engineNumberTabPage.SuspendLayout();
+            this.partNumberTabPage.SuspendLayout();
+            this.ChooseRNTabpage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tabPage5.SuspendLayout();
+            this.MainDataTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.generalDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LowLevelGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Picture_Box)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabPage6.SuspendLayout();
-            this.tabPage7.SuspendLayout();
+            this.FinalSAPPreviewPage.SuspendLayout();
+            this.MainDataTabpage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
@@ -152,10 +152,10 @@ namespace DynamicTable
             this.ExitBtn.UseVisualStyleBackColor = true;
             this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
-            // timer1
+            // SliderTimer
             // 
-            this.timer1.Interval = 15;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            this.SliderTimer.Interval = 15;
+            this.SliderTimer.Tick += new System.EventHandler(this.SliderTimer_Tick);
             // 
             // button1
             // 
@@ -170,13 +170,13 @@ namespace DynamicTable
             this.button1.Size = new System.Drawing.Size(96, 1109);
             this.button1.TabIndex = 8;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.button1.Click += new System.EventHandler(this.SlidePanelClick);
             // 
             // Slide_Panel
             // 
             this.Slide_Panel.BackColor = System.Drawing.SystemColors.Control;
             this.Slide_Panel.Controls.Add(this.label10);
-            this.Slide_Panel.Controls.Add(this.label9);
+            this.Slide_Panel.Controls.Add(this.percentCompleteLabel);
             this.Slide_Panel.Controls.Add(this.button14);
             this.Slide_Panel.Controls.Add(this.button13);
             this.Slide_Panel.Controls.Add(this.button12);
@@ -199,14 +199,14 @@ namespace DynamicTable
             this.label10.TabIndex = 28;
             this.label10.Text = "Developed by: Finlay Brown, Michael Lavelle, Samuel Ellwood and Michael Zhao";
             // 
-            // label9
+            // percentCompleteLabel
             // 
-            this.label9.Font = new System.Drawing.Font("Segoe UI Light", 80F);
-            this.label9.Location = new System.Drawing.Point(6, 181);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(377, 151);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "0%";
+            this.percentCompleteLabel.Font = new System.Drawing.Font("Segoe UI Light", 80F);
+            this.percentCompleteLabel.Location = new System.Drawing.Point(6, 181);
+            this.percentCompleteLabel.Name = "percentCompleteLabel";
+            this.percentCompleteLabel.Size = new System.Drawing.Size(377, 151);
+            this.percentCompleteLabel.TabIndex = 27;
+            this.percentCompleteLabel.Text = "0%";
             // 
             // button14
             // 
@@ -321,14 +321,14 @@ namespace DynamicTable
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
-            this.tabControl1.Controls.Add(this.tabPage0);
+            this.tabControl1.Controls.Add(this.OpeningTab);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.engineNumberTabPage);
+            this.tabControl1.Controls.Add(this.partNumberTabPage);
+            this.tabControl1.Controls.Add(this.ChooseRNTabpage);
+            this.tabControl1.Controls.Add(this.MainDataTab);
+            this.tabControl1.Controls.Add(this.FinalSAPPreviewPage);
+            this.tabControl1.Controls.Add(this.MainDataTabpage);
             this.tabControl1.ItemSize = new System.Drawing.Size(100, 20);
             this.tabControl1.Location = new System.Drawing.Point(48, -25);
             this.tabControl1.Name = "tabControl1";
@@ -337,15 +337,15 @@ namespace DynamicTable
             this.tabControl1.Size = new System.Drawing.Size(1870, 1110);
             this.tabControl1.TabIndex = 10;
             // 
-            // tabPage0
+            // OpeningTab
             // 
-            this.tabPage0.BackColor = System.Drawing.Color.White;
-            this.tabPage0.Controls.Add(this.label8);
-            this.tabPage0.Controls.Add(this.pictureBox4);
-            this.tabPage0.Location = new System.Drawing.Point(4, 24);
-            this.tabPage0.Name = "tabPage0";
-            this.tabPage0.Size = new System.Drawing.Size(1862, 1082);
-            this.tabPage0.TabIndex = 7;
+            this.OpeningTab.BackColor = System.Drawing.Color.White;
+            this.OpeningTab.Controls.Add(this.label8);
+            this.OpeningTab.Controls.Add(this.pictureBox4);
+            this.OpeningTab.Location = new System.Drawing.Point(4, 24);
+            this.OpeningTab.Name = "OpeningTab";
+            this.OpeningTab.Size = new System.Drawing.Size(1862, 1082);
+            this.OpeningTab.TabIndex = 7;
             // 
             // label8
             // 
@@ -360,7 +360,7 @@ namespace DynamicTable
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::DynamicTable.Properties.Resources.rolls;
+            this.pictureBox4.Image = global::RollsRoyceRNApp.Properties.Resources.rolls;
             this.pictureBox4.Location = new System.Drawing.Point(277, 250);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(1366, 378);
@@ -371,7 +371,7 @@ namespace DynamicTable
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.Inspector_ID_Label);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.inspectorIDTextbox);
             this.tabPage1.Controls.Add(this.Inspector_ID_Nxt_btn);
             this.tabPage1.Controls.Add(this.shapeContainer1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
@@ -391,16 +391,16 @@ namespace DynamicTable
             this.Inspector_ID_Label.TabIndex = 3;
             this.Inspector_ID_Label.Text = "Inspector ID:";
             // 
-            // textBox1
+            // inspectorIDTextbox
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox1.Location = new System.Drawing.Point(470, 250);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(386, 43);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox1_PreviewKeyDown);
+            this.inspectorIDTextbox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.inspectorIDTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.inspectorIDTextbox.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.inspectorIDTextbox.Location = new System.Drawing.Point(470, 250);
+            this.inspectorIDTextbox.Name = "inspectorIDTextbox";
+            this.inspectorIDTextbox.Size = new System.Drawing.Size(386, 43);
+            this.inspectorIDTextbox.TabIndex = 1;
+            this.inspectorIDTextbox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox1_PreviewKeyDown);
             // 
             // Inspector_ID_Nxt_btn
             // 
@@ -449,19 +449,19 @@ namespace DynamicTable
             this.rectangleShape1.Name = "rectangleShape1";
             this.rectangleShape1.Size = new System.Drawing.Size(410, 56);
             // 
-            // tabPage2
+            // engineNumberTabPage
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.Engine_nb_lbl);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.shapeContainer2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1696, 1075);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.engineNumberTabPage.BackColor = System.Drawing.Color.White;
+            this.engineNumberTabPage.Controls.Add(this.Engine_nb_lbl);
+            this.engineNumberTabPage.Controls.Add(this.button2);
+            this.engineNumberTabPage.Controls.Add(this.engineIDTextbox);
+            this.engineNumberTabPage.Controls.Add(this.shapeContainer2);
+            this.engineNumberTabPage.Location = new System.Drawing.Point(4, 24);
+            this.engineNumberTabPage.Name = "engineNumberTabPage";
+            this.engineNumberTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.engineNumberTabPage.Size = new System.Drawing.Size(1696, 1075);
+            this.engineNumberTabPage.TabIndex = 1;
+            this.engineNumberTabPage.Text = "engineNumberTabPage";
             // 
             // Engine_nb_lbl
             // 
@@ -486,18 +486,18 @@ namespace DynamicTable
             this.button2.TabIndex = 3;
             this.button2.Text = "Next";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Engine_No_Nxt_btn_Click);
             // 
-            // textBox2
+            // engineIDTextbox
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox2.Location = new System.Drawing.Point(470, 250);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(386, 43);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox2_PreviewKeyDown);
+            this.engineIDTextbox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.engineIDTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.engineIDTextbox.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.engineIDTextbox.Location = new System.Drawing.Point(470, 250);
+            this.engineIDTextbox.Name = "engineIDTextbox";
+            this.engineIDTextbox.Size = new System.Drawing.Size(386, 43);
+            this.engineIDTextbox.TabIndex = 2;
+            this.engineIDTextbox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox2_PreviewKeyDown);
             // 
             // shapeContainer2
             // 
@@ -531,23 +531,23 @@ namespace DynamicTable
             this.rectangleShape3.Name = "rectangleShape3";
             this.rectangleShape3.Size = new System.Drawing.Size(368, 100);
             // 
-            // tabPage3
+            // partNumberTabPage
             // 
-            this.tabPage3.BackColor = System.Drawing.Color.White;
-            this.tabPage3.Controls.Add(this.textBox3);
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Controls.Add(this.label1);
-            this.tabPage3.Controls.Add(this.shapeContainer3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1696, 1075);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
+            this.partNumberTabPage.BackColor = System.Drawing.Color.White;
+            this.partNumberTabPage.Controls.Add(this.partNumberTextbox);
+            this.partNumberTabPage.Controls.Add(this.button3);
+            this.partNumberTabPage.Controls.Add(this.partNumberLabel);
+            this.partNumberTabPage.Controls.Add(this.shapeContainer3);
+            this.partNumberTabPage.Location = new System.Drawing.Point(4, 24);
+            this.partNumberTabPage.Name = "partNumberTabPage";
+            this.partNumberTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.partNumberTabPage.Size = new System.Drawing.Size(1696, 1075);
+            this.partNumberTabPage.TabIndex = 2;
+            this.partNumberTabPage.Text = "partNumberTabPage";
             // 
-            // textBox3
+            // partNumberTextbox
             // 
-            this.textBox3.AutoCompleteCustomSource.AddRange(new string[] {
+            this.partNumberTextbox.AutoCompleteCustomSource.AddRange(new string[] {
             "0132AFM",
             "0132AGV",
             "01H100000XX0100",
@@ -3209,16 +3209,16 @@ namespace DynamicTable
             "NN60940G01",
             "NN60941G01",
             "NN60941G01"});
-            this.textBox3.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.textBox3.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.textBox3.Location = new System.Drawing.Point(470, 250);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(386, 43);
-            this.textBox3.TabIndex = 7;
-            this.textBox3.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox3_PreviewKeyDown);
+            this.partNumberTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.partNumberTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.partNumberTextbox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.partNumberTextbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.partNumberTextbox.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.partNumberTextbox.Location = new System.Drawing.Point(470, 250);
+            this.partNumberTextbox.Name = "partNumberTextbox";
+            this.partNumberTextbox.Size = new System.Drawing.Size(386, 43);
+            this.partNumberTextbox.TabIndex = 7;
+            this.partNumberTextbox.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.textBox3_PreviewKeyDown);
             // 
             // button3
             // 
@@ -3233,17 +3233,17 @@ namespace DynamicTable
             this.button3.TabIndex = 6;
             this.button3.Text = "Next";
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Part_No_Nxt_btn_Click);
             // 
-            // label1
+            // partNumberLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.label1.Location = new System.Drawing.Point(462, 194);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 45);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Part Number:";
+            this.partNumberLabel.AutoSize = true;
+            this.partNumberLabel.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.partNumberLabel.Location = new System.Drawing.Point(462, 194);
+            this.partNumberLabel.Name = "partNumberLabel";
+            this.partNumberLabel.Size = new System.Drawing.Size(209, 45);
+            this.partNumberLabel.TabIndex = 5;
+            this.partNumberLabel.Text = "Part Number:";
             // 
             // shapeContainer3
             // 
@@ -3277,16 +3277,16 @@ namespace DynamicTable
             this.rectangleShape5.Name = "rectangleShape5";
             this.rectangleShape5.Size = new System.Drawing.Size(410, 56);
             // 
-            // tabPage4
+            // ChooseRNTabpage
             // 
-            this.tabPage4.BackColor = System.Drawing.Color.White;
-            this.tabPage4.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 24);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1696, 1075);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "tabPage4";
+            this.ChooseRNTabpage.BackColor = System.Drawing.Color.White;
+            this.ChooseRNTabpage.Controls.Add(this.tableLayoutPanel1);
+            this.ChooseRNTabpage.Location = new System.Drawing.Point(4, 24);
+            this.ChooseRNTabpage.Name = "ChooseRNTabpage";
+            this.ChooseRNTabpage.Padding = new System.Windows.Forms.Padding(3);
+            this.ChooseRNTabpage.Size = new System.Drawing.Size(1696, 1075);
+            this.ChooseRNTabpage.TabIndex = 3;
+            this.ChooseRNTabpage.Text = "ChooseRNTabpage";
             // 
             // tableLayoutPanel1
             // 
@@ -3364,25 +3364,25 @@ namespace DynamicTable
             this.label5.Text = "ML";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tabPage5
+            // MainDataTab
             // 
-            this.tabPage5.BackColor = System.Drawing.Color.White;
-            this.tabPage5.Controls.Add(this.minusButton);
-            this.tabPage5.Controls.Add(this.plusButton);
-            this.tabPage5.Controls.Add(this.listView1);
-            this.tabPage5.Controls.Add(this.finishbutton);
-            this.tabPage5.Controls.Add(this.generalDataGridView);
-            this.tabPage5.Controls.Add(this.button5);
-            this.tabPage5.Controls.Add(this.dataGridView1);
-            this.tabPage5.Controls.Add(this.Main_Picture_Box);
-            this.tabPage5.Controls.Add(this.panel1);
-            this.tabPage5.Controls.Add(this.shapeContainer4);
-            this.tabPage5.Location = new System.Drawing.Point(4, 24);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1862, 1082);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "tabPage5";
+            this.MainDataTab.BackColor = System.Drawing.Color.White;
+            this.MainDataTab.Controls.Add(this.minusButton);
+            this.MainDataTab.Controls.Add(this.plusButton);
+            this.MainDataTab.Controls.Add(this.listView1);
+            this.MainDataTab.Controls.Add(this.finishbutton);
+            this.MainDataTab.Controls.Add(this.generalDataGridView);
+            this.MainDataTab.Controls.Add(this.button5);
+            this.MainDataTab.Controls.Add(this.LowLevelGridView);
+            this.MainDataTab.Controls.Add(this.Main_Picture_Box);
+            this.MainDataTab.Controls.Add(this.panel1);
+            this.MainDataTab.Controls.Add(this.shapeContainer4);
+            this.MainDataTab.Location = new System.Drawing.Point(4, 24);
+            this.MainDataTab.Name = "MainDataTab";
+            this.MainDataTab.Padding = new System.Windows.Forms.Padding(3);
+            this.MainDataTab.Size = new System.Drawing.Size(1862, 1082);
+            this.MainDataTab.TabIndex = 4;
+            this.MainDataTab.Text = "MainDataTab";
             // 
             // minusButton
             // 
@@ -3495,16 +3495,16 @@ namespace DynamicTable
             this.button5.TabIndex = 12;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.backbuttonClick);
             // 
-            // dataGridView1
+            // LowLevelGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.LowLevelGridView.AllowUserToAddRows = false;
+            this.LowLevelGridView.AllowUserToDeleteRows = false;
+            this.LowLevelGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.LowLevelGridView.BackgroundColor = System.Drawing.Color.White;
+            this.LowLevelGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LowLevelGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3512,8 +3512,8 @@ namespace DynamicTable
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LowLevelGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.LowLevelGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -3521,25 +3521,25 @@ namespace DynamicTable
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle11;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.GridColor = System.Drawing.Color.LightGray;
-            this.dataGridView1.Location = new System.Drawing.Point(44, 3);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
+            this.LowLevelGridView.DefaultCellStyle = dataGridViewCellStyle11;
+            this.LowLevelGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.LowLevelGridView.GridColor = System.Drawing.Color.LightGray;
+            this.LowLevelGridView.Location = new System.Drawing.Point(44, 3);
+            this.LowLevelGridView.MultiSelect = false;
+            this.LowLevelGridView.Name = "LowLevelGridView";
+            this.LowLevelGridView.ReadOnly = true;
+            this.LowLevelGridView.RowHeadersVisible = false;
             dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle12;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(919, 1080);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.Visible = false;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnAdded_1);
-            this.dataGridView1.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged_1);
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
+            this.LowLevelGridView.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.LowLevelGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.LowLevelGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.LowLevelGridView.Size = new System.Drawing.Size(919, 1080);
+            this.LowLevelGridView.TabIndex = 0;
+            this.LowLevelGridView.Visible = false;
+            this.LowLevelGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.subDataGridView_Click);
+            this.LowLevelGridView.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.LowLevelGridView_ColumnAdded_1);
+            this.LowLevelGridView.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView1_ColumnWidthChanged_1);
+            this.LowLevelGridView.SelectionChanged += new System.EventHandler(this.LowLevelGridView_SelectionChanged);
             // 
             // Main_Picture_Box
             // 
@@ -3589,20 +3589,20 @@ namespace DynamicTable
             this.rectangleShape7.Name = "rectangleShape7";
             this.rectangleShape7.Size = new System.Drawing.Size(166, 171);
             // 
-            // tabPage6
+            // FinalSAPPreviewPage
             // 
-            this.tabPage6.BackColor = System.Drawing.Color.White;
-            this.tabPage6.Controls.Add(this.button6);
-            this.tabPage6.Controls.Add(this.button4);
-            this.tabPage6.Controls.Add(this.textBox4);
-            this.tabPage6.Controls.Add(this.Label3);
-            this.tabPage6.Controls.Add(this.shapeContainer5);
-            this.tabPage6.Location = new System.Drawing.Point(4, 24);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1696, 1075);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "tabPage6";
+            this.FinalSAPPreviewPage.BackColor = System.Drawing.Color.White;
+            this.FinalSAPPreviewPage.Controls.Add(this.button6);
+            this.FinalSAPPreviewPage.Controls.Add(this.button4);
+            this.FinalSAPPreviewPage.Controls.Add(this.textBox4);
+            this.FinalSAPPreviewPage.Controls.Add(this.Label3);
+            this.FinalSAPPreviewPage.Controls.Add(this.shapeContainer5);
+            this.FinalSAPPreviewPage.Location = new System.Drawing.Point(4, 24);
+            this.FinalSAPPreviewPage.Name = "FinalSAPPreviewPage";
+            this.FinalSAPPreviewPage.Padding = new System.Windows.Forms.Padding(3);
+            this.FinalSAPPreviewPage.Size = new System.Drawing.Size(1696, 1075);
+            this.FinalSAPPreviewPage.TabIndex = 5;
+            this.FinalSAPPreviewPage.Text = "FinalSAPPreviewPage";
             // 
             // button6
             // 
@@ -3615,7 +3615,7 @@ namespace DynamicTable
             this.button6.Size = new System.Drawing.Size(68, 45);
             this.button6.TabIndex = 13;
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // button4
             // 
@@ -3673,34 +3673,34 @@ namespace DynamicTable
             this.rectangleShape8.Name = "rectangleShape8";
             this.rectangleShape8.Size = new System.Drawing.Size(445, 347);
             // 
-            // tabPage7
+            // MainDataTabpage
             // 
-            this.tabPage7.BackColor = System.Drawing.Color.White;
-            this.tabPage7.Controls.Add(this.button8);
-            this.tabPage7.Controls.Add(this.PresentenceChecksBody);
-            this.tabPage7.Controls.Add(this.PresentenceChecksHeader);
-            this.tabPage7.Controls.Add(this.shapeContainer6);
-            this.tabPage7.Location = new System.Drawing.Point(4, 24);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1696, 1075);
-            this.tabPage7.TabIndex = 8;
-            this.tabPage7.Text = "tabPage7";
+            this.MainDataTabpage.BackColor = System.Drawing.Color.White;
+            this.MainDataTabpage.Controls.Add(this.StartInspectionButton);
+            this.MainDataTabpage.Controls.Add(this.PresentenceChecksBody);
+            this.MainDataTabpage.Controls.Add(this.PresentenceChecksHeader);
+            this.MainDataTabpage.Controls.Add(this.shapeContainer6);
+            this.MainDataTabpage.Location = new System.Drawing.Point(4, 24);
+            this.MainDataTabpage.Name = "MainDataTabpage";
+            this.MainDataTabpage.Padding = new System.Windows.Forms.Padding(3);
+            this.MainDataTabpage.Size = new System.Drawing.Size(1696, 1075);
+            this.MainDataTabpage.TabIndex = 8;
+            this.MainDataTabpage.Text = "MainDataTabpage";
             // 
-            // button8
+            // StartInspectionButton
             // 
-            this.button8.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(109, 905);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(358, 92);
-            this.button8.TabIndex = 4;
-            this.button8.Text = "Next";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button7_Click);
+            this.StartInspectionButton.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.StartInspectionButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.StartInspectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.StartInspectionButton.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.StartInspectionButton.ForeColor = System.Drawing.Color.White;
+            this.StartInspectionButton.Location = new System.Drawing.Point(109, 905);
+            this.StartInspectionButton.Name = "StartInspectionButton";
+            this.StartInspectionButton.Size = new System.Drawing.Size(358, 92);
+            this.StartInspectionButton.TabIndex = 4;
+            this.StartInspectionButton.Text = "Next";
+            this.StartInspectionButton.UseVisualStyleBackColor = false;
+            this.StartInspectionButton.Click += new System.EventHandler(this.StartInspectionButton_Click);
             // 
             // PresentenceChecksBody
             // 
@@ -3766,18 +3766,18 @@ namespace DynamicTable
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.MidnightBlue;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label2.Location = new System.Drawing.Point(52, 540);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 40);
-            this.label2.TabIndex = 12;
-            this.label2.Text = ">";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Click += new System.EventHandler(this.button1_Click_1);
+            this.SliderArrow.AutoSize = true;
+            this.SliderArrow.BackColor = System.Drawing.Color.MidnightBlue;
+            this.SliderArrow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SliderArrow.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SliderArrow.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.SliderArrow.Location = new System.Drawing.Point(52, 540);
+            this.SliderArrow.Name = "label2";
+            this.SliderArrow.Size = new System.Drawing.Size(38, 40);
+            this.SliderArrow.TabIndex = 12;
+            this.SliderArrow.Text = ">";
+            this.SliderArrow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SliderArrow.Click += new System.EventHandler(this.SlidePanelClick);
             // 
             // fileSystemWatcher1
             // 
@@ -3791,7 +3791,7 @@ namespace DynamicTable
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1700, 1070);
             this.Controls.Add(this.Slide_Panel);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.SliderArrow);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.button1);
@@ -3803,29 +3803,29 @@ namespace DynamicTable
             this.Load += new System.EventHandler(this.UI_Base_Load);
             this.Slide_Panel.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage0.ResumeLayout(false);
-            this.tabPage0.PerformLayout();
+            this.OpeningTab.ResumeLayout(false);
+            this.OpeningTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
+            this.engineNumberTabPage.ResumeLayout(false);
+            this.engineNumberTabPage.PerformLayout();
+            this.partNumberTabPage.ResumeLayout(false);
+            this.partNumberTabPage.PerformLayout();
+            this.ChooseRNTabpage.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
+            this.MainDataTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.generalDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LowLevelGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Main_Picture_Box)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
+            this.FinalSAPPreviewPage.ResumeLayout(false);
+            this.FinalSAPPreviewPage.PerformLayout();
+            this.MainDataTabpage.ResumeLayout(false);
+            this.MainDataTabpage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
@@ -3836,38 +3836,38 @@ namespace DynamicTable
 
         #endregion
         protected System.Windows.Forms.Button ExitBtn;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer SliderTimer;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel Slide_Panel;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.TabPage tabPage0;
+        private System.Windows.Forms.TabPage engineNumberTabPage;
+        private System.Windows.Forms.TabPage partNumberTabPage;
+        private System.Windows.Forms.TabPage ChooseRNTabpage;
+        private System.Windows.Forms.TabPage MainDataTab;
+        private System.Windows.Forms.TabPage FinalSAPPreviewPage;
+        private System.Windows.Forms.TabPage OpeningTab;
         private System.Windows.Forms.Button Inspector_ID_Nxt_btn;
         private System.Windows.Forms.Label Inspector_ID_Label;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox inspectorIDTextbox;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape2;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape1;
         private System.Windows.Forms.Label Engine_nb_lbl;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox engineIDTextbox;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer2;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape4;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox partNumberTextbox;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label partNumberLabel;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer3;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape6;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
         private System.Windows.Forms.PictureBox Main_Picture_Box;
         private System.Windows.Forms.Label Part_Name;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView LowLevelGridView;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button5;
@@ -3881,7 +3881,7 @@ namespace DynamicTable
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Panel panel1;
         private PictureBox pictureBox3;
-        private Label label2;
+        private Label SliderArrow;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer4;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape7;
         private Label Label3;
@@ -3892,10 +3892,10 @@ namespace DynamicTable
         private Button button6;
         private Label label8;
         private PictureBox pictureBox4;
-        private TabPage tabPage7;
+        private TabPage MainDataTabpage;
         private Label PresentenceChecksBody;
         private Label PresentenceChecksHeader;
-        private Button button8;
+        private Button StartInspectionButton;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer6;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape9;
         private Button minusButton;
@@ -3908,7 +3908,7 @@ namespace DynamicTable
         private Button button10;
         private Button button9;
         private Button button7;
-        private Label label9;
+        private Label percentCompleteLabel;
         private Label label10;
     }
 }

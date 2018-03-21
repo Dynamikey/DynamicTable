@@ -1,4 +1,4 @@
-﻿namespace DynamicTable
+﻿namespace RollsRoyceRNApp
 {
     partial class Undo
     {
@@ -46,7 +46,7 @@
             this.button5.TabIndex = 8;
             this.button5.Text = "No";
             this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.undoNO_Click);
             // 
             // button1
             // 
@@ -61,7 +61,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Yes";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.undoYES_Click);
             // 
             // label1
             // 

@@ -11,14 +11,12 @@ using System.Xml;
 using System.IO;
 using System.Drawing.Imaging;
 using Excel = Microsoft.Office.Interop.Excel;
-using DynamicTable.Properties;
+using RollsRoyceRNApp.Properties;
 using System.Diagnostics;
 using System.Threading;
+using System.Configuration;
 
-
-//using MySql.Data.MySqlClient;
-
-namespace DynamicTable
+namespace RollsRoyceRNApp
 {
     public partial class UI_Base : Form
     {
@@ -33,6 +31,17 @@ namespace DynamicTable
         List<RepairNoteInformation> repairNoteList = new List<RepairNoteInformation>();
         RepairNoteInformation repairNoteInformation = new RepairNoteInformation();
         string[] relatedFiguresArr;
+        public static string path = ConfigurationManager.AppSettings["path"];
+
+
+        XmlTextReader reader = new XmlTextReader($"{path}XMLFolder\\RN-EJ-412-1009-03.xml"); //XML file (from within path folder). Can be changed to any XML from within RNOptionClick()
+        //Declare repair data, repair data list and datatables;
+        RepairData repairData = new RepairData();
+        public List<RepairData> repairDataList = new List<RepairData>();
+        DataTable subrowDataTable;
+        DataTable generalDataTable;
+
+        //For displaying/zooming images
         Size originalPictureBoxSize;
         Image img;
         const double maxScale = 2.0; // The scale factor when it is at its max
@@ -40,6 +49,7 @@ namespace DynamicTable
         const double scaleIncrement = 0.2;
         double currentScale = 1.0;
 
+        //For accessing Excel part finder
         public static Excel.Application app;
         public static Excel.Workbook wb;
         public static Excel.Worksheet xlWorkSheet;
@@ -47,21 +57,23 @@ namespace DynamicTable
 
         string datetime;
 
+        //bool for resetting app, not yet implemented
         bool isFinsFirstTime = true;
 
+        //Form start up code
         public UI_Base()
         {
             InitializeComponent();
+            Console.WriteLine(path);
+            //Show loading GIF
             showGIF();
+            //Load up Excel doc in background
             ThreadStart myThreadStart = new ThreadStart(loadXL);
             Thread myThread = new Thread(myThreadStart);
-            myThread.Start();
-            //loadXL();
-           
-
-            //GenerateRepairData(); Moved to later when switching to table tab
+            myThread.Start();        
         }
 
+        //Function for reseting app after finalising an inspection - doesn't work fully yet.
         public void ResetApp()
         {
             RepairNoteNumber = "";
@@ -96,11 +108,11 @@ namespace DynamicTable
 
             //tableLayoutPanel1 = new TableLayoutPanel();
             repairDataList = new List<RepairData>();
-            //dataGridView1 = new DataGridView();
+            //LowLevelGridView = new DataGridView();
             //generalDataGridView = new DataGridView();
 
             generalDataGridView.Visible = true;
-            dataGridView1.Visible = false;
+            LowLevelGridView.Visible = false;
             button5.Visible = false;
             listView1.Items.Clear();
 
@@ -113,21 +125,23 @@ namespace DynamicTable
             subrowDataTable = new DataTable();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        //For opening left hand slide panel
+        private void SlidePanelClick(object sender, EventArgs e)
         {
             //changePercentComplete();
-            timer1.Start();
-            label2.Text = "<";
+            SliderTimer.Start();
+            SliderArrow.Text = "<";
         }
 
-        private void timer1_Tick_1(object sender, EventArgs e)
+        //Slide panel animation
+        private void SliderTimer_Tick(object sender, EventArgs e)
         {
             if (Hiden)
             {
                 Slide_Panel.Width = Slide_Panel.Width + 10;
                 if (Slide_Panel.Width >= PW)
                 {
-                    timer1.Stop();
+                    SliderTimer.Stop();
                     Hiden = false;
                     this.Refresh();
                 }
@@ -135,11 +149,11 @@ namespace DynamicTable
             }
             else
             {
-                label2.Text = ">";
+                SliderArrow.Text = ">";
                 Slide_Panel.Width = Slide_Panel.Width - 10;
                 if (Slide_Panel.Width <= 0)
                 {
-                    timer1.Stop();
+                    SliderTimer.Stop();
                     Hiden = true;
                     
                     this.Refresh();
@@ -147,10 +161,13 @@ namespace DynamicTable
 
             }
         }
+
+        //For handling exit button click
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             try
             {
+                //Close excel workbook
                 wb.Close(false);
             }
             catch (Exception)
@@ -160,48 +177,50 @@ namespace DynamicTable
             Environment.Exit(0);          
         }
 
-
+        //When Inspector ID next button has been clicked
         private void Inspector_ID_Nxt_btn_Click(object sender, EventArgs e)
         {
-            InspectorID = textBox1.Text;
+            InspectorID = inspectorIDTextbox.Text;
 
             if (InspectorID != "")
             {
-                tabControl1.SelectedTab = tabPage2;
+                tabControl1.SelectedTab = engineNumberTabPage;
                 updatetoolbartext();
             }
-            else textBox1.Focus();
+            else inspectorIDTextbox.Focus();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        //When Engine ID next button has been clicked
+        private void Engine_No_Nxt_btn_Click(object sender, EventArgs e)
         {
-            EngineID = textBox2.Text;
+            EngineID = engineIDTextbox.Text;
 
             if(EngineID != "")
             {
-                tabControl1.SelectedTab = tabPage3;
-                this.ActiveControl = textBox3;
+                tabControl1.SelectedTab = partNumberTabPage;
+                this.ActiveControl = partNumberTextbox;
                 updatetoolbartext();
             }
-            else textBox2.Focus();
+            else engineIDTextbox.Focus();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        //When Part No. next button has been clicked
+        private void Part_No_Nxt_btn_Click(object sender, EventArgs e)
         {
 
-            PartNumber = textBox3.Text;
+            PartNumber = partNumberTextbox.Text;
 
             if (PartNumber != "")
             {
                 repairNoteSearch();
-                tabControl1.SelectedTab = tabPage4;
+                tabControl1.SelectedTab = ChooseRNTabpage;
                 updatetoolbartext();
-
+                
+                //Dynamically generate list of repair notes to choose from
                 for (int i = 0; i < repairNoteList.Count; i++)
                 {
                     RowStyle temp = tableLayoutPanel1.RowStyles[0];
-                    tableLayoutPanel1.RowCount++;
-                   
+                    tableLayoutPanel1.RowCount++;                
 
                     RowStyle style = new RowStyle();
                     style.SizeType = SizeType.Absolute;
@@ -219,113 +238,108 @@ namespace DynamicTable
                     button.BackColor = SystemColors.Control;
                     button.FlatAppearance.BorderSize = 0;
                     button.Text = repairNoteList[i].rn;
-                    button.Click += button4_Click;//function
+                    button.Click += RNOptionClick;//function
                     tableLayoutPanel1.Controls.Add(button, 3, i + 1);
 
-                    Label label = new Label();
-                    //label.Left = 300;
-                    label.Height = 60;
-                    label.Margin = new Padding(0, 10, 0, 0);
-                    //label.Top = top + label.Height / 4;
-                    label.Width = 700;
-                    label.Font = new Font("Segoe UI", 20);
-                    label.Text = repairNoteList[i].description;
-                    tableLayoutPanel1.Controls.Add(label, 0, i + 1);
+                    Label RNDescriptionLabel = new Label();
+                    //RNDescriptionLabel.Left = 300;
+                    RNDescriptionLabel.Height = 60;
+                    RNDescriptionLabel.Margin = new Padding(0, 10, 0, 0);
+                    //RNDescriptionLabel.Top = top + RNDescriptionLabel.Height / 4;
+                    RNDescriptionLabel.Width = 700;
+                    RNDescriptionLabel.Font = new Font("Segoe UI", 20);
+                    RNDescriptionLabel.Text = repairNoteList[i].description;
+                    tableLayoutPanel1.Controls.Add(RNDescriptionLabel, 0, i + 1);
 
-                    Label label2 = new Label();
-                    //label2.Left = 300;
-                    label2.Height = 60;
-                    label2.Margin = new Padding(0, 10, 0, 0);
-                    //label2.Top = top + label.Height / 4;
-                    label2.Width = 700;
-                    label2.Font = new Font("Segoe UI", 20);
-                    label2.Text = repairNoteList[i].ml;
-                    tableLayoutPanel1.Controls.Add(label2, 1, i + 1);
+                    Label RNMLLabel = new Label();
+                    //RNMLLabel.Left = 300;
+                    RNMLLabel.Height = 60;
+                    RNMLLabel.Margin = new Padding(0, 10, 0, 0);
+                    //RNMLLabel.Top = top + RNDescriptionLabel.Height / 4;
+                    RNMLLabel.Width = 700;
+                    RNMLLabel.Font = new Font("Segoe UI", 20);
+                    RNMLLabel.Text = repairNoteList[i].ml;
+                    tableLayoutPanel1.Controls.Add(RNMLLabel, 1, i + 1);
 
-                    Label label3 = new Label();
-                    //label3.Left = 300;
-                    label3.Height = 60;
-                    label3.Margin = new Padding(0, 10, 0, 0);
-                    //label3.Top = top + label.Height / 4;
-                    label3.Width = 700;
-                    label3.Font = new Font("Segoe UI", 20);
-                    label3.Text = repairNoteList[i].pc;
-                    tableLayoutPanel1.Controls.Add(label3, 2, i + 1);
+                    Label RNPCLabel = new Label();
+                    //RNPCLabel.Left = 300;
+                    RNPCLabel.Height = 60;
+                    RNPCLabel.Margin = new Padding(0, 10, 0, 0);
+                    //RNPCLabel.Top = top + RNDescriptionLabel.Height / 4;
+                    RNPCLabel.Width = 700;
+                    RNPCLabel.Font = new Font("Segoe UI", 20);
+                    RNPCLabel.Text = repairNoteList[i].pc;
+                    tableLayoutPanel1.Controls.Add(RNPCLabel, 2, i + 1);
 
                     //top += button.Height + 5;
                 }
 
             }
-            else textBox3.Focus();
-
+            else partNumberTextbox.Focus();
         }
 
-
+        //Check to see if data in list is heading or sub-heading
         bool isSubRow(string str)
         {
             string[] numbers = str.Split('.');
             return (numbers.Length > 2) ? true : false;
         }
 
+        //Splits string of related figures into string array
         string[] convertToRelatedFiguresArr(string str)
         {
             return str.Split(' ');
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        //Handles choice of RN option
+        private void RNOptionClick(object sender, EventArgs e)
         {
             RepairNoteNumber = sender.ToString();
             RepairNoteNumber = RepairNoteNumber.Substring(RepairNoteNumber.IndexOf(":") + 2);
+
+            if (ConfigurationManager.AppSettings["AnyXML?"] == "No")
+            {
+                RepairNoteNumber = "RN-EJ-412-1009-03"; //Comment to use user selected RN XML file (from within path folder), currently always loads the same file 
+            }
+
+            reader = new XmlTextReader($"{path}XMLFolder\\{RepairNoteNumber}.xml");
             GenerateRepairData();
-            tabControl1.SelectedTab = tabPage7;
+            tabControl1.SelectedTab = MainDataTabpage;
             PresentenceChecksBody.Text = preSentenceChecks;
             updatetoolbartext();
         }
-
-
-
-        XmlTextReader reader = new XmlTextReader($"{Program.path}RN-EJ-412-1009-03.xml");
-        //XmlTextReader reader = new XmlTextReader($"{path}RN-EJ-412-1008-04.xml");
-        public List<RepairData> repairDataList = new List<RepairData>();
-        RepairData repairData = new RepairData();
-        DataTable subrowDataTable;
-        DataTable generalDataTable;
-        
-
+       
+        //For writing final inspection data into CSV file
         private void WriteValues()
         {
-            datetime = $"{DateTime.Now.Day.ToString()}_{DateTime.Now.Month.ToString()}_{DateTime.Now.Year.ToString()}_{DateTime.Now.Hour.ToString()}_{DateTime.Now.Minute.ToString()}_{DateTime.Now.Second.ToString()}";
-            using (var writer = new CsvFileWriter($"{Program.path}CSVFolder//{PartNumber}_{RepairNoteNumber}_{InspectorID}_{datetime}.csv"))
+            datetime = $"{DateTime.Now.Day.ToString()}_{DateTime.Now.Month.ToString()}_{DateTime.Now.Year.ToString()}_{DateTime.Now.Hour.ToString()}_{DateTime.Now.Minute.ToString()}_{DateTime.Now.Second.ToString()}"; //Puts date and time into a saveable format
+            using (var writer = new CsvFileWriter($"{path}CSVFolder//{PartNumber}_{RepairNoteNumber}_{InspectorID}_{datetime}.csv")) //<- CSV filename declared here
             {
 
 
                 List<string> columns = new List<string>();
 
-
-                Console.WriteLine(RepairNoteNumber);
-                Console.WriteLine(Inspector_ID_Label.Text);
-                Console.WriteLine(InspectorID);
-                Console.WriteLine(Engine_nb_lbl.Text);
-                Console.WriteLine(EngineID);
-                Console.WriteLine(label1.Text);
-                Console.WriteLine(PartNumber);
-
+                //Add introductory info to top of CSV
                 columns.Add(RepairNoteNumber);
                 writer.WriteRow(columns);
                 columns.Clear();
+
                 columns.Add(Inspector_ID_Label.Text);
                 columns.Add(InspectorID);
                 writer.WriteRow(columns);
                 columns.Clear();
+
                 columns.Add(Engine_nb_lbl.Text);
                 columns.Add(EngineID);
                 writer.WriteRow(columns);
                 columns.Clear();
-                columns.Add(label1.Text);
+
+                columns.Add(partNumberLabel.Text);
                 columns.Add(PartNumber);
                 writer.WriteRow(columns);
                 columns.Clear();
 
+                //Add column headers
                 columns.Add("Feature Number");
                 columns.Add("Feature Name");
                 columns.Add("Usable Limits");
@@ -342,7 +356,7 @@ namespace DynamicTable
                 writer.WriteRow(columns);
                 columns.Clear();
 
-
+                //Add repair info
                 for (int i = 0; i < repairDataList.Count; i++)
                 {
                     columns.Add(repairDataList[i].headingNumber);
@@ -376,6 +390,7 @@ namespace DynamicTable
             }
         }
 
+        //Trys to find related figures from heading name and useable limits
         private void FigFinder()
         {
             for (int i = 0; i < repairDataList.Count; i++)
@@ -402,11 +417,11 @@ namespace DynamicTable
                 {
                     NullReferenceException e;
                 }
-
                 repairDataList[i] = temp;
             }
         }
 
+        //Parses XML data into repair data format. Works for two xml docs provided. May require further work as XML content is very variable.
         private void ParseXML()
         {
             int preSentenceCount = 0;
@@ -442,7 +457,7 @@ namespace DynamicTable
             }
 
             // temporary solution to start reading at beginning
-            reader = new XmlTextReader($"{Program.path}RN-EJ-412-1009-03.xml");
+            reader = new XmlTextReader($"{path}XMLFolder\\{RepairNoteNumber}.xml");
             while (reader.Read())
             {
                 if (reader.Name == "featureDamage") //If XML line is a feature damage heading (e.g. "4.4 Heatshield")
@@ -523,18 +538,21 @@ namespace DynamicTable
             }
         }
 
+        //Print repair list to console
         private void PrintList(List<RepairData> l)
         {
             for (int i = 0; i < l.Count; i++)
                 Console.WriteLine($"{i} = {l[i].headingNumber} {l[i].headingName} {l[i].useableLimits} {l[i].repairableLimits} {l[i].correctiveAction} {l[i].relatedFigures} {l[i].conditionInput} {l[i].damageTypeInput} {l[i].damageMeasurementInput} {l[i].damageFurtherCommentsInput}");
         }
 
+        //Adds repair data to repair data list
         public void AddToList(List<RepairData> l, ref RepairData d)
         {
             l.Add(d);
             d = default(RepairData);
         }
 
+        //Initialise subrow data table headings
         private void InitializeSubrowDataTable()
         {
             subrowDataTable = new DataTable();
@@ -548,6 +566,7 @@ namespace DynamicTable
 
         }
 
+        //Initialise general data table headings
         private void InitializeGeneralDataTable()
         {
             generalDataTable = new DataTable();
@@ -557,6 +576,7 @@ namespace DynamicTable
 
         }
 
+        //Creates graphics column in general datagridview
         private void CreateGraphicsColumn(ref DataGridView dataGridView)
         {
             DataGridViewImageColumn newDataGridViewImageColumn = new DataGridViewImageColumn();
@@ -575,12 +595,11 @@ namespace DynamicTable
                     if (repairDataList[i].relatedFigures != null)
                     {
                         string[] relatedFiguresArrTemp = convertToRelatedFiguresArr(repairDataList[i].relatedFigures);
-                        string imagePathTemp = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArrTemp[0]}.png";
+                        string imagePathTemp = $"{path}RNFigures\\{RepairNoteNumber}\\{relatedFiguresArrTemp[0]}.png"; //Change this to work with other XMLs
 
 
                         Image imageTemp = Image.FromFile(imagePathTemp);
                         Size newsizeTemp = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * imageTemp.Height / imageTemp.Width));
-                        //Size newsize = new Size(Convert.ToInt32(120*image.Width/image.Height), 120);
                         Bitmap resizedImageTemp = new Bitmap(imageTemp, newsizeTemp);
                         dataGridView.Rows[row].Cells[col].Value = resizedImageTemp;
                     } 
@@ -588,70 +607,42 @@ namespace DynamicTable
 
                 }
             }
-            string imagePath = $"{Program.path}figfolder\\default.png";
+            string imagePath = $"{path}RNFigures\\default.png"; //If no figures associated, use default white image.
             Image image = Image.FromFile(imagePath);
             Size newsize = new Size(newDataGridViewImageColumn.Width, Convert.ToInt32((newDataGridViewImageColumn.Width) * image.Height / image.Width));
             Bitmap resizedImage = new Bitmap(image, newsize);
             newDataGridViewImageColumn.DefaultCellStyle.NullValue = resizedImage;
-            //dataGridView.Rows[0].Cells[6].Value = resizedimage;
-
-            //dataGridView.AutoResizeRows();
         }
 
-        //int count = 0;
+        //Creates 'pencil' button column for SAP form
         private void CreateButtonsColumn(ref DataGridView dataGridView)
         {
-
-            //if (!dataGridView.Columns.Contains("Comments"))
-            //{
-            //if (count == 0)
-            //{
                 DataGridViewImageColumn dataGridViewButtonColumn = new DataGridViewImageColumn();
                 Image image = Resources.pencil;
                 dataGridViewButtonColumn.Image = image;
                 dataGridView.Columns.Add(dataGridViewButtonColumn);
-                
-            //}
-            //count = 1;
-            //}
         }
 
-        private void GenerateExampleRepairData()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                repairData.headingNumber = (i + 1).ToString();
-                repairData.headingName = "blah";
-                repairData.useableLimits = "blah";
-                repairData.repairableLimits = "blah";
-                repairData.correctiveAction = "blah blah blah blah blah blah blah blah blah blah blah";
-                repairData.relatedFigures = "blah";
-                repairData.checkComplete = false;
-                AddToList(repairDataList, ref repairData);
-
-            }
-            PrintList(repairDataList);
-        }
-
+        //Parse XML, find figures and output to console
         private void GenerateRepairData()
         {
             ParseXML();
             FigFinder();
             PrintList(repairDataList);
-            
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        //If a cell is clicked in sub data grid view
+        private void subDataGridView_Click(object sender, DataGridViewCellEventArgs e)
         {
-            //Console.WriteLine("Cell clicked");
             var senderGrid = (DataGridView)sender;
             senderGrid.CommitEdit(DataGridViewDataErrorContexts.Commit);
             if (e.RowIndex >= 0)
             {
                 var row = senderGrid.Rows[e.RowIndex];
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
+                
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn) //If pencil icon is clicked
                 {
-                    launchSAPcomment(e.RowIndex + globalSubRowNumber);
+                    launchSAPcomment(e.RowIndex + globalSubRowNumber); //Launch SAP comment
                     switch (repairDataList[e.RowIndex + globalSubRowNumber].conditionInput)
                     {
                         case "Serviceable":
@@ -671,9 +662,9 @@ namespace DynamicTable
                     }
 
                 }
-                else if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn))
+                else if (!(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)) //if not pencil icon, turn green or undo
                 {
-                    if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty)
+                    if (row.DefaultCellStyle.BackColor == Color.White || row.DefaultCellStyle.BackColor == Color.Empty) //If not green
                     {
                         row.DefaultCellStyle.BackColor = Color.LimeGreen;
                         repairDataList[e.RowIndex + globalSubRowNumber] = new RepairData(repairDataList[e.RowIndex + globalSubRowNumber], "Serviceable", "", "", "", "", "", false);
@@ -688,7 +679,7 @@ Further Comment: N/A"*/
 
                         PrintList(repairDataList);
                     }
-                    else if(row.DefaultCellStyle.BackColor != Color.White && row.DefaultCellStyle.BackColor != Color.Empty)
+                    else if(row.DefaultCellStyle.BackColor != Color.White && row.DefaultCellStyle.BackColor != Color.Empty) //If already green
                         {
                         if (launchUndoConfirmation())
                         {
@@ -708,6 +699,7 @@ Further Comment: N/A"*/
             senderGrid.EndEdit();
         }
 
+        //Launch undo confirmation form
         private bool launchUndoConfirmation()
         {
             using (Undo undoConfirmation = new Undo())
@@ -722,14 +714,16 @@ Further Comment: N/A"*/
         }
 
         public int globalSubRowNumber = -1;
+
+        //Generate the subDataGridView
         private void GenerateSubrowDataGridView(int row)
         {
             subrowDataTable.Clear();
-            //Console.WriteLine("Column count at start of GenerateSubrowDataGridView = " + dataGridView1.ColumnCount);
+            //Console.WriteLine("Column count at start of GenerateSubrowDataGridView = " + LowLevelGridView.ColumnCount);
 
-            dataGridView1.DataSource = null; //Gets rid of datasource
-            dataGridView1.Columns.Clear(); //Gets rid of button
-            dataGridView1.Refresh(); 
+            LowLevelGridView.DataSource = null; //Gets rid of datasource
+            LowLevelGridView.Columns.Clear(); //Gets rid of button
+            LowLevelGridView.Refresh(); 
 
             globalSubRowNumber = row + 1;
             for (int i = row + 1; i < repairDataList.Count; i++)
@@ -749,32 +743,23 @@ Further Comment: N/A"*/
                 else break;
 
             }
-            dataGridView1.DataSource = subrowDataTable;
-            //Console.WriteLine(subrowDataTable.Rows[0].ToString());
-            //dataGridView1.Columns.Add(new DataGridViewButtonColumn());
-
-            // Resize "Number" column
-            //dataGridView1.AutoResizeColumn(0);
-            // Resize "Completed" column
-            //dataGridView1.AutoResizeColumn(5);
+            LowLevelGridView.DataSource = subrowDataTable;
             
-            CreateButtonsColumn(ref dataGridView1);
+            CreateButtonsColumn(ref LowLevelGridView);
 
-            Console.WriteLine("Column count before resize = " + dataGridView1.ColumnCount);
-
-            DataGridViewColumn column0 = dataGridView1.Columns[0];
+            //Set widths of columns
+            DataGridViewColumn column0 = LowLevelGridView.Columns[0];
             column0.Width = 80;
-            DataGridViewColumn column1 = dataGridView1.Columns[1];
+            DataGridViewColumn column1 = LowLevelGridView.Columns[1];
             column1.Width = 140;
-            DataGridViewColumn column2 = dataGridView1.Columns[2];
+            DataGridViewColumn column2 = LowLevelGridView.Columns[2];
             column2.Width = 200;
-            DataGridViewColumn column3 = dataGridView1.Columns[3];
+            DataGridViewColumn column3 = LowLevelGridView.Columns[3];
             column3.Width = 142;
-            DataGridViewColumn column4 = dataGridView1.Columns[4];
+            DataGridViewColumn column4 = LowLevelGridView.Columns[4];
             column4.Width = 300;
-            DataGridViewColumn column5 = dataGridView1.Columns[5];
+            DataGridViewColumn column5 = LowLevelGridView.Columns[5];
             column5.Width = 50;
-            Console.WriteLine("Column count at end of GenerateSubrowDataGridView = " + dataGridView1.ColumnCount);
 
 
             for (int i = globalSubRowNumber; i < repairDataList.Count; i++)
@@ -783,20 +768,18 @@ Further Comment: N/A"*/
                 {
                     if (repairDataList[i].checkComplete)
                     {
-                        //dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LimeGreen;
-
                         switch (repairDataList[i].conditionInput)
                         {
                             case "Serviceable":
-                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LimeGreen;
+                                LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.LimeGreen;
                                 break;
 
                             case "Salvageable":
-                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Gold;
+                                LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Gold;
                                 break;
 
                             case "Unsalvageable":
-                                dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Tomato;
+                                LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.Tomato;
                                 break;
 
                             case "":
@@ -805,7 +788,7 @@ Further Comment: N/A"*/
                     }
                     else
                     {
-                        dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.White;
+                        LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor = Color.White;
                     }
                 }
                 else
@@ -818,6 +801,7 @@ Further Comment: N/A"*/
 
         }
 
+        //Generate choice of figures
         private void GenerateImageListView(string[] arr)
         {
             ImageList imageList = new ImageList();
@@ -828,7 +812,7 @@ Further Comment: N/A"*/
             {
                 if (arr[j] != "")
                 {
-                    string tempImagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{arr[j]}.png";
+                    string tempImagePath = $"{path}RNFigures\\{RepairNoteNumber}\\{arr[j]}.png";
                     Image tempImage = Image.FromFile(tempImagePath);
 
                     Console.WriteLine(tempImagePath);
@@ -847,6 +831,7 @@ Further Comment: N/A"*/
             Console.WriteLine(listView1.Items.Count);
         }
 
+        //If general datagridview cell has been clicked
         private void generalDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //Console.WriteLine("Cell clicked");
@@ -878,7 +863,7 @@ Further Comment: N/A"*/
                         currentScale = 1.0;
                        
                         // Cast to image
-                        string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
+                        string imagePath = $"{path}RNFigures\\{RepairNoteNumber}\\{relatedFiguresArr[0]}.png";
                         img = Image.FromFile(imagePath);
                         // Load image data in memory stream
                         //MemoryStream ms = new MemoryStream();
@@ -888,7 +873,7 @@ Further Comment: N/A"*/
                         originalPictureBoxSize = pictureBox1.Size;
                     }
                     button5.Visible = true;
-                    dataGridView1.Visible = true;
+                    LowLevelGridView.Visible = true;
                     generalDataGridView.Visible = false;
                 }
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewImageColumn)
@@ -915,7 +900,7 @@ Further Comment: N/A"*/
                         
                         // Cast to image
                         relatedFiguresArr = convertToRelatedFiguresArr(repairDataList[rowIndex].relatedFigures);
-                        string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[0]}.png";
+                        string imagePath = $"{path}RNFigures\\{RepairNoteNumber}\\{relatedFiguresArr[0]}.png";
                         img = Image.FromFile(imagePath);
                         // Load image data in memory stream
                         //MemoryStream ms = new MemoryStream();
@@ -933,21 +918,21 @@ Further Comment: N/A"*/
             senderGrid.EndEdit();
         }
 
-        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        //If low level datagridview cell has been clicked
+        private void LowLevelGridView_SelectionChanged(object sender, EventArgs e)
         {
-            //Console.WriteLine("Selection changed");
-            dataGridView1.ClearSelection();
+            LowLevelGridView.ClearSelection();
         }
 
         private void generalDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            //Console.WriteLine("Selection changed");
             generalDataGridView.ClearSelection();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        //If back button is clicked in main data tab page
+        private void backbuttonClick(object sender, EventArgs e)
         {
-            if (dataGridView1.Visible == true)
+            if (LowLevelGridView.Visible == true)
             {
                 if (globalSubRowNumber != -1)
                 {
@@ -958,19 +943,16 @@ Further Comment: N/A"*/
                     {
                         if (isSubRow(repairDataList[i].headingNumber))
                         {
-                            Console.WriteLine(i);
-                            //Console.WriteLine(globalSubRowNumber);
-                            //repairDataList[i].checkComplete = true
-                            if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.LimeGreen)
+                            if (LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.LimeGreen)
                             {
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                             }
-                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Gold)
+                            else if (LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Gold)
                             {
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                                 containsSalvageable = true;
                             }
-                            else if (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Tomato)
+                            else if (LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.Tomato)
                             {
                                 repairDataList[i] = new RepairData(repairDataList[i], true);
                                 containsUnsalvageable = true;
@@ -982,7 +964,7 @@ Further Comment: N/A"*/
                                 containsSalvageable = false;
                                 containsUnsalvageable = false;
                             }
-                            // = (dataGridView1.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.White) ? false : true;
+                            // = (LowLevelGridView.Rows[i - globalSubRowNumber].DefaultCellStyle.BackColor == Color.White) ? false : true;
                         }
                         else
                         {
@@ -1026,21 +1008,16 @@ Further Comment: N/A"*/
                     }
                 }
                 button5.Visible = false;
-                dataGridView1.Visible = false;
+                LowLevelGridView.Visible = false;
                 generalDataGridView.Visible = true;
             }
         }
 
+        //Searches repair note file for part number
         private void repairNoteSearch()
         {
-            //Excel.Application app = new Excel.Application();
-            //Excel.Workbook wb = app.Workbooks.Open($"{path}EJ200 Repair Note Finder.xlsx");
-           // Excel.Worksheet xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
-
             Excel.Range currentFind = null;
             Excel.Range firstFind = null;
-
-           // Excel.Range PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
 
             currentFind = PartNameRange.Find(PartNumber, Type.Missing, Excel.XlFindLookIn.xlValues, Excel.XlLookAt.xlPart, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlNext, false, Type.Missing, Type.Missing);
 
@@ -1075,6 +1052,7 @@ Further Comment: N/A"*/
             wb.Close(false);
         }
 
+        //Launces SAP cmomment form
         private void launchSAPcomment(int rowIndex)
         {
             using (SAP_popup sapopup = new SAP_popup(rowIndex, repairDataList))
@@ -1089,6 +1067,7 @@ Further Comment: N/A"*/
 
         }
 
+        //Handles changing figure displayed
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count <= 0)
@@ -1098,7 +1077,7 @@ Further Comment: N/A"*/
             {
               
                 currentScale = 1.0;
-                string imagePath = $"{Program.path}figfolder\\RN-EJ-412-1009-03\\{relatedFiguresArr[selectedIndex]}.png";
+                string imagePath = $"{path}RNFigures\\{RepairNoteNumber}\\{relatedFiguresArr[selectedIndex]}.png";
                 img = Image.FromFile(imagePath);
                 // Load image data in memory stream
                 //MemoryStream ms = new MemoryStream();
@@ -1109,89 +1088,93 @@ Further Comment: N/A"*/
 
         }
 
-        private void dataGridView1_ColumnAdded_1(object sender, DataGridViewColumnEventArgs e)
+        //Ensures added columns are correctly formatted
+        private void LowLevelGridView_ColumnAdded_1(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
             e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
-
         private void generalDataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
             e.Column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         }
 
+        //Timer for welcome screen
         System.Windows.Forms.Timer sw = new System.Windows.Forms.Timer(); // sw cotructor
 
+        //When UI base form loads up
         public void UI_Base_Load(object sender, EventArgs e)
         {
-            var asForm = System.Windows.Automation.AutomationElement.FromHandle(this.Handle);
+            var asForm = System.Windows.Automation.AutomationElement.FromHandle(this.Handle); //To auto bring up OSK
+
+            //Slide panel setup
             PW = Slide_Panel.Width;
             Hiden = true;
             Slide_Panel.Width = 0;
             
-
-
+            //Initialise datatables
             InitializeSubrowDataTable();
             InitializeGeneralDataTable();
 
-            updatetoolbartext();
-            
-            
-            sw.Interval = 3000;
+            updatetoolbartext(); //Update slide panel text 
+
+            sw.Interval = 3000; //3 second timer
             sw.Start(); // starts the stopwatch
-            sw.Tick += new EventHandler(exitOpeningScreen);
+            sw.Tick += new EventHandler(exitOpeningScreen); //Exits welcome screen after timer interval
             
            
 
         }
 
+        //For handling exiting of welcome screen
         void exitOpeningScreen(Object myObject, EventArgs myEventArgs)
         {
             sw.Stop();
+
+            //For handling the non-finished app reset
             if (isFinsFirstTime)
             {
                 tabControl1.SelectedTab = tabPage1;
-                this.ActiveControl = textBox1;
+                this.ActiveControl = inspectorIDTextbox;
             } else
             {
-                tabControl1.SelectedTab = tabPage2;
-                this.ActiveControl = textBox2;
+                tabControl1.SelectedTab = engineNumberTabPage;
+                this.ActiveControl = engineIDTextbox;
             }
             
         }
 
+        //Loads up Excel EJ200 Repair Note Finder file
         void loadXL()
         {
             app = new Excel.Application();
-            wb = app.Workbooks.Open($"{Program.path}EJ200 Repair Note Finder.xlsx");
+            wb = app.Workbooks.Open($"{path}EJ200 Repair Note Finder.xlsx");
             xlWorkSheet = (Excel.Worksheet)wb.Worksheets.get_Item(1);
             PartNameRange = xlWorkSheet.UsedRange.Columns["A:E", Type.Missing];
-
         }
 
+        //Adds loading GIF
         void showGIF()
         {
-            // 
-            // pictureBox5
-            // 
-            tabControl1.SelectedTab = tabPage0;
-            PictureBox pictureBox5 = new PictureBox();
-            pictureBox5.Image = Resources.ajax_loader;
-            pictureBox5.Location = new System.Drawing.Point(850, 647);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new System.Drawing.Size(220, 220);
-            pictureBox5.TabIndex = 2;
-            pictureBox5.TabStop = false;
-            tabPage0.Controls.Add(pictureBox5);
+
+            tabControl1.SelectedTab = OpeningTab;
+            PictureBox LoadingGIF = new PictureBox();
+            LoadingGIF.Image = Resources.ajax_loader;
+            LoadingGIF.Location = new System.Drawing.Point(850, 647);
+            LoadingGIF.Name = "LoadingGIF";
+            LoadingGIF.Size = new System.Drawing.Size(220, 220);
+            LoadingGIF.TabIndex = 2;
+            LoadingGIF.TabStop = false;
+            OpeningTab.Controls.Add(LoadingGIF);
         }
 
-
+        //Generates final SAP comment on finish button click
         private void finishbutton_Click_1(object sender, EventArgs e)
         {
             
             WriteValues();
-            tabControl1.SelectedTab = tabPage6;
+            tabControl1.SelectedTab = FinalSAPPreviewPage;
             string OverallSAPComment = "";
 
             OverallSAPComment = DateTime.Now.ToString() + System.Environment.NewLine + System.Environment.NewLine;
@@ -1206,10 +1189,13 @@ Further Comment: N/A"*/
             textBox4.Text = OverallSAPComment;
         }
 
+        //Handles non-functioning app reset
         private void button4_Click_1(object sender, EventArgs e)
         {
             isFinsFirstTime = false;
 
+            ExitBtn_Click(this, EventArgs.Empty);
+            /*
             // Reset variables after exporting to CSV
             ResetApp();
 
@@ -1219,9 +1205,10 @@ Further Comment: N/A"*/
             myThread.Start();
             sw.Interval = 3000;
             sw.Start(); // starts the stopwatch
-            sw.Tick += new EventHandler(exitOpeningScreen);
+            sw.Tick += new EventHandler(exitOpeningScreen);*/
         }
 
+        //Updates slide bar text based on input
         private void updatetoolbartext()
         {
             if (RepairNoteNumber != "") Part_Name.Text = $"{InspectorID} > Engine: {EngineID} > Part: {PartNumber} > {RepairNoteNumber}";
@@ -1231,19 +1218,21 @@ Further Comment: N/A"*/
             else Part_Name.Text = "Welcome to the Rolls Royce Interactive Repair Note App";
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void BackButton_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage5;
+            tabControl1.SelectedTab = MainDataTab;
         }
 
+        //Debug earlier column width problems
         private void dataGridView1_ColumnWidthChanged_1(object sender, DataGridViewColumnEventArgs e)
         {
-            //Console.WriteLine("Width has been changed to" + dataGridView1.Columns[0].Width + dataGridView1.Columns[1].Width + dataGridView1.Columns[2].Width + dataGridView1.Columns[3].Width + dataGridView1.Columns[4].Width + dataGridView1.Columns[5].Width);
+            //Console.WriteLine("Width has been changed to" + LowLevelGridView.Columns[0].Width + LowLevelGridView.Columns[1].Width + LowLevelGridView.Columns[2].Width + LowLevelGridView.Columns[3].Width + LowLevelGridView.Columns[4].Width + LowLevelGridView.Columns[5].Width);
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        //Creates datagridviews on start inspection button click
+        private void StartInspectionButton_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage5;
+            tabControl1.SelectedTab = MainDataTab;
 
             for (int i = 0; i < repairDataList.Count; i++)
             {
@@ -1255,12 +1244,9 @@ Further Comment: N/A"*/
                     newDataRow[2] = repairDataList[i].relatedFigures;
                     generalDataTable.Rows.Add(newDataRow);
                 }
-
             }
             generalDataGridView.DataSource = generalDataTable;
 
-
-        
             CreateGraphicsColumn(ref generalDataGridView);
 
             DataGridViewColumn column = generalDataGridView.Columns[0];
@@ -1273,63 +1259,50 @@ Further Comment: N/A"*/
             column.Width = 200;
         }
 
+        //Figure zooming functionality
         private void plusButton_Click(object sender, EventArgs e)
         {
             currentScale += scaleIncrement;
             if (currentScale > maxScale)
                 currentScale = 2.0;
-            //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
-            //double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
-            //Console.WriteLine(trackBar1.Value);
             Console.WriteLine(currentScale);
             Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)currentScale),
                           Convert.ToInt32((double)originalPictureBoxSize.Height * (double)currentScale));
 
-            //pictureBox1.Size = newSize;
-            //pictureBox1.Image.Size = newSize;
             Console.WriteLine(newSize.Width);
             Console.WriteLine(newSize.Height);
             Bitmap bmp = new Bitmap(img, newSize);
             pictureBox1.Image = bmp;
         }
-
         private void minusButton_Click(object sender, EventArgs e)
         {
             currentScale -= scaleIncrement;
             if (currentScale < minScale)
                 currentScale = 1.0;
-            //double scale = Math.Pow(MaxScale, trackBar1.Value / trackBar1.Maximum);
-            //double scale = (((double)trackBar1.Value / (double)trackBar1.Maximum) * maxScale) + 1.0;
-            //Console.WriteLine(trackBar1.Value);
-            //Console.WriteLine(scale);
             Size newSize = new Size(Convert.ToInt32((double)originalPictureBoxSize.Width * (double)currentScale),
                           Convert.ToInt32((double)originalPictureBoxSize.Height * (double)currentScale));
 
-            //pictureBox1.Size = newSize;
-            //pictureBox1.Image.Size = newSize;
             Console.WriteLine(newSize.Width);
             Console.WriteLine(newSize.Height);
             Bitmap bmp = new Bitmap(img, newSize);
             pictureBox1.Image = bmp;
         }
 
-
+        //Handles pressing of 'Enter' key instead of button clicks
         private void textBox3_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button3_Click(this, EventArgs.Empty);
+                Part_No_Nxt_btn_Click(this, EventArgs.Empty);
             }
         }
-
         private void textBox2_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                button2_Click(this, EventArgs.Empty);
+                Engine_No_Nxt_btn_Click(this, EventArgs.Empty);
             }
         }
-
         private void textBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1338,9 +1311,9 @@ Further Comment: N/A"*/
             }
         }
 
+        //Updates percentage through RN number in slide panel
         private void changePercentComplete()
         {
-            Console.WriteLine("Hello Everyone");
             int NoOfComplete = 0;
             for (int i = 0; i < repairDataList.Count; i++)
             {
@@ -1353,15 +1326,13 @@ Further Comment: N/A"*/
             Console.WriteLine(NoOfComplete);
             if(repairDataList.Count > 0)
             {
-                Console.WriteLine("HELLO MIAFHJKASLKD");
                 Console.WriteLine((float)NoOfComplete / (float)repairDataList.Count);
                 float percentCompletefloat =  (float) NoOfComplete * 100f / (float) repairDataList.Count;
                 int percentComplete = (int)percentCompletefloat;
-                label9.Text = percentComplete.ToString() + "%";
+                percentCompleteLabel.Text = percentComplete.ToString() + "%";
             }
 
         }
-
 
     }
 }

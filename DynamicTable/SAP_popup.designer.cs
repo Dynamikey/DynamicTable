@@ -1,4 +1,4 @@
-﻿namespace DynamicTable
+﻿namespace RollsRoyceRNApp
 {
     partial class SAP_popup
     {
@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SAP_popup));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.serviceableButton = new System.Windows.Forms.Button();
+            this.unsalvageableButton = new System.Windows.Forms.Button();
+            this.salvageableButton = new System.Windows.Forms.Button();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.rectangleShape5 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
             this.rectangleShape6 = new Microsoft.VisualBasic.PowerPacks.RectangleShape();
@@ -53,7 +53,7 @@
             this.ExitBtn = new System.Windows.Forms.Button();
             this.CameraPreview = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.raiseRDRButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.CameraPreview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -86,50 +86,50 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Damage Type";
             // 
-            // button1
+            // serviceableButton
             // 
-            this.button1.BackColor = System.Drawing.Color.LimeGreen;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.button1.Location = new System.Drawing.Point(394, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(376, 108);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Serviceable";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.serviceableButton.BackColor = System.Drawing.Color.LimeGreen;
+            this.serviceableButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLightLight;
+            this.serviceableButton.FlatAppearance.BorderSize = 0;
+            this.serviceableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.serviceableButton.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.serviceableButton.Location = new System.Drawing.Point(394, 12);
+            this.serviceableButton.Name = "serviceableButton";
+            this.serviceableButton.Size = new System.Drawing.Size(376, 108);
+            this.serviceableButton.TabIndex = 2;
+            this.serviceableButton.Text = "Serviceable";
+            this.serviceableButton.UseVisualStyleBackColor = false;
+            this.serviceableButton.Click += new System.EventHandler(this.serviceableButton_Click);
             // 
-            // button2
+            // unsalvageableButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Tomato;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.button2.Location = new System.Drawing.Point(394, 273);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(376, 108);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Unsalvageable";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.unsalvageableButton.BackColor = System.Drawing.Color.Tomato;
+            this.unsalvageableButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.unsalvageableButton.FlatAppearance.BorderSize = 0;
+            this.unsalvageableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.unsalvageableButton.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.unsalvageableButton.Location = new System.Drawing.Point(394, 273);
+            this.unsalvageableButton.Name = "unsalvageableButton";
+            this.unsalvageableButton.Size = new System.Drawing.Size(376, 108);
+            this.unsalvageableButton.TabIndex = 3;
+            this.unsalvageableButton.Text = "Unsalvageable";
+            this.unsalvageableButton.UseVisualStyleBackColor = false;
+            this.unsalvageableButton.Click += new System.EventHandler(this.unsalvageableButton_Click_1);
             // 
-            // button3
+            // salvageableButton
             // 
-            this.button3.BackColor = System.Drawing.Color.Gold;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 24F);
-            this.button3.Location = new System.Drawing.Point(394, 143);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(376, 108);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Salvageable";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.salvageableButton.BackColor = System.Drawing.Color.Gold;
+            this.salvageableButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.salvageableButton.FlatAppearance.BorderSize = 0;
+            this.salvageableButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.salvageableButton.Font = new System.Drawing.Font("Segoe UI", 24F);
+            this.salvageableButton.Location = new System.Drawing.Point(394, 143);
+            this.salvageableButton.Name = "salvageableButton";
+            this.salvageableButton.Size = new System.Drawing.Size(376, 108);
+            this.salvageableButton.TabIndex = 4;
+            this.salvageableButton.Text = "Salvageable";
+            this.salvageableButton.UseVisualStyleBackColor = false;
+            this.salvageableButton.Click += new System.EventHandler(this.salvageableButton_Click_1);
             // 
             // shapeContainer1
             // 
@@ -225,13 +225,13 @@
             this.button5.TabIndex = 7;
             this.button5.Text = "Generate SAP Note";
             this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.generateSAPCommentButton_Click);
             // 
-            // textBox1
+            // inspectorIDTextbox
             // 
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(22, 153);
-            this.textBox1.Name = "textBox1";
+            this.textBox1.Name = "inspectorIDTextbox";
             this.textBox1.Size = new System.Drawing.Size(207, 35);
             this.textBox1.TabIndex = 8;
             this.textBox1.TextChanged += new System.EventHandler(this.updateSAPComment);
@@ -256,12 +256,12 @@
             this.label3.TabIndex = 11;
             this.label3.Text = "Further Comments";
             // 
-            // textBox2
+            // engineIDTextbox
             // 
             this.textBox2.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.Location = new System.Drawing.Point(19, 238);
             this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
+            this.textBox2.Name = "engineIDTextbox";
             this.textBox2.Size = new System.Drawing.Size(345, 144);
             this.textBox2.TabIndex = 10;
             this.textBox2.TextChanged += new System.EventHandler(this.updateSAPComment);
@@ -288,7 +288,7 @@
             this.button6.Text = "Take photo";
             this.button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.cameraButton_Click);
             // 
             // webCameraControl1
             // 
@@ -352,19 +352,19 @@
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // button4
+            // raiseRDRButton
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(1611, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(194, 155);
-            this.button4.TabIndex = 19;
-            this.button4.Text = "Raise RDR";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.raiseRDRButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.raiseRDRButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlLight;
+            this.raiseRDRButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.raiseRDRButton.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.raiseRDRButton.Location = new System.Drawing.Point(1611, 19);
+            this.raiseRDRButton.Name = "raiseRDRButton";
+            this.raiseRDRButton.Size = new System.Drawing.Size(194, 155);
+            this.raiseRDRButton.TabIndex = 19;
+            this.raiseRDRButton.Text = "Raise RDR";
+            this.raiseRDRButton.UseVisualStyleBackColor = false;
+            this.raiseRDRButton.Click += new System.EventHandler(this.raiseRDRButton_Click);
             // 
             // SAP_popup
             // 
@@ -372,7 +372,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1830, 400);
             this.Controls.Add(this.ExitBtn);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.raiseRDRButton);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.CameraPreview);
             this.Controls.Add(this.pictureBox1);
@@ -384,9 +384,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.salvageableButton);
+            this.Controls.Add(this.unsalvageableButton);
+            this.Controls.Add(this.serviceableButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.shapeContainer1);
@@ -407,9 +407,9 @@
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button serviceableButton;
+        private System.Windows.Forms.Button unsalvageableButton;
+        private System.Windows.Forms.Button salvageableButton;
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape3;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape2;
@@ -428,7 +428,7 @@
         private WebEye.Controls.WinForms.WebCameraControl.WebCameraControl webCameraControl1;
         private System.Windows.Forms.ComboBox comboBox2;
         protected System.Windows.Forms.Button ExitBtn;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button raiseRDRButton;
         private Microsoft.VisualBasic.PowerPacks.RectangleShape rectangleShape5;
     }
 }

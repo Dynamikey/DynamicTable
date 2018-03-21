@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
 
-namespace DynamicTable
+namespace RollsRoyceRNApp
 {
     /// <summary>
     /// Determines how empty lines are interpreted when reading CSV files.

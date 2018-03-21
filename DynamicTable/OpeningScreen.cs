@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace DynamicTable
+namespace RollsRoyceRNApp
 {
     public partial class OpeningScreen : Form
     {
